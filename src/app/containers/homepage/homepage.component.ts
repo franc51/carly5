@@ -10,9 +10,5 @@ export class HomepageComponent {
   constructor(public auth: AuthService) {}
   loaded: any;
   events: string[] = [];
-  opened: boolean = true;
-
-  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(
-    window.location.host
-  );
+  opened: boolean = false;
 }

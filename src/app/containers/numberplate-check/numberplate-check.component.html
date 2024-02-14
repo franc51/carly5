@@ -11,46 +11,40 @@
   </mat-expansion-panel>
 
   <form #form="ngForm" class="nr-inmatriculare">
-    <label for="nr-inmatriculare">
-      <input
-        type="text"
-        class="input"
-        name="numberPlate"
-        oninput="this.value = this.value.toUpperCase()"
-        required
-        minlength="7"
-        maxlength="7"
-        [(ngModel)]="userInput"
-      />
-      <ng-container *ngIf="form.invalid && form.touched">
-        <p class="error">Te rog introdu 7 caractere!</p>
-      </ng-container>
+    <input
+      type="text"
+      class="input"
+      name="numberPlate"
+      oninput="this.value = this.value.toUpperCase()"
+      required
+      minlength="7"
+      maxlength="7"
+      [(ngModel)]="userInput"
+    />
+    <ng-container *ngIf="form.invalid && form.touched">
+      <p class="error">Te rog introdu 7 caractere!</p>
+    </ng-container>
 
-      <ng-container
-        *ngIf="!this.isMatchingPattern(this.userInput) && form.submitted"
-      >
-        <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
-      </ng-container>
+    <ng-container
+      *ngIf="!this.isMatchingPattern(this.userInput) && form.submitted"
+    >
+      <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
+    </ng-container>
 
-      <ng-container
-        *ngIf="matchingNumberPlate && form.submitted && form.touched"
-      >
-        <p class="error">
-          Numarul {{ matchingNumberPlate }} nu este disponibil.
-        </p>
-      </ng-container>
+    <ng-container *ngIf="matchingNumberPlate && form.submitted && form.touched">
+      <p class="error">Numarul {{ matchingNumberPlate }} nu este disponibil.</p>
+    </ng-container>
 
-      <ng-container
-        *ngIf="
-          matchingNumberPlate === undefined &&
-          form.submitted &&
-          form.touched &&
-          this.isMatchingPattern(this.userInput)
-        "
-      >
-        <p class="available">Numarul {{ userInput }} este disponibil.</p>
-      </ng-container>
-    </label>
+    <ng-container
+      *ngIf="
+        matchingNumberPlate === undefined &&
+        form.submitted &&
+        form.touched &&
+        this.isMatchingPattern(this.userInput)
+      "
+    >
+      <p class="available">Numarul {{ userInput }} este disponibil.</p>
+    </ng-container>
     <button
       (click)="searchNumberPlate(userInput)"
       mat-raised-button

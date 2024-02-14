@@ -1,7 +1,11 @@
 .red {
-  height: 20rem;
-  width: 30rem;
-  background-color: red;
+  height: 40rem;
+  width: 22rem;
+  background-color: rgba(188, 188, 255, 0.742);
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .register-container {

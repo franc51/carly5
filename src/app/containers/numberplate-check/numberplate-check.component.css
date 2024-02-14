@@ -64,7 +64,9 @@ h3 {
     flex-direction: column;
     margin: 1rem 5rem;
   }
-
+  .nr-inmatriculare {
+    padding: 2rem;
+  }
   .input {
     border: none;
     background-image: url("https://i.ibb.co/cbTqN4Q/Romanian-license-plate-B-777-LVF.png");
@@ -72,8 +74,9 @@ h3 {
     background-repeat: no-repeat;
     height: 53px;
     width: 223px;
-    font-size: 3rem;
+    font-size: 2.8rem;
     padding-left: 2rem;
+    margin: 0 -1rem;
   }
   h2 {
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
