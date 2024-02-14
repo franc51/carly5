@@ -1,0 +1,26 @@
+.dashboard {
+  background-color: #6eb6ff;
+  height: 100vh;
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 1rem;
+}
+
+.mat {
+  display: flex !important;
+  background-color: #6eb6ff !important;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.dashboard-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 2px solid #d0e7ff;
+  border-radius: 0.5rem;
+  width: 100%;
+  margin: 1rem 0;
+}

@@ -1,0 +1,28 @@
+<div class="main-container">
+  <nav class="nav">
+    <h2 class="logo">Carly</h2>
+    <app-login></app-login>
+  </nav>
+  <div class="container">
+    <div class="homepage-content-container">
+      <div class="homepage-content">
+        <mat-sidenav-container
+          class="example-container"
+          *ngIf="auth.isAuthenticated$ | async"
+        >
+          <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+            <app-dashboard></app-dashboard>
+          </mat-sidenav>
+
+          <mat-sidenav-content class="sidenav">
+            <button mat-button (click)="sidenav.toggle()" class="nav-opener">
+              Sidenav Toggle
+            </button>
+            <app-register-vehicle></app-register-vehicle>
+          </mat-sidenav-content>
+          <app-dashboard></app-dashboard>
+        </mat-sidenav-container>
+      </div>
+    </div>
+  </div>
+</div>

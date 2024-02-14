@@ -1,0 +1,24 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e0efff;
+  border-radius: 0.5rem;
+  padding-top: 0.5rem;
+}
+.profile-picture {
+  height: 3rem;
+  border-radius: 50%;
+}
+p {
+  color: rgb(38, 37, 37);
+}
+.user-emai {
+  margin: 1rem 0.5rem;
+}
+.pi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem;
+}

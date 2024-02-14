@@ -1,0 +1,157 @@
+@import url("https://fonts.cdnfonts.com/css/conthrax");
+
+.nav-opener {
+  color: black !important;
+}
+.example-container {
+  position: absolute;
+  top: 4rem;
+  bottom: 0;
+  left: 18rem;
+  right: 18rem;
+  background-color: #eff7ff;
+}
+
+.sidenavbar {
+  background-color: #eff7ff;
+  overflow: hidden !important;
+}
+
+.logo {
+  font-family: "conthrax";
+  font-size: 1.8rem;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(0, 17, 255),
+    rgba(17, 231, 53, 0.589)
+  );
+  padding: 8px;
+  margin: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16vw;
+  background-color: #5cadfe;
+  height: 4rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 15vw;
+  box-shadow: 2px 2px rgb(231, 224, 224);
+}
+
+.homepage-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eff7ff;
+  width: 100%;
+}
+.loading {
+  height: 100vh;
+  width: 100vw;
+}
+
+.loader {
+  position: relative;
+  width: 164px;
+  height: 164px;
+  border-radius: 50%;
+  animation: rotate 0.75s linear infinite;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 40px;
+  border: 1px solid #ff3d00;
+  border-width: 12px 2px 7px;
+  border-radius: 2px 2px 1px 1px;
+  box-sizing: border-box;
+  transform: rotate(45deg) translate(24px, -10px);
+  background-image: linear-gradient(#ff3d00 20px, transparent 0),
+    linear-gradient(#ff3d00 30px, transparent 0),
+    linear-gradient(#ff3d00 30px, transparent 0);
+  background-size: 10px 12px, 1px 30px, 1px 30px;
+  background-repeat: no-repeat;
+  background-position: center, 12px 0px, 3px 0px;
+}
+.loader::after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 4px;
+  left: 20px;
+  top: 47px;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: -4px 7px 2px, -7px 16px 3px 1px, -11px 24px 4px 1px,
+    -6px 24px 4px 1px, -14px 35px 6px 2px, -5px 36px 8px 2px, -5px 45px 8px 2px,
+    -14px 49px 8px 2px, 6px 60px 11px 1px, -11px 66px 11px 1px, 11px 75px 13px,
+    -1px 82px 15px;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav-opener {
+    color: black !important;
+  }
+  .example-container {
+    position: absolute;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #eff7ff;
+  }
+
+  .sidenavbar {
+    background-color: #eff7ff;
+    overflow: hidden !important;
+  }
+
+  .logo {
+    font-family: "conthrax";
+    font-size: 1rem;
+    padding: 0 10px;
+    margin: 4px;
+    cursor: pointer;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0.1rem;
+    padding-right: 1rem;
+    background-color: #5cadfe;
+    height: 2.5rem;
+    box-shadow: 2px 2px 10px 2px rgb(198, 193, 193);
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .container {
+    margin-left: 10rem;
+    padding: 10rem;
+  }
+}
