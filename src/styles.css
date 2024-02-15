@@ -15,4 +15,14 @@ body {
 }
 .mat-drawer-inner-container::-webkit-scrollbar {
   display: none;
+
+}
+.mat-drawer-content::-webkit-scrollbar {
+  display: none;
+}
+.mat-sidenav-content::-webkit-scrollbar{
+  display: none;
+}
+.mat-drawer{
+  background-color: white !important;
 }

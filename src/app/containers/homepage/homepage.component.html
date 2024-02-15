@@ -10,7 +10,7 @@
           class="example-container"
           *ngIf="auth.isAuthenticated$ | async"
         >
-          <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+          <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav1">
             <app-dashboard></app-dashboard>
           </mat-sidenav>
 
@@ -18,7 +18,7 @@
             <button mat-button (click)="sidenav.toggle()" class="nav-opener">
               <mat-icon>arrow_forward_ios</mat-icon>
             </button>
-            <app-register-vehicle></app-register-vehicle>
+              <router-outlet></router-outlet>
           </mat-sidenav-content>
           <app-dashboard></app-dashboard>
         </mat-sidenav-container>
