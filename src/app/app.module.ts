@@ -17,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 // form
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { RegisterVehicleComponent } from './containers/register-vehicle/register-vehicle.component';
@@ -39,6 +40,7 @@ import { RegisterVehicleComponent } from './containers/register-vehicle/register
     FormsModule,
     MatExpansionModule,
     MatSidenavModule,
+    MatFormFieldModule,
     AuthModule.forRoot({
       domain: 'dev-tlh80f7xwrzzr2oq.us.auth0.com',
       clientId: 'cn8K5prNUAiMqawEhmdTrjXu9RGGwxJL',

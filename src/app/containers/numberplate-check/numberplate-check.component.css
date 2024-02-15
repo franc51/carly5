@@ -1,17 +1,23 @@
 .app-numberplate-check {
-  max-width: fit-content;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   text-align: center;
   background-color: #d0e7ff;
   border-radius: 0.5rem;
+  max-width: 400px;
 }
 label {
   display: flex;
   flex-direction: column;
 }
+.nr-inmatriculare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .searchnumberplate {
   margin: 0.5rem;
   background-color: #5cadfe;
+  display: flex;
 }
 
 .input {
@@ -51,6 +57,9 @@ h3 {
 }
 
 @media only screen and (max-width: 600px) {
+  .notauth {
+    background-color: #5cadfe;
+  }
   .app-numberplate-check {
     border-radius: 4px;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -65,7 +74,7 @@ h3 {
   }
   .nr-inmatriculare {
     padding: 2rem;
-    background-color: #D0E7FF;
+    background-color: #d0e7ff;
   }
   .input {
     border: none;
