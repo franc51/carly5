@@ -4,35 +4,28 @@
     <app-login></app-login>
   </nav>
   <div class="container">
-    <div class="homepage-content-container">
-      <div class="homepage-content">
-        <mat-sidenav-container
-          class="example-container"
-          *ngIf="auth.isAuthenticated$ | async"
-        >
-          <mat-sidenav
-            #sidenav
-            mode="side"
-            [(opened)]="opened"
-            class="sidenav1"
-          >
-            <app-dashboard></app-dashboard>
-          </mat-sidenav>
-
-          <mat-sidenav-content class="sidenav">
-            <button mat-button (click)="sidenav.toggle()" class="nav-opener">
-              <mat-icon>arrow_forward_ios</mat-icon>
-            </button>
-            <router-outlet></router-outlet>
-          </mat-sidenav-content>
+    <div class="homepage-content">
+      <mat-sidenav-container
+        class="example-container"
+        *ngIf="auth.isAuthenticated$ | async"
+      >
+        <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav1">
           <app-dashboard></app-dashboard>
-        </mat-sidenav-container>
-      </div>
-      <div *ngIf="(auth.isAuthenticated$ | async) === false" class="notauth">
-        <h2>Nu ești autentificat</h2>
-        <app-numberplate-check></app-numberplate-check>
-        <app-numberplate-check></app-numberplate-check>
-      </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="sidenav">
+          <button mat-button (click)="sidenav.toggle()" class="nav-opener">
+            <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+          <router-outlet></router-outlet>
+        </mat-sidenav-content>
+        <app-dashboard></app-dashboard>
+      </mat-sidenav-container>
     </div>
+  </div>
+  <div *ngIf="(auth.isAuthenticated$ | async) === false" class="notauth">
+    <h2>Nu ești autentificat</h2>
+    <app-numberplate-check></app-numberplate-check>
+    <app-numberplate-check></app-numberplate-check>
   </div>
 </div>
