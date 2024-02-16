@@ -1,4 +1,9 @@
 @import url("https://fonts.cdnfonts.com/css/conthrax");
+.hello{
+  color: gray;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-align: center;
+}
 
 .notauth {
   display: flex;

@@ -22,6 +22,11 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { RegisterVehicleComponent } from './containers/register-vehicle/register-vehicle.component';
 import { ReserveNumberplateComponent } from './containers/reserve-numberplate/reserve-numberplate.component';
+import { TaxesComponent } from './containers/taxes/taxes.component';
+import { RadiateVehicleComponent } from './containers/radiate-vehicle/radiate-vehicle.component';
+import { TechnicalAppointmentComponent } from './containers/technical-appointment/technical-appointment.component';
+import { ContactComponent } from './containers/contact/contact.component';
+import { HelpComponent } from './containers/help/help.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { ReserveNumberplateComponent } from './containers/reserve-numberplate/re
     ProfileComponent,
     RegisterVehicleComponent,
     ReserveNumberplateComponent,
+    TaxesComponent,
+    RadiateVehicleComponent,
+    TechnicalAppointmentComponent,
+    ContactComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,
