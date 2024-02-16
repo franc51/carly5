@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-numberplate-check',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   styleUrl: './numberplate-check.component.css'
 })
 export class NumberplateCheckComponent {
+
+  constructor(public auth: AuthService) {}
+
+// these are test arrays
+// will be replace with an API service
+
+  reservedNumberPlate: string[] = [
+  'HD55AFC'
+  ];
 
   numberPlate: string[] = [
     'BV15ABC',

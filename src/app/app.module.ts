@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { RegisterVehicleComponent } from './containers/register-vehicle/register-vehicle.component';
+import { ReserveNumberplateComponent } from './containers/reserve-numberplate/reserve-numberplate.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterVehicleComponent } from './containers/register-vehicle/register
     DashboardComponent,
     ProfileComponent,
     RegisterVehicleComponent,
+    ReserveNumberplateComponent,
   ],
   imports: [
     BrowserModule,

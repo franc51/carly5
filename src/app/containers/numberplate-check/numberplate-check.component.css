@@ -40,13 +40,19 @@ label {
 .available {
   color: green;
 }
-.expansion-detele-styles {
+.expansion-panel {
   padding: 0.5rem 0.3rem;
-  background-color: #d0e7ff;
-  color: black;
+  margin-bottom: 1rem;
+  background-color: #0080ff4d;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   transition: none !important;
   box-shadow: none !important;
+}
+.reserve-numberplate{
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem;
+
 }
 
 h3 {
@@ -65,7 +71,8 @@ h3 {
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     text-align: center;
     background-color: rgb(255, 255, 255);
-    padding: 0;
+
+    border-bottom-left-radius: 0.5rem;
   }
   label {
     display: flex;
@@ -92,4 +99,16 @@ h3 {
     font-weight: bolder;
     font-size: 1rem;
   }
+  .expansion-panel {
+    padding: 0.5rem 0.3rem;
+    background-color: #0080ff4d;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    transition: none !important;
+    box-shadow: none !important;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
 }
