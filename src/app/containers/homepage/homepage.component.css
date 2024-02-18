@@ -1,4 +1,9 @@
 @import url("https://fonts.cdnfonts.com/css/conthrax");
+.hello{
+  color: gray;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-align: center;
+}
 
 .notauth {
   display: flex;
@@ -16,6 +21,7 @@
   left: 19rem;
   right: 19rem;
   background-color: #eff7ff;
+  box-shadow: 10px 10px 10px 5px rgb(236, 230, 230);
 }
 
 .sidenavbar {
@@ -47,20 +53,9 @@
   height: 4rem;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-  margin: 0 15vw;
-  box-shadow: 2px 2px rgb(231, 224, 224);
-}
+.homepage-content{
+  box-shadow: 2px 2px 20px 2px gray;
 
-.homepage-content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  background-color: #eff7ff;
-  width: 100%;
 }
 .loading {
   height: 100vh;
@@ -155,11 +150,5 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-  }
-
-  .container {
-    margin: 0;
-    padding: 1rem;
-    width: fit-content;
   }
 }

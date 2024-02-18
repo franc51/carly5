@@ -1,28 +1,29 @@
 <div class="dashboard">
   <app-profile></app-profile>
   <div class="dashboard-links">
-    <button class="mat" mat-flat-button>
+    <button class="mat" mat-flat-button routerLink="/profile" routerLinkActive="active">
       <mat-icon>account_circle</mat-icon>Profilul meu
     </button>
     <button class="mat" mat-flat-button routerLink="/register-vehicle" routerLinkActive="active">
       <mat-icon>directions_car</mat-icon>Înmatriculare vehicul
     </button>
-    <button class="mat" mat-flat-button>
-      <mat-icon>delete_sweep</mat-icon>Radiere vehicul
+    <button class="mat" mat-flat-button routerLink="/radiate-vehicle" routerLinkActive="active">
+      <mat-icon>delete_sweep</mat-icon>Radiate vehicle
     </button>
-    <button class="mat" mat-flat-button>
+    <button class="mat" mat-flat-button routerLink="/technical-appointment" routerLinkActive="active">
       <mat-icon>schedule</mat-icon>Programare Inspecție Tehnică
     </button>
-    <button class="mat" mat-flat-button>
-      <mat-icon>schedule</mat-icon>Rezervare număr
+    <button class="mat" mat-flat-button routerLink="/reserve-numberplate" routerLinkActive="active">
+      <mat-icon>confirmation_number</mat-icon>Rezervare număr
     </button>
-    <button class="mat" mat-flat-button>
+    <button class="mat" mat-flat-button routerLink="/taxes" routerLinkActive="active">
       <mat-icon>payment</mat-icon>Plătește taxe
     </button>
-    <button class="mat" mat-flat-button>
+    <button class="mat" mat-flat-button routerLink="/contact" routerLinkActive="active">
       <mat-icon> phone</mat-icon>Contact
     </button>
-    <button class="mat" mat-flat-button><mat-icon>help</mat-icon>Ajutor</button>
+    <button class="mat" mat-flat-button routerLink="/help" routerLinkActive="active">
+      <mat-icon>help</mat-icon>Ajutor</button>
   </div>
   <app-numberplate-check></app-numberplate-check>
 </div>

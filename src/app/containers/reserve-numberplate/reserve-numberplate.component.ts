@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-numberplate-check',
-  templateUrl: './numberplate-check.component.html',
-  styleUrl: './numberplate-check.component.css'
+  selector: 'app-reserve-numberplate',
+  templateUrl: './reserve-numberplate.component.html',
+  styleUrl: './reserve-numberplate.component.css'
 })
-export class NumberplateCheckComponent {
-
-  constructor(public auth: AuthService) {}
+export class ReserveNumberplateComponent{ constructor(public auth: AuthService) {}
 
 // these are test arrays
 // will be replace with an API service
