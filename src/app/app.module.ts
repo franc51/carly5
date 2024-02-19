@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NumberplateCheckComponent } from './containers/numberplate-check/numberplate-check.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 // form
 import { FormsModule } from '@angular/forms';
@@ -53,6 +54,8 @@ import { HelpComponent } from './containers/help/help.component';
     MatExpansionModule,
     MatSidenavModule,
     MatFormFieldModule,
+    MatInput,
+    MatInputModule,
     AuthModule.forRoot({
       domain: 'dev-tlh80f7xwrzzr2oq.us.auth0.com',
       clientId: 'cn8K5prNUAiMqawEhmdTrjXu9RGGwxJL',

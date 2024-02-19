@@ -4,16 +4,15 @@ import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-reserve-numberplate',
   templateUrl: './reserve-numberplate.component.html',
-  styleUrl: './reserve-numberplate.component.css'
+  styleUrl: './reserve-numberplate.component.css',
 })
-export class ReserveNumberplateComponent{ constructor(public auth: AuthService) {}
+export class ReserveNumberplateComponent {
+  constructor(public auth: AuthService) {}
 
-// these are test arrays
-// will be replace with an API service
+  // these are test arrays
+  // will be replace with an API service
 
-  reservedNumberPlate: string[] = [
-  'HD55AFC'
-  ];
+  reservedNumberPlate: string[] = ['HD55AFC', 'BV15ABC'];
 
   numberPlate: string[] = [
     'BV15ABC',
@@ -46,17 +45,18 @@ export class ReserveNumberplateComponent{ constructor(public auth: AuthService) 
   isMatchingPattern = (userInput: string): boolean => {
     const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
     return pattern.test(userInput);
-  }
+  };
 
   result = this.isMatchingPattern(this.userInput);
 
-  searchNumberPlate(numberPlate: String): void {
-    if(this.isMatchingPattern){
+  searchNumberPlate(reservedNumberPlate: String): void {
+    if (this.isMatchingPattern) {
       console.log(this.isMatchingPattern(this.userInput));
-      this.matchingNumberPlate = this.numberPlate.find(
+      this.matchingNumberPlate = this.reservedNumberPlate.find(
         (item) => item === this.userInput
       );
-
+      this.reservedNumberPlate.push(this.userInput);
+      console.log(reservedNumberPlate);
     }
     if (this.matchingNumberPlate === this.userInput) {
     }

@@ -1,17 +1,26 @@
 <div class="register-container">
   <div class="app-numberplate-check">
     <mat-expansion-panel class="expansion-panel">
-      <mat-expansion-panel-header >
-        <h3 style="color: rgb(36, 33, 33);">Rezervare număr înmatriculare</h3>
+      <mat-expansion-panel-header>
+        <h3 style="color: rgb(36, 33, 33)">Rezervare număr înmatriculare</h3>
       </mat-expansion-panel-header>
       <p>
-        Pentru a rezerva un număr de înmatriculare, după ce vă asigurați că numărul este disponibil, apăsați pe butonul
+        Pentru a rezerva un număr de înmatriculare, după ce vă asigurați că
+        numărul este disponibil, apăsați pe butonul
         <span style="font-weight: bolder">Rezervă</span>
       </p>
-      <p>După ce ați apăsat pe butonul <span style="font-weight: bolder">Rezervă</span> veți fi redirecționat spre pagina de plată.
+      <p>
+        După ce ați apăsat pe butonul
+        <span style="font-weight: bolder">Rezervă</span> veți fi redirecționat
+        spre pagina de plată.
       </p>
-      <p>Rezervarea numărului de înmatriculare se face pentru perioada de <span style="font-weight: bolder;">7 zile.</span></p>
-      <p *ngIf="(auth.isAuthenticated$ | async) === false">Pentru a rezerva un număr trebuie să fii logat în cont.</p>
+      <p>
+        Rezervarea numărului de înmatriculare se face pentru perioada de
+        <span style="font-weight: bolder">7 zile.</span>
+      </p>
+      <p *ngIf="(auth.isAuthenticated$ | async) === false">
+        Pentru a rezerva un număr trebuie să fii logat în cont.
+      </p>
     </mat-expansion-panel>
 
     <form #form="ngForm" class="nr-inmatriculare">
@@ -35,8 +44,12 @@
         <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
       </ng-container>
 
-      <ng-container *ngIf="matchingNumberPlate && form.submitted && form.touched">
-        <p class="error">Numarul {{ matchingNumberPlate }} nu este disponibil.</p>
+      <ng-container
+        *ngIf="matchingNumberPlate && form.submitted && form.touched"
+      >
+        <p class="error">
+          Numarul {{ matchingNumberPlate }} nu este disponibil.
+        </p>
       </ng-container>
 
       <ng-container
@@ -47,34 +60,27 @@
           this.isMatchingPattern(this.userInput)
         "
       >
-        <p class="available">Numarul {{ userInput }} este disponibil.</p>
+        <p class="available">
+          Numarul {{ userInput }} este rezervat cu succes.
+        </p>
       </ng-container>
       <div class="div-pret">
         <h3>Prețul rezervării: <span class="pret">Lei 7,99</span></h3>
       </div>
       <div class="reserve-numberplate">
         <button
-        (click)="searchNumberPlate(userInput)"
-        mat-raised-button
-        class="searchnumberplate"
-      >
-        <mat-icon>search</mat-icon>
-        Caută
-      </button>
-      <button
-        type="submit"
-        style="background-color: green;"
-        (click)="searchNumberPlate(userInput)"
-        mat-raised-button
-        class="reserve-numberplate"
-        *ngIf="(auth.isAuthenticated$ | async ) === true"
-        routerLink="/reserve-numberplate"
-      >
-        <mat-icon>save</mat-icon>
-        Rezervă
-      </button>
+          type="submit"
+          style="background-color: green"
+          (click)="searchNumberPlate(userInput)"
+          mat-raised-button
+          class="reserve-numberplate"
+          *ngIf="(auth.isAuthenticated$ | async) === true"
+          routerLink="/reserve-numberplate"
+        >
+          <mat-icon>save</mat-icon>
+          Rezervă
+        </button>
       </div>
     </form>
   </div>
-
 </div>
