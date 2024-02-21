@@ -3,5 +3,20 @@
 </div>
 
 <div class="history-below">
-  <app-registration-history [vehicle]="vehicle"></app-registration-history>
+  <div class="history-list">
+    <ng-template
+      *ngIf="vehicles.length; then historyRegistrations; else noRegistrations"
+    >
+    </ng-template>
+
+    <ng-template #historyRegistrations class="history-card">
+      <app-registration-history
+        *ngFor="let vehicle of vehicles; trackBy: trackById"
+        [vehicle]="vehicle"
+      ></app-registration-history>
+    </ng-template>
+  </div>
+  <ng-template #noRegistrations>
+    <p class="novehicles">Nu aveți vehicule inmatriculate</p>
+  </ng-template>
 </div>

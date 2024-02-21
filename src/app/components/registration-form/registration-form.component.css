@@ -4,7 +4,22 @@
 
 .history-below {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+.history-list {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.history-card {
+  margin: 20rem 20rem;
+}
+.novehicles {
+  color: gray;
+  background-color: rgba(23, 212, 184, 0.218);
+  border-radius: 4px;
+  text-align: center;
 }

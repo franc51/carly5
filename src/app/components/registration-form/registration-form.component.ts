@@ -13,20 +13,69 @@ export class RegistrationFormComponent {
   ngOnInit(): void {
     this.vehicles = [
       {
+        id: '2gh2gj',
         ownerName: 'ownerName',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
-        vehicleManufacturer: 'Volkswagen',
-        vehicleModel: 'Passat',
+        vehicleManufacturer: 'Mercedes',
+        vehicleModel: 'AMG',
         vehicleYear: 2003,
         vehicleVinNumber: 'WVW527HF7FF320A',
         vehicleIdentityCard: 'vehicleIdentityCard',
-        vehicleNumberPlate: 'BV51FXR',
+        vehicleNumberPlate: 'MM47GHK',
+        certificatePaymentProof: true,
+        ownershipProof: 'ownershipProof',
+        status: 'În așteptare',
+      },
+      {
+        id: 'n90f68d',
+        ownerName: 'ownerName',
+        ownerCNP: 12324,
+        ownerIdentityCard: 'ownerIdentityCard',
+        vehicleManufacturer: 'Opel',
+        vehicleModel: 'Astra',
+        vehicleYear: 2003,
+        vehicleVinNumber: 'WVW527HF7FF320A',
+        vehicleIdentityCard: 'vehicleIdentityCard',
+        vehicleNumberPlate: 'SB32DRJ',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
         status: 'Respins',
       },
+      {
+        id: 's4pg9ub',
+        ownerName: 'ownerName',
+        ownerCNP: 12324,
+        ownerIdentityCard: 'ownerIdentityCard',
+        vehicleManufacturer: 'Mercedes',
+        vehicleModel: 'Vito',
+        vehicleYear: 2003,
+        vehicleVinNumber: 'WVW527HF7FF320A',
+        vehicleIdentityCard: 'vehicleIdentityCard',
+        vehicleNumberPlate: 'IL25HDF',
+        certificatePaymentProof: true,
+        ownershipProof: 'ownershipProof',
+        status: 'Acceptat',
+      },
+      {
+        id: '0g5sd7',
+        ownerName: 'ownerName',
+        ownerCNP: 12324,
+        ownerIdentityCard: 'ownerIdentityCard',
+        vehicleManufacturer: 'Volkswagen',
+        vehicleModel: 'Arteon',
+        vehicleYear: 2003,
+        vehicleVinNumber: 'WVW527HF7FF320A',
+        vehicleIdentityCard: 'vehicleIdentityCard',
+        vehicleNumberPlate: 'BV10GSF',
+        certificatePaymentProof: true,
+        ownershipProof: 'ownershipProof',
+        status: 'Acceptat',
+      },
     ];
-    this.vehicle = this.vehicles[0];
+  }
+
+  trackById(index: number, value: VehicleRegistration) {
+    return value.id;
   }
 }
