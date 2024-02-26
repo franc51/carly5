@@ -8,4 +8,12 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
 })
 export class RegistrationHistoryComponent {
   @Input() vehicle!: VehicleRegistration;
+  displayedColumns: string[] = [
+    'id',
+    'vehicleManufacturer',
+    'vehicleModel',
+    'date',
+    'status',
+  ];
+  dataSource = this.vehicle;
 }

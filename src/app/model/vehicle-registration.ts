@@ -1,5 +1,6 @@
 export interface VehicleRegistration {
   id: any;
+  date: string;
   ownerName: string;
   ownerCNP: number;
   ownerIdentityCard: string;

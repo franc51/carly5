@@ -1,5 +1,4 @@
 .register-history {
-  background-color: #5cadfe;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,4 +26,7 @@
 }
 h2 {
   margin: 0;
+}
+table {
+  width: 100%;
 }

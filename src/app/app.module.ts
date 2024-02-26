@@ -15,6 +15,7 @@ import { NumberplateCheckComponent } from './containers/numberplate-check/number
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 // form
 import { FormsModule } from '@angular/forms';
@@ -58,6 +59,7 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     MatFormFieldModule,
     MatInput,
     MatInputModule,
+    MatTableModule,
     AuthModule.forRoot({
       domain: 'dev-tlh80f7xwrzzr2oq.us.auth0.com',
       clientId: 'cn8K5prNUAiMqawEhmdTrjXu9RGGwxJL',
