@@ -1,6 +1,7 @@
 <div class="register-history">
   <div>
     <div>
+      <h2>Istoric vehicule</h2>
       <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -44,6 +45,12 @@
               }}</span>
             </ng-container>
           </td>
+        </ng-container>
+
+        <!-- details Column -->
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef>Detalii</th>
+          <td mat-cell *matCellDef="let vehicle">{{ vehicle.details }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

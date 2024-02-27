@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,8 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { NumberplateCheckComponent } from './containers/numberplate-check/numberplate-check.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInput } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import {
+  MatOption,
+  MatSelect,
+  MatSelectModule,
+} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 // form
 import { FormsModule } from '@angular/forms';
@@ -60,6 +66,8 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     MatInput,
     MatInputModule,
     MatTableModule,
+    MatSelect,
+    MatOption,
     AuthModule.forRoot({
       domain: 'dev-tlh80f7xwrzzr2oq.us.auth0.com',
       clientId: 'cn8K5prNUAiMqawEhmdTrjXu9RGGwxJL',
@@ -70,5 +78,6 @@ import { RegistrationFormComponent } from './components/registration-form/regist
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

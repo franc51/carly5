@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-
+import { MatSelect } from '@angular/material/select';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -16,6 +16,7 @@ export class RegistrationFormComponent {
         id: 'B02JF33',
         date: '24.03.2024',
         ownerName: 'ownerName',
+        ownerPhone: '0712312312',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'KIA',
@@ -26,12 +27,15 @@ export class RegistrationFormComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
+        details: 'string',
+
         status: 'Respins',
       },
       {
         id: 'AP20TJF',
         date: '24.03.2024',
         ownerName: 'ownerName',
+        ownerPhone: '0712312312',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'MERCEDES',
@@ -42,12 +46,15 @@ export class RegistrationFormComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
+        details: 'string',
+
         status: 'Aprobat',
       },
       {
         id: 'AP29VJ4',
         date: '12.01.2022',
         ownerName: 'ownerName',
+        ownerPhone: '0712312312',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'VOLKSWAGEN',
@@ -58,6 +65,7 @@ export class RegistrationFormComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
+        details: 'string',
         status: 'Aprobat',
       },
     ];

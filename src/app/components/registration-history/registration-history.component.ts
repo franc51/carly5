@@ -16,6 +16,7 @@ export class RegistrationHistoryComponent {
         id: 'B02JF33',
         date: '24.03.2024',
         ownerName: 'ownerName',
+        ownerPhone: 'string',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'KIA',
@@ -26,12 +27,14 @@ export class RegistrationHistoryComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
+        details: 'Lipsa asigurare',
         status: 'Respins',
       },
       {
         id: 'AP20TJF',
         date: '24.03.2024',
         ownerName: 'ownerName',
+        ownerPhone: 'string',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'MERCEDES',
@@ -42,12 +45,14 @@ export class RegistrationHistoryComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
+        details: 'Talonul si placutele de inmatriculare au fost trimise',
         status: 'Aprobat',
       },
       {
         id: 'AP29VJ4',
         date: '12.01.2022',
         ownerName: 'ownerName',
+        ownerPhone: 'string',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'VOLKSWAGEN',
@@ -58,6 +63,7 @@ export class RegistrationHistoryComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
+        details: 'Talonul si placutele de inmatriculare au fost trimise',
         status: 'Aprobat',
       },
     ];
@@ -71,6 +77,7 @@ export class RegistrationHistoryComponent {
     'vehicleModel',
     'date',
     'status',
+    'details',
   ];
   dataSource = this.vehicle;
 }
