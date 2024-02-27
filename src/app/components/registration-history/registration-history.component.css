@@ -25,7 +25,8 @@
   border-radius: 0.3rem;
 }
 h2 {
-  margin: 0;
+  margin: 1rem;
+  color: gray;
 }
 table {
   width: 100%;

@@ -42,7 +42,7 @@ export class RegistrationFormComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
-        status: 'În așteptare',
+        status: 'Aprobat',
       },
       {
         id: 'AP29VJ4',
@@ -58,7 +58,7 @@ export class RegistrationFormComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
-        status: 'Acceptat',
+        status: 'Aprobat',
       },
     ];
   }

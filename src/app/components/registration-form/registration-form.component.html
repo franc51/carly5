@@ -10,10 +10,7 @@
     </ng-template>
 
     <ng-template #historyRegistrations class="history-card">
-      <app-registration-history
-        *ngFor="let vehicle of vehicles; trackBy: trackById"
-        [vehicle]="vehicle"
-      ></app-registration-history>
+      <app-registration-history></app-registration-history>
     </ng-template>
   </div>
   <ng-template #noRegistrations>

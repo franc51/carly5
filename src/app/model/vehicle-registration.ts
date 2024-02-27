@@ -12,5 +12,5 @@ export interface VehicleRegistration {
   vehicleNumberPlate: string;
   certificatePaymentProof: boolean;
   ownershipProof: string;
-  status?: 'Acceptat' | 'Respins' | 'În așteptare';
+  status?: 'Aprobat' | 'Respins' | 'În așteptare';
 }
