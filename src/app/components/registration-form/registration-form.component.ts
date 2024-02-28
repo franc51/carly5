@@ -9,6 +9,27 @@ import { MatSelect } from '@angular/material/select';
 export class RegistrationFormComponent {
   vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
+  userInput: string = '';
+  matchingNumberPlate: string | undefined;
+
+  isMatchingPattern = (userInput: string): boolean => {
+    const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
+    return pattern.test(userInput);
+  };
+
+  result = this.isMatchingPattern(this.userInput);
+  numberPlate: any;
+
+  searchNumberPlate(numberPlate: String): void {
+    if (this.isMatchingPattern) {
+      console.log(this.isMatchingPattern(this.userInput));
+      this.matchingNumberPlate = this.numberPlate.find(
+        (item: string) => item === this.userInput
+      );
+    }
+    if (this.matchingNumberPlate === this.userInput) {
+    }
+  }
 
   ngOnInit(): void {
     this.vehicles = [
