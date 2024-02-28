@@ -36,6 +36,7 @@ import { ContactComponent } from './containers/contact/contact.component';
 import { HelpComponent } from './containers/help/help.component';
 import { RegistrationHistoryComponent } from './components/registration-history/registration-history.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     HelpComponent,
     RegistrationHistoryComponent,
     RegistrationFormComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

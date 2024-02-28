@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 
 @Component({
-  selector: 'app-registration-history',
-  templateUrl: './registration-history.component.html',
-  styleUrl: './registration-history.component.css',
+  selector: 'app-admin-dashboard',
+  templateUrl: './admin-dashboard.component.html',
+  styleUrl: './admin-dashboard.component.css',
 })
-export class RegistrationHistoryComponent {
+export class AdminDashboardComponent {
   vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
 
@@ -28,7 +28,7 @@ export class RegistrationHistoryComponent {
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
         details: 'Lipsa asigurare',
-        status: 'Respins',
+        status: 'În așteptare',
       },
       {
         id: 'AP20TJF',
@@ -46,7 +46,7 @@ export class RegistrationHistoryComponent {
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
         details: 'Talonul si placutele de inmatriculare au fost trimise',
-        status: 'Aprobat',
+        status: 'În așteptare',
       },
       {
         id: 'AP29VJ4',
@@ -64,7 +64,7 @@ export class RegistrationHistoryComponent {
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
         details: 'Talonul si placutele de inmatriculare au fost trimise',
-        status: 'Aprobat',
+        status: 'În așteptare',
       },
     ];
   }
@@ -73,12 +73,11 @@ export class RegistrationHistoryComponent {
     return value.id;
   }
   displayedColumns: string[] = [
+    'ownerName',
     'vehicleManufacturer',
-    'vehicleModel',
     'date',
     'numberPlate',
     'details',
-    'status',
   ];
   dataSource = this.vehicle;
 }
