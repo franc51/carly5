@@ -1,7 +1,7 @@
 <div class="register-history">
   <div>
     <div>
-      <h2>Interfața de admin</h2>
+      <h2>Cereri înmatriculare</h2>
       <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -50,11 +50,11 @@
           </td>
         </ng-container>
 
-          <!-- Date Column -->
-          <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef>Data</th>
-            <td mat-cell *matCellDef="let vehicle">{{ vehicle.date }}</td>
-          </ng-container>
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Data</th>
+          <td mat-cell *matCellDef="let vehicle">{{ vehicle.date }}</td>
+        </ng-container>
 
         <!-- details Column -->
         <ng-container matColumnDef="details">
@@ -78,28 +78,23 @@
                 margin-left: 1rem;
               "
             >
-              <mat-icon style="padding-left: 10px;">cloud_download</mat-icon>
+              <mat-icon style="padding-left: 10px">cloud_download</mat-icon>
             </button>
             <div>
               <button
                 matTooltip="Respinge cerere"
                 mat-raised-button
-                style="background-color: red; margin-left: 1rem;"
+                style="background-color: red; margin-left: 1rem"
               >
-              <mat-icon style="padding-left: 10px;">cancel</mat-icon>
+                <mat-icon style="padding-left: 10px">cancel</mat-icon>
               </button>
               <button
                 matTooltip="Aprobă cerere"
                 mat-raised-button
-                style="
-                  background-color: green;
-                  margin-left: 1rem;
-                "
+                style="background-color: green; margin-left: 1rem"
               >
-                <mat-icon style="padding-left: 10px;">check-box</mat-icon>
+                <mat-icon style="padding-left: 10px">check-box</mat-icon>
               </button>
-
-
             </div>
           </td>
         </ng-container>

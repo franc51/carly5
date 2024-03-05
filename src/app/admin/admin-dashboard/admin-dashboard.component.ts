@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 
-
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',

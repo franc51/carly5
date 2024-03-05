@@ -8,8 +8,10 @@ import { ContactComponent } from './containers/contact/contact.component';
 import { HelpComponent } from './containers/help/help.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { ProfileComponent } from './containers/profile/profile.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
+  { path: 'admin', component: AdminDashboardComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'register-vehicle', component: RegistrationFormComponent },
   { path: 'radiate-vehicle', component: RadiateVehicleComponent },
