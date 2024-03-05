@@ -9,6 +9,7 @@ import { HomepageComponent } from './containers/homepage/homepage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // styles
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NumberplateCheckComponent } from './containers/numberplate-check/numberplate-check.component';
@@ -70,6 +71,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     MatTableModule,
     MatSelect,
     MatOption,
+    MatTooltipModule,
     AuthModule.forRoot({
       domain: 'dev-tlh80f7xwrzzr2oq.us.auth0.com',
       clientId: 'cn8K5prNUAiMqawEhmdTrjXu9RGGwxJL',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -16,6 +17,7 @@ export class AdminDashboardComponent {
         id: 'B02JF33',
         date: '24.03.2024',
         ownerName: 'ownerName',
+        ownerSurname: 'aotngs[glomns[dgo',
         ownerPhone: 'string',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
@@ -34,6 +36,7 @@ export class AdminDashboardComponent {
         id: 'AP20TJF',
         date: '24.03.2024',
         ownerName: 'ownerName',
+        ownerSurname: 'aotngs[f3-gdgo',
         ownerPhone: 'string',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
@@ -45,13 +48,14 @@ export class AdminDashboardComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
-        details: 'Talonul si placutele de inmatriculare au fost trimise',
+        details: 'Lipsa asigurare',
         status: 'În așteptare',
       },
       {
         id: 'AP29VJ4',
         date: '12.01.2022',
         ownerName: 'ownerName',
+        ownerSurname: 'aotngs[glomns[dgo',
         ownerPhone: 'string',
         ownerCNP: 12324,
         ownerIdentityCard: 'ownerIdentityCard',
@@ -63,7 +67,7 @@ export class AdminDashboardComponent {
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
-        details: 'Talonul si placutele de inmatriculare au fost trimise',
+        details: 'Lipsa asigurare',
         status: 'În așteptare',
       },
     ];
@@ -74,9 +78,12 @@ export class AdminDashboardComponent {
   }
   displayedColumns: string[] = [
     'ownerName',
+    'ownerSurname',
+    'ownerPhone',
     'vehicleManufacturer',
-    'date',
+    'vehicleModel',
     'numberPlate',
+    'date',
     'details',
   ];
   dataSource = this.vehicle;

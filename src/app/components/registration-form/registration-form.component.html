@@ -4,8 +4,8 @@
   <div class="register-form">
     <div class="example-container">
       <form action="" #form="ngForm">
-        <div>
-          <mat-form-field>
+
+          <mat-form-field color="accent" >
             <mat-label>Nume Proprietar</mat-label>
             <input
               matInput
@@ -16,7 +16,7 @@
             />
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field color="accent">
             <mat-label>Prenume Proprietar</mat-label>
             <input
               matInput
@@ -26,10 +26,8 @@
               required
             />
           </mat-form-field>
-        </div>
 
-        <div>
-          <mat-form-field>
+          <mat-form-field color="accent">
             <mat-label>Numar telefon</mat-label>
             <input
               matInput
@@ -41,16 +39,14 @@
             />
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field color="accent">
             <mat-label>Marca</mat-label>
             <mat-select>
               <mat-option value="">Volkswagen</mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
 
-        <div>
-          <mat-form-field>
+          <mat-form-field color="accent">
             <mat-label>Model</mat-label>
             <mat-select>
               <mat-option value="">Golf</mat-option>
@@ -60,13 +56,13 @@
               <mat-option value="">Caddy</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field color="accent">
             <mat-label>VIN</mat-label>
             <input matInput #input type="number" maxlength="10" required />
           </mat-form-field>
-        </div>
 
-        <mat-form-field>
+
+        <mat-form-field color="accent">
           <mat-label>Numar inmatriculare</mat-label>
           <input
             matInput
@@ -93,8 +89,7 @@
 
         <app-uploadcare-upload></app-uploadcare-upload>
       </form>
-    </div>
-    <button mat-raised-button style="background-color: green">
+    <button mat-raised-button style="background-color: green; margin-bottom: 1rem;">
       <mat-icon>send</mat-icon>
       Trimite cerere
     </button>

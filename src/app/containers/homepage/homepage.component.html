@@ -4,7 +4,7 @@
     <app-login></app-login>
   </nav>
   <div class="container">
-    <div class="homepage-content">
+    <div class="homepage-content" *ngIf="auth.user$">
       <mat-sidenav-container
         class="example-container"
         *ngIf="auth.isAuthenticated$ | async"
@@ -26,6 +26,5 @@
   </div>
   <div *ngIf="(auth.isAuthenticated$ | async) === false" class="notauth">
     <h2>Nu ești autentificat</h2>
-    <app-numberplate-check></app-numberplate-check>
   </div>
 </div>

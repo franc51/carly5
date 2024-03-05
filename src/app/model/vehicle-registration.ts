@@ -2,6 +2,7 @@ export interface VehicleRegistration {
   id: any;
   date: string;
   ownerName: string;
+  ownerSurname: string;
   ownerPhone: string;
   ownerCNP: number;
   ownerIdentityCard: string;
@@ -13,7 +14,6 @@ export interface VehicleRegistration {
   vehicleNumberPlate: string;
   certificatePaymentProof: boolean;
   ownershipProof: string;
-  details: string;
-
+  details?: 'Certificatul de înmatriculare și plăcuțele au fost trimise.' | 'Lipsa asigurare';
   status?: 'Aprobat' | 'Respins' | 'În așteptare';
 }

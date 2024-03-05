@@ -1,0 +1,9 @@
+.notifications {
+  display: flex;
+  gap: 0.5rem;
+}
+.notif-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

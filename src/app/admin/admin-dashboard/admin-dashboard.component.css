@@ -1,10 +1,6 @@
 .register-history {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  text-align: center;
 }
 
 .status-acceptat {
@@ -30,4 +26,11 @@ h2 {
 }
 table {
   width: 100%;
+}
+
+.admin-power {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }

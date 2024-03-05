@@ -1,5 +1,7 @@
-<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-
+<ng-container  *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+ <div class="notifications">
+  <button mat-raised-button class="notif-btn" matTooltip="Notificări" ><mat-icon [ngStyle]="{'color':'white'}" style="padding-left: 10px;">notifications_none</mat-icon>
+  <ng-template ><mat-icon matTooltip="Notificări" [ngStyle]="{'color':'white'}">notifications_important</mat-icon></ng-template></button>
   <button
     (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })"
     mat-raised-button
@@ -8,6 +10,7 @@
     <mat-icon>logout</mat-icon>
     Deconectare
   </button>
+ </div>
 </ng-container>
 
 <ng-template #loggedOut>

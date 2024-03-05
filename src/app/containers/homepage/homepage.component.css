@@ -18,8 +18,7 @@
   position: absolute;
   top: 4rem;
   bottom: 0;
-  left: 19rem;
-  right: 19rem;
+  width: 100%;
   background-color: #eff7ff;
   box-shadow: 10px 10px 10px 5px rgb(236, 230, 230);
 }
@@ -48,7 +47,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16vw;
+  padding: 0 1vw;
   background-color: #5cadfe;
   height: 4rem;
 }
