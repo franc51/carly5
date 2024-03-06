@@ -70,31 +70,119 @@
                 <mat-option value="">Date incorecte</mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="action-btns">
-            <button
-              matTooltip="Descarcă documentele"
-              mat-button>
-              <mat-icon style="padding-left: 10px">vertical_align_bottom</mat-icon>
-            </button>
 
-              <button
-                matTooltip="Respinge cerere"
-                mat-raised-button >
-                <mat-icon style="padding-left: 10px">not_interested</mat-icon>
-              </button>
-              <button
-                matTooltip="Aprobă cerere"
-                mat-raised-button
-              >
-                <mat-icon style="padding-left: 10px">check_circle_outline</mat-icon>
-              </button>
-            </div>
+
+                <div class="action-btns">
+                  <button
+                    matTooltip="Descarcă documentele">
+                    <img src="https://i.ibb.co/z5CHZK5/download-1.png" alt="">
+                  </button>
+
+                    <button
+                      matTooltip="Respinge cerere">
+                      <img src="https://i.ibb.co/hMJtnfr/decline-1.png" alt="">
+                    </button>
+                    <button
+                      matTooltip="Aprobă cerere"
+                    >
+                      <img src="https://i.ibb.co/48nPsPw/checklist-1.png" alt="">
+                    </button>
+                  </div>
+
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+    </div>
+  </div>
+</div>
+
+<div class="register-history">
+  <div>
+    <div>
+      <h2>Istoric cereri</h2>
+      <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="ownerName">
+          <th mat-header-cell *matHeaderCellDef>Nume</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.ownerName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ownerSurname">
+          <th mat-header-cell *matHeaderCellDef>Prenume</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.ownerName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ownerPhone">
+          <th mat-header-cell *matHeaderCellDef>Numar Telefon</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.ownerPhone }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicleManufacturer">
+          <th mat-header-cell *matHeaderCellDef>Autovehicul</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.vehicleManufacturer }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicleModel">
+          <th mat-header-cell *matHeaderCellDef>Model</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.vehicleManufacturer }}
+          </td>
+        </ng-container>
+
+        <!-- placute Column -->
+        <ng-container matColumnDef="numberPlate">
+          <th mat-header-cell *matHeaderCellDef>Nr. Înmatriculare</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.vehicleNumberPlate }}
+          </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Data</th>
+          <td mat-cell *matCellDef="let vehicle">{{ vehicle.date }}</td>
+        </ng-container>
+
+        <!-- details Column -->
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef>Detalii</th>
+          <td mat-cell *matCellDef="let vehicle" class="admin-power">
+            <mat-form-field style="margin-top: 1rem" color="accent">
+              <mat-label>Motivul respingerii</mat-label>
+              <mat-select>
+                <mat-option value="">Lipsă asigurare</mat-option>
+                <mat-option value="">Lipsă CI</mat-option>
+                <mat-option value="">Lipsă contract</mat-option>
+                <mat-option value="">Lipsă dovada plății talon</mat-option>
+                <mat-option value="">Date incorecte</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+</mat-paginator>
     </div>
   </div>
 </div>

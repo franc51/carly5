@@ -6,6 +6,7 @@
   text-align: center;
   background-color: #424242;
   border-radius: 2px;
+  margin: 0 1rem;
 }
 
 .history-below {
@@ -14,6 +15,7 @@
 .history-list {
   display: flex;
   flex-direction: column;
+  border: 2px solid gray;
 }
 
 .novehicles {
@@ -30,4 +32,8 @@ h2 {
 }
 .example-container {
 padding-top: 1rem;
+background-color: aliceblue !important;
+}
+form {
+  background-color: aliceblue !important;
 }

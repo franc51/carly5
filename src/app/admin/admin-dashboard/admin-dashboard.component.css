@@ -1,5 +1,5 @@
 .register-history {
-  padding: 0.5rem;
+  padding: 0 2rem;
   border-radius: 0.5rem;
 }
 
@@ -35,20 +35,20 @@ table {
   align-items: center;
 }
 button {
-  scale: 120%;
-  box-shadow: none !important;
+border-radius: 50%;
+border: none;
+background-color: transparent;
+cursor: pointer;
+padding: 0.8rem;
+}
+button:hover {
+  background-color: rgba(223, 222, 222, 0.603);
 }
 .action-btns{
-  margin-left: 3rem;
-  width: 16rem;
+  width: 14rem;
   height: 3rem;
-  border: 1px solid rgba(128, 128, 128, 0.438);
-  border-radius: 8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  margin-left: 1rem;
   align-items: center;
 }
-button:hover{
-}
-
