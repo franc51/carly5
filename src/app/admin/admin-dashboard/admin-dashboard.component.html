@@ -2,6 +2,42 @@
   <div>
     <div>
       <h2>Cereri înmatriculare</h2>
+      <mat-form-field>
+        <mat-label>Caută după nr. de telefon</mat-label>
+        <input
+          type="number"
+          matInput
+          #input
+          type="tel"
+          maxlength="10"
+          placeholder="0712345678"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Caută după Nume</mat-label>
+        <input
+          type="number"
+          matInput
+          #input
+          type="tel"
+          maxlength="10"
+          placeholder="0712345678"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Caută după serie autovehicul</mat-label>
+        <input
+          type="number"
+          matInput
+          #input
+          type="tel"
+          maxlength="10"
+          placeholder="0712345678"
+        />
+      </mat-form-field>
+
       <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -103,9 +139,47 @@
   <div>
     <div>
       <h2>Istoric cereri</h2>
+
+      <mat-form-field>
+        <mat-label>Caută după nr. de telefon</mat-label>
+        <input
+          type="number"
+          matInput
+          #input
+          type="tel"
+          maxlength="10"
+          placeholder="0712345678"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Caută după Nume</mat-label>
+        <input
+          type="number"
+          matInput
+          #input
+          type="tel"
+          maxlength="10"
+          placeholder="0712345678"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Caută după serie autovehicul</mat-label>
+        <input
+          type="number"
+          matInput
+          #input
+          type="tel"
+          maxlength="10"
+          placeholder="0712345678"
+        />
+      </mat-form-field>
       <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
+
+
 
         <!-- Name Column -->
         <ng-container matColumnDef="ownerName">
@@ -179,10 +253,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements">
-</mat-paginator>
     </div>
   </div>
 </div>

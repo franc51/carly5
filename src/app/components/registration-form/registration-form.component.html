@@ -1,122 +1,133 @@
 <div class="history-below">
-  <h2>Pentru a înmtricula un vehicul folosiți formularul de mai jos</h2>
+  <mat-tab-group fitInkBarToContent>
+    <mat-tab label="Înmatriculare">
+<h2>Folosiți următorul formular pentru a trimite cereri.</h2>
+      <div class="register-form">
+        <form action="" #form="ngForm" class="formabro">
 
-  <div class="register-form">
+            <mat-form-field color="accent" >
+              <mat-label>Nume Proprietar</mat-label>
+              <input
+                matInput
+                #input
+                maxlength="15"
+                placeholder="Popescu"
+                required
+              />
+            </mat-form-field>
 
-      <form action="" #form="ngForm" class="formabro">
+            <mat-form-field color="accent">
+              <mat-label>Prenume Proprietar</mat-label>
+              <input
+                matInput
+                #input
+                maxlength="15"
+                placeholder="Daniel"
+                required
+              />
+            </mat-form-field>
 
-          <mat-form-field color="accent" >
-            <mat-label>Nume Proprietar</mat-label>
+            <mat-form-field color="accent">
+              <mat-label>Numar telefon</mat-label>
+              <input
+                matInput
+                #input
+                type="tel"
+                maxlength="10"
+                placeholder="0712345678"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <mat-label>E-mail</mat-label>
+              <input
+              type="email"
+                matInput
+                #input
+                type="tel"
+                maxlength="10"
+                placeholder="0712345678"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <mat-label>Marca</mat-label>
+              <mat-select>
+                <mat-option value="">Volkswagen</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <mat-label>Model</mat-label>
+              <mat-select>
+                <mat-option value="">Golf</mat-option>
+                <mat-option value="">Passat</mat-option>
+                <mat-option value="">Arteon</mat-option>
+                <mat-option value="">Touareg</mat-option>
+                <mat-option value="">Caddy</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>VIN</mat-label>
+              <input matInput #input type="number" maxlength="10" required />
+            </mat-form-field>
+
+
+          <mat-form-field color="accent">
+            <mat-label>Numar inmatriculare</mat-label>
             <input
               matInput
-              #input
-              maxlength="15"
-              placeholder="Popescu"
+              type="text"
+              class="input"
+              name="numberPlate"
+              oninput="this.value = this.value.toUpperCase()"
               required
+              minlength="7"
+              maxlength="7"
+              [(ngModel)]="userInput"
             />
           </mat-form-field>
 
-          <mat-form-field color="accent">
-            <mat-label>Prenume Proprietar</mat-label>
-            <input
-              matInput
-              #input
-              maxlength="15"
-              placeholder="Daniel"
-              required
-            />
-          </mat-form-field>
+          <ng-container *ngIf="form.invalid && form.touched">
+            <p class="error">Te rog introdu 7 caractere!</p>
+          </ng-container>
 
-          <mat-form-field color="accent">
-            <mat-label>Numar telefon</mat-label>
-            <input
-              matInput
-              #input
-              type="tel"
-              maxlength="10"
-              placeholder="0712345678"
-              required
-            />
-          </mat-form-field>
+          <ng-container
+            *ngIf="!this.isMatchingPattern(this.userInput) && form.touched"
+          >
+            <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
+          </ng-container>
 
-          <mat-form-field color="accent">
-            <mat-label>E-mail</mat-label>
-            <input
-            type="email"
-              matInput
-              #input
-              type="tel"
-              maxlength="10"
-              placeholder="0712345678"
-              required
-            />
-          </mat-form-field>
-
-          <mat-form-field color="accent">
-            <mat-label>Marca</mat-label>
-            <mat-select>
-              <mat-option value="">Volkswagen</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field color="accent">
-            <mat-label>Model</mat-label>
-            <mat-select>
-              <mat-option value="">Golf</mat-option>
-              <mat-option value="">Passat</mat-option>
-              <mat-option value="">Arteon</mat-option>
-              <mat-option value="">Touareg</mat-option>
-              <mat-option value="">Caddy</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field color="accent">
-            <mat-label>VIN</mat-label>
-            <input matInput #input type="number" maxlength="10" required />
-          </mat-form-field>
-
-
-        <mat-form-field color="accent">
-          <mat-label>Numar inmatriculare</mat-label>
-          <input
-            matInput
-            type="text"
-            class="input"
-            name="numberPlate"
-            oninput="this.value = this.value.toUpperCase()"
-            required
-            minlength="7"
-            maxlength="7"
-            [(ngModel)]="userInput"
-          />
-        </mat-form-field>
-
-        <ng-container *ngIf="form.invalid && form.touched">
-          <p class="error">Te rog introdu 7 caractere!</p>
-        </ng-container>
-
-        <ng-container
-          *ngIf="!this.isMatchingPattern(this.userInput) && form.touched"
-        >
-          <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
-        </ng-container>
-
-        <app-uploadcare></app-uploadcare>
-        <button mat-raised-button style="background-color: green; margin-bottom: 1rem; color: white;">
-          <mat-icon>send</mat-icon>
-          Trimite cerere
-        </button>
-      </form>
-  <div class="history-list">
-    <ng-template
-      *ngIf="vehicles.length; then historyRegistrations; else noRegistrations"
-    >
-    </ng-template>
+          <app-uploadcare></app-uploadcare>
+          <button mat-raised-button style="background-color: green; margin-bottom: 1rem; color: white;">
+            <mat-icon>send</mat-icon>
+            Trimite cerere
+          </button>
+        </form>
   </div>
 
-  <ng-template #noRegistrations>
-    <p class="novehicles">Nu aveți vehicule inmatriculate</p>
-  </ng-template>
-</div>
-<ng-template #historyRegistrations class="history-card">
-  <app-registration-history></app-registration-history>
-</ng-template>
+    </mat-tab>
+    <mat-tab label="Istoric înmatriculări">
+
+      <div class="history-list">
+        <ng-template
+          *ngIf="vehicles.length; then historyRegistrations; else noRegistrations"
+        >
+        </ng-template>
+      </div>
+
+      <ng-template #noRegistrations>
+        <p class="novehicles">Nu aveți vehicule inmatriculate</p>
+      </ng-template>
+    <ng-template #historyRegistrations class="history-card">
+      <app-registration-history></app-registration-history>
+    </ng-template>
+
+
+    </mat-tab>
+  </mat-tab-group>
+
+
+

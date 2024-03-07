@@ -1,3 +1,5 @@
+import { MatPaginator } from "@angular/material/paginator";
+
 export interface VehicleRegistration {
   id: any;
   date: string;
@@ -16,4 +18,5 @@ export interface VehicleRegistration {
   ownershipProof: string;
   details?: 'Certificatul de înmatriculare și plăcuțele au fost trimise.' | 'Lipsa asigurare';
   status?: 'Aprobat' | 'Respins' | 'În așteptare';
+  paginator?: MatPaginator;
 }

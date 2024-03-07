@@ -14,6 +14,11 @@ import * as LR from "@uploadcare/blocks";
 
 LR.registerBlocks(LR);
 
+
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginator} from '@angular/material/paginator';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
@@ -66,6 +71,9 @@ import { UploadcareComponent } from './components/uploadcare/uploadcare.componen
     UploadcareComponent,
   ],
   imports: [
+    MatTabsModule,
+    MatPaginator,
+    MatPaginatorModule,
     UcWidgetModule,
     BrowserModule,
     AppRoutingModule,

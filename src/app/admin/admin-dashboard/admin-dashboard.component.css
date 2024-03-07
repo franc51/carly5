@@ -21,7 +21,7 @@
   border-radius: 0.3rem;
 }
 h2 {
-  margin: 1rem;
+  margin-top: 1rem;
   color: gray;
 }
 table {
@@ -54,4 +54,7 @@ button:hover {
 }
 img {
   border-radius: 50%;
+}
+mat-form-field {
+  margin-left: 8px;
 }
