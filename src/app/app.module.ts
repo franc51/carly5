@@ -14,7 +14,6 @@ import * as LR from "@uploadcare/blocks";
 
 LR.registerBlocks(LR);
 
-
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';

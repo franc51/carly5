@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './help.component.css'
 })
 export class HelpComponent {
-
+  panelOpenState = false;
 }

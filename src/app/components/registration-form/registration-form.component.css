@@ -1,11 +1,15 @@
 .register-form {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   border-radius: 0.5rem;
   text-align: center;
   border-radius: 2px;
   margin: 0 1rem;
+}
+.formabro {
+  padding: 1rem !important;
 }
 
 .history-below {
@@ -26,11 +30,13 @@ mat-form-field + mat-form-field {
 }
 h2 {
   color: gray;
+  margin-left: 1rem;
 }
 .example-container {
-padding-top: 1rem;
-background-color: aliceblue !important;
+background-color: white !important;
 }
 form {
-  background-color: aliceblue !important;
+  background-color: white !important;
+  box-shadow: 1px 6px 10px 4px rgb(192, 192, 192);
+  width: 28rem;
 }

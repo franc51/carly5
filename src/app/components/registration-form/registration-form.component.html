@@ -2,8 +2,8 @@
   <h2>Pentru a înmtricula un vehicul folosiți formularul de mai jos</h2>
 
   <div class="register-form">
-    <div class="example-container">
-      <form action="" #form="ngForm">
+
+      <form action="" #form="ngForm" class="formabro">
 
           <mat-form-field color="accent" >
             <mat-label>Nume Proprietar</mat-label>
@@ -101,20 +101,16 @@
         </ng-container>
 
         <app-uploadcare></app-uploadcare>
+        <button mat-raised-button style="background-color: green; margin-bottom: 1rem; color: white;">
+          <mat-icon>send</mat-icon>
+          Trimite cerere
+        </button>
       </form>
-    <button mat-raised-button style="background-color: green; margin-bottom: 1rem; color: white;">
-      <mat-icon>send</mat-icon>
-      Trimite cerere
-    </button>
-  </div>
-
   <div class="history-list">
     <ng-template
       *ngIf="vehicles.length; then historyRegistrations; else noRegistrations"
     >
     </ng-template>
-
-
   </div>
 
   <ng-template #noRegistrations>
