@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { MatSelect } from '@angular/material/select';
+import { AppModule } from '../../app.module';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',

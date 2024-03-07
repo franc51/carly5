@@ -39,10 +39,10 @@ border-radius: 50%;
 border: none;
 background-color: transparent;
 cursor: pointer;
-padding: 0.8rem;
+padding: 0.5rem;
 }
 button:hover {
-  background-color: rgba(223, 222, 222, 0.603);
+  scale: 110%;
 }
 .action-btns{
   width: 14rem;
@@ -51,4 +51,7 @@ button:hover {
   flex-direction: row;
   margin-left: 1rem;
   align-items: center;
+}
+img {
+  border-radius: 50%;
 }

@@ -9,6 +9,13 @@ import { HomepageComponent } from './containers/homepage/homepage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // styles
+
+import * as LR from "@uploadcare/blocks";
+
+LR.registerBlocks(LR);
+
+
+import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +45,7 @@ import { HelpComponent } from './containers/help/help.component';
 import { RegistrationHistoryComponent } from './components/registration-history/registration-history.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { UploadcareComponent } from './components/uploadcare/uploadcare.component';
 
 @NgModule({
   declarations: [
@@ -56,8 +64,10 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     RegistrationHistoryComponent,
     RegistrationFormComponent,
     AdminDashboardComponent,
+    UploadcareComponent,
   ],
   imports: [
+    UcWidgetModule,
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
