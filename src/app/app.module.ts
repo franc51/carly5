@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { HomepageComponent } from './containers/homepage/homepage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
+import { HttpClientModule } from '@angular/common/http';
 // styles
 
 import * as LR from "@uploadcare/blocks";
@@ -15,6 +15,9 @@ import * as LR from "@uploadcare/blocks";
 LR.registerBlocks(LR);
 
 
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {DatePipe} from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -49,6 +52,8 @@ import { RegistrationHistoryComponent } from './components/registration-history/
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { UploadcareComponent } from './components/uploadcare/uploadcare.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { SimplepaginatorComponent } from './components/simplepaginator/simplepaginator.component';
 
 @NgModule({
   declarations: [
@@ -68,8 +73,14 @@ import { UploadcareComponent } from './components/uploadcare/uploadcare.componen
     RegistrationFormComponent,
     AdminDashboardComponent,
     UploadcareComponent,
+    PaginatorComponent,
+    SimplepaginatorComponent,
   ],
   imports: [
+    HttpClientModule,
+    MatSortModule,
+    MatSort,
+    MatProgressSpinnerModule,
     MatTabsModule,
     MatPaginator,
     MatPaginatorModule,

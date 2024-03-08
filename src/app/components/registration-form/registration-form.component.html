@@ -1,79 +1,106 @@
 <div class="history-below">
   <mat-tab-group fitInkBarToContent>
     <mat-tab label="Înmatriculare">
-<h2>Folosiți următorul formular pentru a trimite cereri.</h2>
+      <h2>Folosiți formularul de mai jos pentru a trimite cereri.</h2>
       <div class="register-form">
         <form action="" #form="ngForm" class="formabro">
+          <mat-form-field color="accent">
+            <mat-label>Nume Proprietar</mat-label>
+            <input
+              name="ownerName"
+              #ownerName="ngModel"
+              matInput
+              #input
+              maxlength="15"
+              placeholder="Popescu"
+              required
+              ngModel
+            />
+          </mat-form-field>
 
-            <mat-form-field color="accent" >
-              <mat-label>Nume Proprietar</mat-label>
-              <input
-                matInput
-                #input
-                maxlength="15"
-                placeholder="Popescu"
-                required
-              />
-            </mat-form-field>
 
-            <mat-form-field color="accent">
-              <mat-label>Prenume Proprietar</mat-label>
-              <input
-                matInput
-                #input
-                maxlength="15"
-                placeholder="Daniel"
-                required
-              />
-            </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Prenume Proprietar</mat-label>
+            <input
+              name="ownerSurname"
+              #ownerSurname="ngModel"
+              matInput
+              #input
+              maxlength="15"
+              placeholder="Daniel"
+              required
+              ngModel
+            />
+          </mat-form-field>
 
-            <mat-form-field color="accent">
-              <mat-label>Numar telefon</mat-label>
-              <input
-                matInput
-                #input
-                type="tel"
-                maxlength="10"
-                placeholder="0712345678"
-                required
-              />
-            </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Numar telefon</mat-label>
+            <input
+              name="ownerPhone"
+              #ownerPhone="ngModel"
+              matInput
+              #input
+              type="tel"
+              minlength="10"
+              maxlength="10"
+              placeholder="0712345678"
+              required
+              ngModel
+            />
+          </mat-form-field>
 
-            <mat-form-field color="accent">
-              <mat-label>E-mail</mat-label>
-              <input
+          <mat-form-field color="accent">
+            <mat-label>E-mail</mat-label>
+            <input
+              type="ownerEmail"
+              #ownerEmail="ngModel"
+              matInput
+              #input
               type="email"
-                matInput
-                #input
-                type="tel"
-                maxlength="10"
-                placeholder="0712345678"
-                required
-              />
-            </mat-form-field>
+              placeholder="david@yahoo.com"
+              required
+              ngModel
+            />
+          </mat-form-field>
 
-            <mat-form-field color="accent">
-              <mat-label>Marca</mat-label>
-              <mat-select>
-                <mat-option value="">Volkswagen</mat-option>
-              </mat-select>
-            </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Marca</mat-label>
+            <mat-select>
+              <mat-option name="vehicleManufacturer" ngModel value=""
+                >Volkswagen</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
 
-            <mat-form-field color="accent">
-              <mat-label>Model</mat-label>
-              <mat-select>
-                <mat-option value="">Golf</mat-option>
-                <mat-option value="">Passat</mat-option>
-                <mat-option value="">Arteon</mat-option>
-                <mat-option value="">Touareg</mat-option>
-                <mat-option value="">Caddy</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>VIN</mat-label>
-              <input matInput #input type="number" maxlength="10" required />
-            </mat-form-field>
-
+          <mat-form-field color="accent">
+            <mat-label>Model</mat-label>
+            <mat-select>
+              <mat-option name="vehicleModel" ngModel value="">Golf</mat-option>
+              <mat-option name="vehicleModel" ngModel value=""
+                >Passat</mat-option
+              >
+              <mat-option name="vehicleModel" ngModel value=""
+                >Arteon</mat-option
+              >
+              <mat-option name="vehicleModel" ngModel value=""
+                >Touareg</mat-option
+              >
+              <mat-option name="vehicleModel" ngModel value=""
+                >Caddy</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>VIN</mat-label>
+            <input
+              ngModel
+              matInput
+              #input
+              type="number"
+              maxlength="10"
+              required
+            />
+          </mat-form-field>
 
           <mat-form-field color="accent">
             <mat-label>Numar inmatriculare</mat-label>
@@ -90,30 +117,51 @@
             />
           </mat-form-field>
 
-          <ng-container *ngIf="form.invalid && form.touched">
-            <p class="error">Te rog introdu 7 caractere!</p>
-          </ng-container>
+<!-- Form validations -->
 
           <ng-container
-            *ngIf="!this.isMatchingPattern(this.userInput) && form.touched"
+            *ngIf="!this.isMatchingPattern(this.userInput) && form.submitted"
           >
-            <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
+            <p class="error">Numarul de înm. trebuie sa fie de forma LLCCLLL</p>
           </ng-container>
 
+          <ng-container *ngIf="ownerName.invalid && form.submitted">
+            <p class="error">Numele nu este valid</p>
+          </ng-container>
+
+          <ng-container *ngIf="ownerSurname.invalid && form.submitted">
+            <p class="error">Prenumele nu este valid</p>
+          </ng-container>
+
+          <ng-container *ngIf="ownerPhone.invalid && form.submitted">
+            <p class="error">Numărul de telefon nu este valid</p>
+          </ng-container>
+
+          <ng-container *ngIf="ownerEmail.invalid && form.submitted">
+            <p class="error">Email invalid</p>
+          </ng-container>
+
+
           <app-uploadcare></app-uploadcare>
-          <button mat-raised-button style="background-color: green; margin-bottom: 1rem; color: white;">
+          <button
+          type="submit"
+            mat-raised-button
+            style="background-color: green; margin-bottom: 1rem; color: white"
+          >
             <mat-icon>send</mat-icon>
             Trimite cerere
           </button>
         </form>
-  </div>
-
+      </div>
     </mat-tab>
     <mat-tab label="Istoric înmatriculări">
-
       <div class="history-list">
         <ng-template
-          *ngIf="vehicles.length; then historyRegistrations; else noRegistrations"
+          *ngIf="
+            vehicles.length;
+            then historyRegistrations;
+            else noRegistrations
+          "
         >
         </ng-template>
       </div>
@@ -121,13 +169,9 @@
       <ng-template #noRegistrations>
         <p class="novehicles">Nu aveți vehicule inmatriculate</p>
       </ng-template>
-    <ng-template #historyRegistrations class="history-card">
-      <app-registration-history></app-registration-history>
-    </ng-template>
-
-
+      <ng-template #historyRegistrations class="history-card">
+        <app-registration-history></app-registration-history>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
-
-
-
+</div>
