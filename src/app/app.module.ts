@@ -10,19 +10,27 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule } from '@angular/common/http';
 // styles
 
-import * as LR from "@uploadcare/blocks";
+import * as LR from '@uploadcare/blocks';
 
 LR.registerBlocks(LR);
 
-
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {DatePipe} from '@angular/common';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DatePipe } from '@angular/common';
+import { MatTabGroup } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NumberplateCheckComponent } from './containers/numberplate-check/numberplate-check.component';
@@ -54,6 +62,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { UploadcareComponent } from './components/uploadcare/uploadcare.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SimplepaginatorComponent } from './components/simplepaginator/simplepaginator.component';
+import { RegistrationsComponent } from './containers/registrations/registrations.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +84,14 @@ import { SimplepaginatorComponent } from './components/simplepaginator/simplepag
     UploadcareComponent,
     PaginatorComponent,
     SimplepaginatorComponent,
+    RegistrationsComponent,
   ],
   imports: [
+    MatDialogClose,
+    MatDialogActions,
+    MatDialogContent,
+    MatDialogTitle,
+    MatTabGroup,
     HttpClientModule,
     MatSortModule,
     MatSort,

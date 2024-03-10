@@ -1,34 +1,38 @@
 <div class="history-below">
   <mat-tab-group fitInkBarToContent>
     <mat-tab label="Înmatriculare">
-      <h2>Folosiți formularul de mai jos pentru a trimite cereri.</h2>
       <div class="register-form">
-        <form action="" #form="ngForm" class="formabro">
+        <form
+          action=""
+          #form="ngForm"
+          (ngSubmit)="handleSubmit(form)"
+          class="formabro"
+        >
           <mat-form-field color="accent">
             <mat-label>Nume Proprietar</mat-label>
             <input
-              name="ownerName"
-              #ownerName="ngModel"
               matInput
               #input
               maxlength="15"
               placeholder="Popescu"
               required
+              name="ownerName"
+              #ownerName="ngModel"
               ngModel
+              [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
-
 
           <mat-form-field color="accent">
             <mat-label>Prenume Proprietar</mat-label>
             <input
-              name="ownerSurname"
-              #ownerSurname="ngModel"
               matInput
               #input
               maxlength="15"
               placeholder="Daniel"
               required
+              name="ownerSurname"
+              #ownerSurname="ngModel"
               ngModel
             />
           </mat-form-field>
@@ -36,8 +40,6 @@
           <mat-form-field color="accent">
             <mat-label>Numar telefon</mat-label>
             <input
-              name="ownerPhone"
-              #ownerPhone="ngModel"
               matInput
               #input
               type="tel"
@@ -45,6 +47,8 @@
               maxlength="10"
               placeholder="0712345678"
               required
+              name="ownerPhone"
+              #ownerPhone="ngModel"
               ngModel
             />
           </mat-form-field>
@@ -52,53 +56,50 @@
           <mat-form-field color="accent">
             <mat-label>E-mail</mat-label>
             <input
-              type="ownerEmail"
-              #ownerEmail="ngModel"
               matInput
               #input
               type="email"
               placeholder="david@yahoo.com"
               required
+              type="ownerEmail"
+              #ownerEmail="ngModel"
               ngModel
             />
           </mat-form-field>
 
           <mat-form-field color="accent">
             <mat-label>Marca</mat-label>
-            <mat-select>
-              <mat-option name="vehicleManufacturer" ngModel value=""
-                >Volkswagen</mat-option
-              >
+            <mat-select
+              name="vehicleManufacturer"
+              ngModel
+              value="vehicleManufacturer"
+            >
+              <mat-option value="VOLKSWAGEN">VOLKSWAGEN</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field color="accent">
             <mat-label>Model</mat-label>
-            <mat-select>
-              <mat-option name="vehicleModel" ngModel value="">Golf</mat-option>
-              <mat-option name="vehicleModel" ngModel value=""
-                >Passat</mat-option
-              >
-              <mat-option name="vehicleModel" ngModel value=""
-                >Arteon</mat-option
-              >
-              <mat-option name="vehicleModel" ngModel value=""
-                >Touareg</mat-option
-              >
-              <mat-option name="vehicleModel" ngModel value=""
-                >Caddy</mat-option
-              >
+            <mat-select name="vehicleModel" ngModel value="vehicleModel">
+              <mat-option value="GOLF">GOLF</mat-option>
+              <mat-option value="PASSAT">PASSAT</mat-option>
+              <mat-option value="ARTEON">ARTEON</mat-option>
+              <mat-option value="TUAREG">TUAREG</mat-option>
+              <mat-option value="CADDY">CADDY</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>VIN</mat-label>
             <input
-              ngModel
               matInput
               #input
               type="number"
               maxlength="10"
               required
+              name="vehicleVinNumber"
+              ngModel
+              value="vehicleVinNumber"
+              ngModel
             />
           </mat-form-field>
 
@@ -117,7 +118,7 @@
             />
           </mat-form-field>
 
-<!-- Form validations -->
+          <!-- Form validations -->
 
           <ng-container
             *ngIf="!this.isMatchingPattern(this.userInput) && form.submitted"
@@ -141,10 +142,15 @@
             <p class="error">Email invalid</p>
           </ng-container>
 
+          <ng-container *ngIf="form.submitted && form.valid">
+            <div class="green">
+              <h3>Cerere trimisă cu succes!</h3>
+            </div>
+          </ng-container>
 
           <app-uploadcare></app-uploadcare>
           <button
-          type="submit"
+            type="submit"
             mat-raised-button
             style="background-color: green; margin-bottom: 1rem; color: white"
           >
@@ -170,7 +176,7 @@
         <p class="novehicles">Nu aveți vehicule inmatriculate</p>
       </ng-template>
       <ng-template #historyRegistrations class="history-card">
-        <app-registration-history></app-registration-history>
+        <app-paginator></app-paginator>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

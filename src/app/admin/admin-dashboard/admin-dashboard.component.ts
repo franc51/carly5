@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-admin-dashboard',

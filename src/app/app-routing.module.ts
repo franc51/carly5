@@ -6,14 +6,13 @@ import { TechnicalAppointmentComponent } from './containers/technical-appointmen
 import { TaxesComponent } from './containers/taxes/taxes.component';
 import { ContactComponent } from './containers/contact/contact.component';
 import { HelpComponent } from './containers/help/help.component';
-import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-
+import { RegistrationsComponent } from './containers/registrations/registrations.component';
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'register-vehicle', component: RegistrationFormComponent },
+  { path: 'register-vehicle', component: RegistrationsComponent },
   { path: 'radiate-vehicle', component: RadiateVehicleComponent },
   { path: 'technical-appointment', component: TechnicalAppointmentComponent },
   { path: 'reserve-numberplate', component: ReserveNumberplateComponent },

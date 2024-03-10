@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { MatSelect } from '@angular/material/select';
-import { AppModule } from '../../app.module';
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -107,4 +107,11 @@ export class RegistrationFormComponent {
     'status',
   ];
   dataSource = this.vehicle;
+
+  handleSubmit(form: NgForm) {
+    if (form.valid) {
+      console.log(form.value);
+    }
+    return;
+  }
 }
