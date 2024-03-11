@@ -36,13 +36,10 @@ export class RegistrationFormComponent {
   }
 
   // provides the service
-  constructor(private vehicleService: VehicleService){
-
-  }
+  constructor(public vehicleService: VehicleService) {}
   ngOnInit(): void {
-
     // takes state and makes it available inside components
-      this.vehicles = this.vehicleService.vehicles;
+    this.vehicles = this.vehicleService.read();
   }
 
   trackById(index: number, value: VehicleRegistration) {

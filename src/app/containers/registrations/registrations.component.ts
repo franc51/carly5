@@ -9,26 +9,15 @@ import { VehicleService } from '../../admin/services/vehicle.service';
 })
 export class RegistrationsComponent implements OnInit {
   vehicle!: VehicleRegistration;
-  constructor(private vehicleService: VehicleService){}
+  constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
     // find item from the vehicleService
-      const id = 'B02JF33';
-     // if there is no item i provide a prototype object
-      this.vehicle = this.vehicleService.vehicles.find((vehicle: VehicleRegistration) =>   vehicle.id === id) ||{id: '',
-        date: '',
-        ownerName: '',
-        ownerSurname: '',
-        ownerPhone: '',
-        ownerEmail: '',
-        vehicleManufacturer: '',
-        vehicleModel: '',
-        vehicleVinNumber: '',
-        vehicleNumberPlate: '',
-  }
-
+    const id = 'B02JF33';
+    // if there is no item i provide a prototype object
+    this.vehicle = this.vehicleService.readOne('xxx');
   }
   onCreate(vehicle: VehicleRegistration) {
-    console.log('Oncreate: ', vehicle);
+    this.vehicleService.giveBirth(vehicle);
   }
 }

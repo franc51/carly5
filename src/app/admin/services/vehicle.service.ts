@@ -2,11 +2,10 @@ import { Injectable, ViewEncapsulation } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VehicleService {
-  vehicles: VehicleRegistration[] =
-  [
+  private vehicles: VehicleRegistration[] = [
     {
       id: 'B02JF33',
       date: '24.03.2024',
@@ -25,7 +24,6 @@ export class VehicleService {
       certificatePaymentProof: true,
       ownershipProof: 'ownershipProof',
       details: 'Lipsa asigurare',
-
       status: 'În așteptare',
     },
     {
@@ -46,7 +44,6 @@ export class VehicleService {
       certificatePaymentProof: true,
       ownershipProof: 'ownershipProof',
       details: 'Lipsa asigurare',
-
       status: 'În așteptare',
     },
     {
@@ -71,5 +68,34 @@ export class VehicleService {
     },
   ];
 
-  constructor() { }
+  constructor() {}
+
+  read() {
+    return this.vehicles;
+  }
+  readOne(id: string) {
+    const vehicle = this.read().find(
+      (vehicle: VehicleRegistration) => vehicle.id === id
+    );
+    if (vehicle) {
+      return vehicle;
+    }
+    return {
+      id: '',
+      date: '',
+      ownerName: '',
+      ownerSurname: '',
+      ownerPhone: '',
+      ownerEmail: '',
+      vehicleManufacturer: '',
+      vehicleModel: '',
+      vehicleVinNumber: '',
+      vehicleNumberPlate: '',
+    };
+  }
+
+  giveBirth(payload: VehicleRegistration) {
+    this.vehicles = [...this.vehicles, payload];
+    console.log(this.vehicles);
+  }
 }
