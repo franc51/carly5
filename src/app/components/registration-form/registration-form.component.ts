@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 
@@ -8,7 +8,9 @@ import { NgForm } from '@angular/forms';
   styleUrl: './registration-form.component.css',
 })
 export class RegistrationFormComponent {
-  vehicle!: VehicleRegistration;
+  @Output() make = new EventEmitter<VehicleRegistration>();
+
+  @Input() vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
   userInput: string = '';
   matchingNumberPlate: string | undefined;
@@ -110,7 +112,7 @@ export class RegistrationFormComponent {
 
   handleSubmit(form: NgForm) {
     if (form.valid) {
-      console.log(form.value);
+      this.make.emit(form.value);
     }
     return;
   }
