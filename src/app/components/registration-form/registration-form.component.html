@@ -18,7 +18,7 @@
               required
               name="ownerName"
               #ownerName="ngModel"
-              [ngModel]="ownerName"
+              [ngModel]="vehicle.ownerName"
               [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
@@ -33,7 +33,7 @@
               required
               name="ownerSurname"
               #ownerSurname="ngModel"
-              [ngModel]="ownerSurname"
+              [ngModel]="vehicle.ownerSurname"
             />
           </mat-form-field>
 
@@ -49,7 +49,7 @@
               required
               name="ownerPhone"
               #ownerPhone="ngModel"
-              [ngModel]="ownerPhone"
+              [ngModel]="vehicle.ownerPhone"
             />
           </mat-form-field>
 
@@ -62,6 +62,7 @@
               placeholder="david@yahoo.com"
               required
               type="ownerEmail"
+              name="ownerEmail"
               #ownerEmail="ngModel"
               [ngModel]="ownerEmail"
             />
@@ -73,7 +74,7 @@
               name="vehicleManufacturer"
               value="vehicleManufacturer"
               #vehicleManufacturer="ngModel"
-              [ngModel]="vehicleManufacturer"
+              [ngModel]="vehicle.vehicleManufacturer"
             >
               <mat-option value="VOLKSWAGEN">VOLKSWAGEN</mat-option>
             </mat-select>
@@ -83,7 +84,7 @@
             <mat-label>Model</mat-label>
             <mat-select
               name="vehicleModel"
-              [ngModel]="vehicleModel"
+              [ngModel]="vehicle.vehicleModel"
               value="vehicleModel"
               #vehicleModel="ngModel"
             >
@@ -105,7 +106,7 @@
               name="vehicleVinNumber"
               #vehicleVinNumber="ngModel"
               value="vehicleVinNumber"
-              [ngModel]="vehicleVinNumber"
+              [ngModel]="vehicle.vehicleVinNumber"
             />
           </mat-form-field>
 

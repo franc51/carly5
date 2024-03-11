@@ -32,6 +32,8 @@ ngOnInit(): void {
     ownerName: 'ownerName',
     ownerSurname: 'adpisngo',
     ownerPhone: 'string',
+    ownerEmail: 'string',
+
     ownerCNP: 12324,
     ownerIdentityCard: 'ownerIdentityCard',
     vehicleManufacturer: 'KIA',
@@ -43,7 +45,7 @@ ngOnInit(): void {
     certificatePaymentProof: true,
     ownershipProof: 'ownershipProof',
     details: 'Lipsa asigurare',
-    status: 'Respins',
+    status: 'În așteptare',
   },
 ];
 }

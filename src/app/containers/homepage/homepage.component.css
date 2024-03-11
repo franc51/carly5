@@ -4,12 +4,24 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   text-align: center;
 }
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .notauth {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  margin-top: 1rem;
+  border-radius: 4px;
+  background-color: rgba(0, 140, 255, 0.048);
+  border: 1px solid rgb(230, 224, 224);
+  padding: 1rem;
+  width: 30rem;
 }
 .nav-opener {
   color: rgb(85, 125, 212) !important;

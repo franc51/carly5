@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
+import { VehicleService } from '../../admin/services/vehicle.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -34,68 +35,14 @@ export class RegistrationFormComponent {
     }
   }
 
+  // provides the service
+  constructor(private vehicleService: VehicleService){
+
+  }
   ngOnInit(): void {
-    this.vehicles = [
-      {
-        id: 'B02JF33',
-        date: '24.03.2024',
-        ownerName: 'ownerName',
-        ownerSurname: 'apdfihagoisn',
-        ownerPhone: '0712312312',
-        ownerCNP: 12324,
-        ownerIdentityCard: 'ownerIdentityCard',
-        vehicleManufacturer: 'KIA',
-        vehicleModel: 'CEED',
-        vehicleYear: 2003,
-        vehicleVinNumber: 'WVW527HF7FF320A',
-        vehicleIdentityCard: 'vehicleIdentityCard',
-        vehicleNumberPlate: 'MM47GHK',
-        certificatePaymentProof: true,
-        ownershipProof: 'ownershipProof',
-        details: 'Lipsa asigurare',
 
-        status: 'Respins',
-      },
-      {
-        id: 'AP20TJF',
-        date: '24.03.2024',
-        ownerName: 'ownerName',
-        ownerSurname: 'apdfihagoisn',
-        ownerPhone: '0712312312',
-        ownerCNP: 12324,
-        ownerIdentityCard: 'ownerIdentityCard',
-        vehicleManufacturer: 'MERCEDES',
-        vehicleModel: 'AMG',
-        vehicleYear: 2003,
-        vehicleVinNumber: 'WVW527HF7FF320A',
-        vehicleIdentityCard: 'vehicleIdentityCard',
-        vehicleNumberPlate: 'MM47GHK',
-        certificatePaymentProof: true,
-        ownershipProof: 'ownershipProof',
-        details: 'Lipsa asigurare',
-
-        status: 'Aprobat',
-      },
-      {
-        id: 'AP29VJ4',
-        date: '12.01.2022',
-        ownerName: 'ownerName',
-        ownerSurname: 'apdfihagoisn',
-        ownerPhone: '0712312312',
-        ownerCNP: 12324,
-        ownerIdentityCard: 'ownerIdentityCard',
-        vehicleManufacturer: 'VOLKSWAGEN',
-        vehicleModel: 'ARTEON',
-        vehicleYear: 2003,
-        vehicleVinNumber: 'WVW527HF7FF320A',
-        vehicleIdentityCard: 'vehicleIdentityCard',
-        vehicleNumberPlate: 'MM47GHK',
-        certificatePaymentProof: true,
-        ownershipProof: 'ownershipProof',
-        details: 'Lipsa asigurare',
-        status: 'Aprobat',
-      },
-    ];
+    // takes state and makes it available inside components
+      this.vehicles = this.vehicleService.vehicles;
   }
 
   trackById(index: number, value: VehicleRegistration) {

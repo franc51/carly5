@@ -23,7 +23,46 @@
       </mat-sidenav-container>
     </div>
   </div>
-  <div *ngIf="(auth.isAuthenticated$ | async) === false" class="notauth">
-    <h2>Nu ești autentificat</h2>
+  <div *ngIf="(auth.isAuthenticated$ | async) === false" class="home">
+
+    <div class="notauth">
+      <h2>Înmatriculare vehicule</h2>
+    <p>Pentru a înmatricula un vehicul trebuie să fii logat în contul tău.</p>
+     <form #form="ngForm">
+     <button mat-button class="programeaza">
+       <mat-icon >border_color</mat-icon>
+       înmatriculare
+     </button>
+     </form>
+    </div>
+
+    <div class="notauth">
+      <h2>Radiere vehicule</h2>
+    <p>Pentru a radia un vehicul trebuie să fii logat în contul tău.</p>
+     <form #form="ngForm">
+     <button mat-raised-button color="warn" class="programeaza">
+       <mat-icon >border_color</mat-icon>
+       Radiază
+     </button>
+     </form>
+    </div>
+
+    <div class="notauth">
+      <h2>Programare inspecție tehnică periodică sau RAR</h2>
+
+     <form #form="ngForm">
+
+
+     <button mat-button class="programeaza">
+       <mat-icon >border_color</mat-icon>
+       Programează
+     </button>
+     </form>
+    </div>
+
+
+
+
+
   </div>
 </div>
