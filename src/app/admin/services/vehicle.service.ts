@@ -9,63 +9,44 @@ export class VehicleService {
     {
       id: 'B02JF33',
       date: '24.03.2024',
-      ownerName: 'ownerName',
-      ownerSurname: 'apdfihagoisn',
-      ownerPhone: '0712312312',
-      ownerEmail: 'string',
-      ownerCNP: 12324,
+      ownerName: 'Szasz',
+      ownerSurname: 'Francisco',
+      ownerPhone: '0720628821',
+      ownerEmail: 'francisc.szasz@saguna.ro',
+      ownerCNP: '2324',
       ownerIdentityCard: 'ownerIdentityCard',
       vehicleManufacturer: 'KIA',
       vehicleModel: 'CEED',
-      vehicleYear: 2003,
+      vehicleYear: '2003',
       vehicleVinNumber: 'WVW527HF7FF320A',
       vehicleIdentityCard: 'vehicleIdentityCard',
       vehicleNumberPlate: 'MM47GHK',
       certificatePaymentProof: true,
       ownershipProof: 'ownershipProof',
-      details: 'Lipsa asigurare',
+      details: 'Cerere trimisă',
       status: 'În așteptare',
     },
     {
-      id: 'AP20TJF',
+      id: 'PPPAAA',
       date: '24.03.2024',
-      ownerName: 'ownerName',
-      ownerSurname: 'apdfihagoisn',
-      ownerPhone: '0712312312',
-      ownerEmail: 'string',
-      ownerCNP: 12324,
+      ownerName: 'Costica',
+      ownerSurname: 'Camataru',
+      ownerPhone: '0720628821',
+      ownerEmail: 'francisc.szasz@saguna.ro',
+      ownerCNP: '2324',
       ownerIdentityCard: 'ownerIdentityCard',
-      vehicleManufacturer: 'MERCEDES',
-      vehicleModel: 'AMG',
-      vehicleYear: 2003,
+      vehicleManufacturer: 'MERCEDES-BENZ',
+      vehicleModel: 'AMG63',
+      vehicleYear: '2003',
       vehicleVinNumber: 'WVW527HF7FF320A',
       vehicleIdentityCard: 'vehicleIdentityCard',
-      vehicleNumberPlate: 'MM47GHK',
+      vehicleNumberPlate: 'BV66CMT',
       certificatePaymentProof: true,
       ownershipProof: 'ownershipProof',
-      details: 'Lipsa asigurare',
+      details: 'Cerere trimisă',
       status: 'În așteptare',
     },
-    {
-      id: 'AP29VJ4',
-      date: '12.01.2022',
-      ownerName: 'ownerName',
-      ownerSurname: 'apdfihagoisn',
-      ownerPhone: '0712312312',
-      ownerEmail: 'string',
-      ownerCNP: 12324,
-      ownerIdentityCard: 'ownerIdentityCard',
-      vehicleManufacturer: 'VOLKSWAGEN',
-      vehicleModel: 'ARTEON',
-      vehicleYear: 2003,
-      vehicleVinNumber: 'WVW527HF7FF320A',
-      vehicleIdentityCard: 'vehicleIdentityCard',
-      vehicleNumberPlate: 'MM47GHK',
-      certificatePaymentProof: true,
-      ownershipProof: 'ownershipProof',
-      details: 'Lipsa asigurare',
-      status: 'În așteptare',
-    },
+
   ];
 
   constructor() {}
@@ -76,7 +57,7 @@ export class VehicleService {
   readOne(id: string) {
     const vehicle = this.read().find(
       (vehicle: VehicleRegistration) => vehicle.id === id
-    );
+    )
     if (vehicle) {
       return vehicle;
     }
@@ -87,15 +68,32 @@ export class VehicleService {
       ownerSurname: '',
       ownerPhone: '',
       ownerEmail: '',
+      ownerCNP: '',
+      ownerIdentityCard: '',
       vehicleManufacturer: '',
       vehicleModel: '',
+      vehicleYear: '',
       vehicleVinNumber: '',
+      vehicleIdentityCard: '',
       vehicleNumberPlate: '',
-    };
+      certificatePaymentProof: true,
+      ownershipProof: '',
+      details: 'Cerere trimisă',
+      status: 'În așteptare'
+    } as VehicleRegistration;
   }
 
   giveBirth(payload: VehicleRegistration) {
     this.vehicles = [...this.vehicles, payload];
+    console.log(this.vehicles);
+  }
+  update(payload: VehicleRegistration){
+    this.vehicles = this.vehicles.map((vehicle: VehicleRegistration) => {
+      if(vehicle.id === payload.id){
+        return payload;
+      }
+      return vehicle;
+    });
     console.log(this.vehicles);
   }
 }

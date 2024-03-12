@@ -1,23 +1,22 @@
-import { MatPaginator } from '@angular/material/paginator';
+
 
 export interface VehicleRegistration {
-  id?: any;
+  id?: string;
   date: string;
   ownerName: string;
   ownerSurname: string;
   ownerEmail: string;
   ownerPhone: string;
-  ownerCNP?: number;
+  ownerCNP?: string;
   ownerIdentityCard?: string;
   vehicleManufacturer: string;
   vehicleModel: string;
-  vehicleYear?: number;
+  vehicleYear?: string;
   vehicleVinNumber: string;
   vehicleIdentityCard?: string;
   vehicleNumberPlate: string;
   certificatePaymentProof?: boolean;
   ownershipProof?: string;
-  details: 'Lipsa asigurare';
-  status: 'În așteptare';
-  paginator?: MatPaginator;
+  details: 'Lipsă asigurare' | 'Cerere trimisă';
+  status: 'În așteptare' | 'Respins';
 }

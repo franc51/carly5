@@ -11,6 +11,8 @@ import { VehicleService } from '../../admin/services/vehicle.service';
 export class RegistrationFormComponent {
   @Output() make = new EventEmitter<VehicleRegistration>();
 
+  @Output() update = new EventEmitter<VehicleRegistration>();
+
   @Input() vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
   userInput: string = '';
@@ -54,10 +56,11 @@ export class RegistrationFormComponent {
   ];
   dataSource = this.vehicle;
 
-  handleSubmit(form: NgForm) {
+  handleCreate(form: NgForm) {
     if (form.valid) {
       this.make.emit(form.value);
     }
     return;
   }
+
 }

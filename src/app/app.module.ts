@@ -63,6 +63,7 @@ import { UploadcareComponent } from './components/uploadcare/uploadcare.componen
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SimplepaginatorComponent } from './components/simplepaginator/simplepaginator.component';
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
+import { DatepipeComponent } from './components/datepipe/datepipe.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { RegistrationsComponent } from './containers/registrations/registrations
     PaginatorComponent,
     SimplepaginatorComponent,
     RegistrationsComponent,
+    DatepipeComponent,
   ],
   imports: [
     MatDialogClose,

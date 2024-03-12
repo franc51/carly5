@@ -41,18 +41,17 @@ constructor (){
         ownerSurname: 'adpisngo',
         ownerPhone: 'string',
         ownerEmail: 'string',
-
-        ownerCNP: 12324,
+        ownerCNP: '12324',
         ownerIdentityCard: 'ownerIdentityCard',
         vehicleManufacturer: 'KIA',
         vehicleModel: 'CEED',
-        vehicleYear: 2003,
+        vehicleYear: '2003',
         vehicleVinNumber: 'WVW527HF7FF320A',
         vehicleIdentityCard: 'vehicleIdentityCard',
         vehicleNumberPlate: 'MM47GHK',
         certificatePaymentProof: true,
         ownershipProof: 'ownershipProof',
-        details: 'Lipsa asigurare',
+        details: 'Lipsă asigurare',
         status: 'În așteptare',
       }
     ];

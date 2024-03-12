@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { MatTabGroup } from '@angular/material/tabs';
+import { NgForm } from '@angular/forms';
+import { VehicleService } from '../services/vehicle.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,11 +9,16 @@ import { MatTabGroup } from '@angular/material/tabs';
   styleUrl: './admin-dashboard.component.css',
 })
 export class AdminDashboardComponent {
+
   vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
 
+  constructor(private vehicleService: VehicleService) {}
+
+  @Output() update = new EventEmitter<VehicleRegistration>();
+
   ngOnInit(): void {
-    this.vehicles = [];
+    this.vehicles = this.vehicleService.read();
   }
 
   trackById(index: number, value: VehicleRegistration) {
@@ -28,5 +34,12 @@ export class AdminDashboardComponent {
     'date',
     'details',
   ];
-  dataSource = this.vehicle;
+  dataSource = this.vehicleService.read();
+
+  handleUpdate(form: NgForm) {
+    if (form.valid) {
+      this.update.emit({id: this.vehicle.id, ...form.value}) ;
+    }
+    return;
+  }
 }

@@ -4,7 +4,7 @@
       <div class="register-history">
         <div>
           <div>
-            <mat-form-field #form="ngForm">
+            <mat-form-field>
               <mat-label>Caută cerere</mat-label>
               <input
                 type="text"
@@ -31,7 +31,7 @@
               <ng-container matColumnDef="ownerSurname">
                 <th mat-header-cell *matHeaderCellDef>Prenume</th>
                 <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.ownerName }}
+                  {{ vehicle.ownerSurname }}
                 </td>
               </ng-container>
 
@@ -52,7 +52,7 @@
               <ng-container matColumnDef="vehicleModel">
                 <th mat-header-cell *matHeaderCellDef>Model</th>
                 <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.vehicleManufacturer }}
+                  {{ vehicle.vehicleModel }}
                 </td>
               </ng-container>
 
@@ -71,6 +71,7 @@
               </ng-container>
 
               <!-- details Column -->
+             <form #form="ngForm">
               <ng-container matColumnDef="details">
                 <th mat-header-cell *matHeaderCellDef>Detalii</th>
                 <td mat-cell *matCellDef="let vehicle" class="admin-power">
@@ -96,7 +97,7 @@
                       <img src="https://i.ibb.co/Nx7hPs2/descarca.png" alt="" />
                     </button>
 
-                    <button matTooltip="Respinge cerere">
+                    <button matTooltip="Respinge cerere" (click)="handleUpdate(form)">
                       <img src="https://i.ibb.co/W3M8b9X/eliminat.png" alt="" />
                     </button>
                     <button matTooltip="Aprobă cerere">
@@ -105,6 +106,7 @@
                   </div>
                 </td>
               </ng-container>
+             </form>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
