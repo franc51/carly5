@@ -12,14 +12,12 @@ export class RegistrationsComponent implements OnInit {
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
-
-    this.vehicle = this.vehicleService.readOne('B02JF33');
+    // this.vehicle = this.vehicleService.readOne('B02JF33');
   }
   onCreate(vehicle: VehicleRegistration) {
     this.vehicleService.giveBirth(vehicle);
   }
-  onUpdate(vehicle: VehicleRegistration){
+  onUpdate(vehicle: VehicleRegistration) {
     this.vehicleService.update(vehicle);
   }
-
 }

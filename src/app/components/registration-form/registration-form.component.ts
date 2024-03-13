@@ -9,7 +9,6 @@ import { VehicleService } from '../../admin/services/vehicle.service';
   styleUrl: './registration-form.component.css',
 })
 export class RegistrationFormComponent {
-
   @Output() make = new EventEmitter<VehicleRegistration>();
   @Output() update = new EventEmitter<VehicleRegistration>();
 
@@ -41,7 +40,11 @@ export class RegistrationFormComponent {
   constructor(public vehicleService: VehicleService) {}
   ngOnInit(): void {
     // takes state and makes it available inside components
-    this.vehicles = this.vehicleService.read();
+    this.vehicleService
+      .read()
+      .subscribe(
+        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
+      );
   }
 
   trackById(index: number, value: VehicleRegistration) {
@@ -64,7 +67,7 @@ export class RegistrationFormComponent {
   }
   handleUpdate(form: NgForm) {
     if (form.valid) {
-      this.update.emit({ id: this.vehicle.id, ...form.value}) ;
+      this.update.emit({ id: this.vehicle.id, ...form.value });
     }
     return;
   }

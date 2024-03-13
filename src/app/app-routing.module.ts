@@ -9,6 +9,7 @@ import { HelpComponent } from './containers/help/help.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
+
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'profile', component: ProfileComponent },

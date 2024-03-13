@@ -7,19 +7,24 @@ import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.comp
 @Component({
   selector: 'app-admin-container',
   templateUrl: './admin-container.component.html',
-  styleUrl: './admin-container.component.css'
+  styleUrl: './admin-container.component.css',
 })
 export class AdminContainerComponent implements OnInit {
   @Input() vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
   @Output() update = new EventEmitter<VehicleRegistration>();
 
-  onUpdate(vehicle: VehicleRegistration){
+  onUpdate(vehicle: VehicleRegistration) {
     this.vehicleService.update(vehicle);
   }
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
-    this.vehicle = this.vehicleService.readOne('B02JF33');
+    // takes state and makes it available inside components
+    this.vehicleService
+      .read()
+      .subscribe(
+        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
+      );
   }
 }
