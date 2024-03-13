@@ -12,10 +12,8 @@ export class RegistrationsComponent implements OnInit {
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
-    // find item from the vehicleService
-    const id = '';
-    // if there is no item i provide a prototype object
-    this.vehicle = this.vehicleService.readOne('PPPAAA');
+
+    this.vehicle = this.vehicleService.readOne('B02JF33');
   }
   onCreate(vehicle: VehicleRegistration) {
     this.vehicleService.giveBirth(vehicle);
@@ -23,4 +21,5 @@ export class RegistrationsComponent implements OnInit {
   onUpdate(vehicle: VehicleRegistration){
     this.vehicleService.update(vehicle);
   }
+
 }

@@ -64,6 +64,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SimplepaginatorComponent } from './components/simplepaginator/simplepaginator.component';
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
 import { DatepipeComponent } from './components/datepipe/datepipe.component';
+import { AdminContainerComponent } from './admin/admin-container/admin-container.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { DatepipeComponent } from './components/datepipe/datepipe.component';
     SimplepaginatorComponent,
     RegistrationsComponent,
     DatepipeComponent,
+    AdminContainerComponent,
   ],
   imports: [
     MatDialogClose,

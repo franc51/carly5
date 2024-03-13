@@ -80,12 +80,12 @@
                     <mat-select
                       name="details"
                       #details="ngModel"
-                      [ngModel]="vehicle.details"
+                      [(ngModel)]="vehicle.details"
                     >
-                      <mat-option value="">Lipsă asigurare</mat-option>
-                      <mat-option value="">Lipsă CI</mat-option>
-                      <mat-option value="">Lipsă contract</mat-option>
-                      <mat-option value=""
+                      <mat-option value="Lipsă asigurare">Lipsă asigurare</mat-option>
+                      <mat-option value="Lipsă CI">Lipsă CI</mat-option>
+                      <mat-option value="Lipsă contract">Lipsă contract</mat-option>
+                      <mat-option value="Lipsă dovada plății talon"
                         >Lipsă dovada plății talon</mat-option
                       >
                       <mat-option value="">Date incorecte</mat-option>
@@ -97,7 +97,7 @@
                       <img src="https://i.ibb.co/Nx7hPs2/descarca.png" alt="" />
                     </button>
 
-                    <button matTooltip="Respinge cerere" (click)="handleUpdate(form)">
+                    <button matTooltip="Respinge cerere" (click)="handleUpdate(form, vehicle)">
                       <img src="https://i.ibb.co/W3M8b9X/eliminat.png" alt="" />
                     </button>
                     <button matTooltip="Aprobă cerere">

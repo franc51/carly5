@@ -1,4 +1,4 @@
-import { Injectable, ViewEncapsulation } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 
 @Injectable({
@@ -90,8 +90,11 @@ export class VehicleService {
   update(payload: VehicleRegistration){
     this.vehicles = this.vehicles.map((vehicle: VehicleRegistration) => {
       if(vehicle.id === payload.id){
+        console.log('returning payload');
         return payload;
       }
+      console.log('returning vehicle');
+
       return vehicle;
     });
     console.log(this.vehicles);

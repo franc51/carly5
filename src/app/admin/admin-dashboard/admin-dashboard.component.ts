@@ -36,9 +36,10 @@ export class AdminDashboardComponent {
   ];
   dataSource = this.vehicleService.read();
 
-  handleUpdate(form: NgForm) {
-    if (form.valid) {
-      this.update.emit({id: this.vehicle.id, ...form.value}) ;
+  handleUpdate(form: NgForm, vehicle: VehicleRegistration) {
+    if (form.valid && vehicle) {
+      this.update.emit({ id: vehicle.id, ...form.value});
+      console.log(this.vehicles);
     }
     return;
   }

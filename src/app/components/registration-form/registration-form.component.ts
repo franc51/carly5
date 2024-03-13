@@ -9,8 +9,8 @@ import { VehicleService } from '../../admin/services/vehicle.service';
   styleUrl: './registration-form.component.css',
 })
 export class RegistrationFormComponent {
-  @Output() make = new EventEmitter<VehicleRegistration>();
 
+  @Output() make = new EventEmitter<VehicleRegistration>();
   @Output() update = new EventEmitter<VehicleRegistration>();
 
   @Input() vehicle!: VehicleRegistration;
@@ -62,5 +62,10 @@ export class RegistrationFormComponent {
     }
     return;
   }
-
+  handleUpdate(form: NgForm) {
+    if (form.valid) {
+      this.update.emit({ id: this.vehicle.id, ...form.value}) ;
+    }
+    return;
+  }
 }
