@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import * as LR from '@uploadcare/blocks';
 
+// --proxy-config proxy.conf.json
+
 LR.registerBlocks(LR);
 
 import {
@@ -65,6 +67,7 @@ import { SimplepaginatorComponent } from './components/simplepaginator/simplepag
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
 import { DatepipeComponent } from './components/datepipe/datepipe.component';
 import { AdminContainerComponent } from './admin/admin-container/admin-container.component';
+import { AdminHistoryComponent } from './admin/admin-history/admin-history.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +92,7 @@ import { AdminContainerComponent } from './admin/admin-container/admin-container
     RegistrationsComponent,
     DatepipeComponent,
     AdminContainerComponent,
+    AdminHistoryComponent,
   ],
   imports: [
     MatDialogClose,

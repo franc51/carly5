@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +13,28 @@ export class VehicleService {
   constructor(private http: HttpClient) {}
 
   read() {
-    return this.http.get<VehicleRegistration[]>(`/api/vehicles`);
-    // return this.vehicles;
+    console.log('Fetching history...');
+    return this.http
+      .get<VehicleRegistration[]>(`http://localhost:3000/vehicles`)
+      .pipe(
+        map((vehicles) =>
+          vehicles.filter((vehicle) =>
+            vehicle.details.includes('Cerere trimisă')
+          )
+        )
+      );
+  }
+  readHistory() {
+    console.log('Fetching history...');
+    return this.http
+      .get<VehicleRegistration[]>(`http://localhost:3000/vehicles`)
+      .pipe(
+        map((vehicles) =>
+          vehicles.filter(
+            (vehicle) => !vehicle.details.includes('Cerere trimisă')
+          )
+        )
+      );
   }
 
   // readOne(id: string) {
@@ -58,6 +80,12 @@ export class VehicleService {
 
       return vehicle;
     });
+    console.log(this.vehicles);
+  }
+  delete(payload: VehicleRegistration) {
+    this.vehicles = this.vehicles.filter(
+      (vehicle: VehicleRegistration) => vehicle.id !== payload.id
+    );
     console.log(this.vehicles);
   }
 }

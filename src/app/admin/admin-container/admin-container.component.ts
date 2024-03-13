@@ -9,7 +9,7 @@ import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.comp
   templateUrl: './admin-container.component.html',
   styleUrl: './admin-container.component.css',
 })
-export class AdminContainerComponent implements OnInit {
+export class AdminContainerComponent {
   @Input() vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
   @Output() update = new EventEmitter<VehicleRegistration>();
@@ -17,14 +17,8 @@ export class AdminContainerComponent implements OnInit {
   onUpdate(vehicle: VehicleRegistration) {
     this.vehicleService.update(vehicle);
   }
-  constructor(private vehicleService: VehicleService) {}
-
-  ngOnInit(): void {
-    // takes state and makes it available inside components
-    this.vehicleService
-      .read()
-      .subscribe(
-        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
-      );
+  onDelete(vehicle: VehicleRegistration) {
+    this.vehicleService.delete(vehicle);
   }
+  constructor(private vehicleService: VehicleService) {}
 }
