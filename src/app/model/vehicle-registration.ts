@@ -1,6 +1,7 @@
-
-
 export interface VehicleRegistration {
+  count: number;
+  items: any;
+  total_count: number;
   id?: string;
   date: string;
   ownerName: string;

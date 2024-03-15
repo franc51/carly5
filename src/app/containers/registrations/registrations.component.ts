@@ -8,7 +8,29 @@ import { VehicleService } from '../../admin/services/vehicle.service';
   styleUrl: './registrations.component.css',
 })
 export class RegistrationsComponent implements OnInit {
-  vehicle!: VehicleRegistration;
+  vehicle: VehicleRegistration = {
+    id: 'B02JF33',
+    date: '24.03.2024',
+    ownerName: 'Szasz',
+    ownerSurname: 'Francisco',
+    ownerPhone: '0720628821',
+    ownerEmail: 'francisc.szasz@saguna.ro',
+    ownerCNP: '2324',
+    ownerIdentityCard: 'ownerIdentityCard',
+    vehicleManufacturer: 'KIA',
+    vehicleModel: 'CEED',
+    vehicleYear: '2003',
+    vehicleVinNumber: 'WVW527HF7FF320A',
+    vehicleIdentityCard: 'vehicleIdentityCard',
+    vehicleNumberPlate: 'MM47GHK',
+    certificatePaymentProof: true,
+    ownershipProof: 'ownershipProof',
+    details: 'Lipsă asigurare',
+    status: 'Respins',
+    count: 0,
+    items: undefined,
+    total_count: 0,
+  };
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {

@@ -14,6 +14,9 @@ import * as LR from '@uploadcare/blocks';
 
 // --proxy-config proxy.conf.json
 
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+
 LR.registerBlocks(LR);
 
 import {
@@ -134,4 +137,20 @@ import { AdminHistoryComponent } from './admin/admin-history/admin-history.compo
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  firebaseConfig = {
+    apiKey: 'AIzaSyDraEcH4AENNMX0jP5tnGW4MlkhUApXFrY',
+    authDomain: 'carly-58c95.firebaseapp.com',
+    projectId: 'carly-58c95',
+    storageBucket: 'carly-58c95.appspot.com',
+    messagingSenderId: '811853117687',
+    appId: '1:811853117687:web:11594b1523e42a962a3bf2',
+    measurementId: 'G-F8934N76TW',
+  };
+
+  // Initialize Firebase
+  app = initializeApp(this.firebaseConfig);
+  analytics = getAnalytics(this.app);
+}

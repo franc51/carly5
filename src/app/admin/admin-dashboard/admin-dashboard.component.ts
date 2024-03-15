@@ -45,9 +45,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   handleDelete() {
-    if (confirm(`Sigur respingi cererea?`)) {
-      this.delete.emit({ ...this.vehicle });
-    }
+    this.delete.emit({ ...this.vehicle });
     return;
   }
 

@@ -29,6 +29,7 @@
               name="ownerSurname"
               #ownerSurname="ngModel"
               [ngModel]="vehicle.ownerSurname"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
 
@@ -45,6 +46,7 @@
               name="ownerPhone"
               #ownerPhone="ngModel"
               [ngModel]="vehicle.ownerPhone"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
 
@@ -60,6 +62,7 @@
               name="ownerEmail"
               #ownerEmail="ngModel"
               [ngModel]="vehicle.ownerEmail"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
 
@@ -70,6 +73,7 @@
               value="vehicleManufacturer"
               #vehicleManufacturer="ngModel"
               [ngModel]="vehicle.vehicleManufacturer"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             >
               <mat-option value="VOLKSWAGEN">VOLKSWAGEN</mat-option>
             </mat-select>
@@ -82,6 +86,7 @@
               [ngModel]="vehicle.vehicleModel"
               value="vehicleModel"
               #vehicleModel="ngModel"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             >
               <mat-option value="GOLF">GOLF</mat-option>
               <mat-option value="PASSAT">PASSAT</mat-option>
@@ -102,6 +107,7 @@
               #vehicleVinNumber="ngModel"
               value="vehicleVinNumber"
               [ngModel]="vehicle.vehicleVinNumber"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
 
@@ -117,6 +123,8 @@
               minlength="7"
               maxlength="7"
               [(ngModel)]="userInput"
+              [ngModelOptions]="{ updateOn: 'submit' }"
+              [ngModelOptions]="{ updateOn: 'submit' }"
             />
           </mat-form-field>
 
@@ -128,19 +136,19 @@
             <p class="error">Numarul de înm. trebuie sa fie de forma LLCCLLL</p>
           </ng-container>
 
-          <ng-container *ngIf="ownerName.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid && form.submitted">
             <p class="error">Numele nu este valid</p>
           </ng-container>
 
-          <ng-container *ngIf="ownerSurname.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid && form.submitted">
             <p class="error">Prenumele nu este valid</p>
           </ng-container>
 
-          <ng-container *ngIf="ownerPhone.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid && form.submitted">
             <p class="error">Numărul de telefon nu este valid</p>
           </ng-container>
 
-          <ng-container *ngIf="ownerEmail.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid && form.submitted">
             <p class="error">Email invalid</p>
           </ng-container>
 
@@ -175,23 +183,12 @@
       </div>
     </mat-tab>
     <mat-tab label="Istoric înmatriculări">
-      <div class="history-list">
-        <ng-template
-          *ngIf="
-            vehicles.length;
-            then historyRegistrations;
-            else noRegistrations
-          "
-        >
-        </ng-template>
-      </div>
+      <div class="history-list"><app-paginator></app-paginator></div>
 
       <ng-template #noRegistrations>
         <p class="novehicles">Nu aveți vehicule inmatriculate</p>
       </ng-template>
-      <ng-template #historyRegistrations class="history-card">
-        <app-paginator></app-paginator>
-      </ng-template>
+      <ng-template #historyRegistrations class="history-card"> </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>

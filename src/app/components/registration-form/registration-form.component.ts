@@ -25,27 +25,26 @@ export class RegistrationFormComponent {
   result = this.isMatchingPattern(this.userInput);
   numberPlate: any;
 
-  searchNumberPlate(numberPlate: String): void {
+  searchNumberPlate(numberPlate: string): void {
     if (this.isMatchingPattern) {
       console.log(this.isMatchingPattern(this.userInput));
-      this.matchingNumberPlate = this.numberPlate.find(
-        (item: string) => item === this.userInput
+      // Use find method to search for a matching vehicle registration
+      const foundVehicle = this.vehicles.find(
+        (vehicle: VehicleRegistration) =>
+          vehicle.vehicleNumberPlate === this.userInput
       );
-    }
-    if (this.matchingNumberPlate === this.userInput) {
+      if (foundVehicle) {
+        // If a matching vehicle registration is found we
+        console.log('Matching vehicle found:', foundVehicle);
+      } else {
+        // If no matching vehicle is found
+        console.log('No matching vehicle found');
+      }
     }
   }
 
   // provides the service
   constructor(public vehicleService: VehicleService) {}
-  ngOnInit(): void {
-    // takes state and makes it available inside components
-    this.vehicleService
-      .read()
-      .subscribe(
-        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
-      );
-  }
 
   trackById(index: number, value: VehicleRegistration) {
     return value.id;

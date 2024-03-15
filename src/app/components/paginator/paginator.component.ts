@@ -1,21 +1,21 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, SortDirection} from '@angular/material/sort';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-
+import { HttpClient } from '@angular/common/http';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, SortDirection } from '@angular/material/sort';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { VehicleRegistration } from '../../model/vehicle-registration';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
-  styleUrl: './paginator.component.css'
+  styleUrls: ['./paginator.component.css'],
 })
-
 export class PaginatorComponent implements AfterViewInit {
   displayedColumns: string[] = ['created', 'state', 'number', 'title'];
-  exampleDatabase!: ExampleHttpDatabase | null;
-  data: GithubIssue[] = [];
+  exampleDatabase!: ExampleHttpDatabase;
+  data: VehicleRegistration[] = [];
+  vehicles!: VehicleRegistration[];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -37,54 +37,55 @@ export class PaginatorComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
+          return this.exampleDatabase!.getData(
             this.sort.active,
             this.sort.direction,
-            this.paginator.pageIndex,
+            this.paginator.pageIndex
           ).pipe(catchError(() => observableOf(null)));
         }),
-        map(data => {
+        map((data) => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
-          this.isRateLimitReached = data === null;
 
-          if (data === null) {
+          if (!data) {
+            // Handle the case when null is emitted
             return [];
           }
 
-          // Only refresh the result length if there is new data. In case of rate
-          // limit errors, we do not want to reset the paginator to zero, as that
-          // would prevent users from re-triggering requests.
-          this.resultsLength = data.total_count;
+          // Assuming your data structure has a property 'total' to represent the total count
+          this.resultsLength = data.total;
           return data.items;
-        }),
+        })
       )
-      .subscribe(data => (this.data = data));
+      .subscribe((data) => (this.data = data || [])); // Ensure data is not null
   }
 }
 
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
+export interface VehicleRegistrationResponse {
+  items: VehicleRegistration[];
+  total: number;
 }
 
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
-}
-
-/** An example database that the data source uses to retrieve data for the table. */
 export class ExampleHttpDatabase {
   constructor(private _httpClient: HttpClient) {}
 
-  getRepoIssues(sort: string, order: SortDirection, page: number): Observable<GithubApi> {
-    const href = 'https://api.github.com/search/issues';
-    const requestUrl = `${href}?q=repo:angular/components&sort=${sort}&order=${order}&page=${
-      page + 1
-    }`;
+  getData(
+    sort: string,
+    order: SortDirection,
+    page: number
+  ): Observable<VehicleRegistrationResponse> {
+    // Replace this with your actual URL to fetch data
+    const source = 'http://localhost:4200/api/vehicles';
 
-    return this._httpClient.get<GithubApi>(requestUrl);
+    return this._httpClient.get<VehicleRegistration[]>(source).pipe(
+      map((vehicles: VehicleRegistration[]) => {
+        const total = vehicles.length; // Assuming the length of the array represents the total count
+        return { items: vehicles, total: total };
+      }),
+      catchError((error) => {
+        console.error('Error loading data:', error);
+        return observableOf({ items: [], total: 0 }); // Return an empty response in case of error
+      })
+    );
   }
 }
