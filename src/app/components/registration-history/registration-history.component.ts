@@ -1,65 +1,39 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatTableModule } from '@angular/material/table';
-import { Injectable } from '@angular/core';
+import { VehicleService } from '../../admin/services/vehicle.service';
 
 @Component({
   selector: 'app-registration-history',
   templateUrl: './registration-history.component.html',
-  styleUrl: './registration-history.component.css',
+  styleUrls: ['./registration-history.component.css'],
 })
-export class RegistrationHistoryComponent{
+export class RegistrationHistoryComponent implements OnInit {
   vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
+  isLoadingResults = false;
 
-  dataSource: any;
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  constructor(private vehicleService: VehicleService) {}
 
   displayedColumns: string[] = [
+    'ownerName',
+    'ownerSurname',
+    'ownerPhone',
     'vehicleManufacturer',
     'vehicleModel',
-    'date',
     'numberPlate',
+    'date',
     'details',
     'status',
   ];
-
-constructor (){
-  this.dataSource = new MatTableDataSource<VehicleRegistration>(this.vehicles);
-}
+  dataSource = this.vehicleService.read();
 
   ngOnInit(): void {
-    this.vehicles = [
-      {
-        id: 'B02JF33',
-        date: '24.03.2024',
-        ownerName: 'ownerName',
-        ownerSurname: 'adpisngo',
-        ownerPhone: 'string',
-        ownerEmail: 'string',
-        ownerCNP: '12324',
-        ownerIdentityCard: 'ownerIdentityCard',
-        vehicleManufacturer: 'KIA',
-        vehicleModel: 'CEED',
-        vehicleYear: '2003',
-        vehicleVinNumber: 'WVW527HF7FF320A',
-        vehicleIdentityCard: 'vehicleIdentityCard',
-        vehicleNumberPlate: 'MM47GHK',
-        certificatePaymentProof: true,
-        ownershipProof: 'ownershipProof',
-        details: 'Lipsă asigurare',
-        status: 'În așteptare',
-      }
-    ];
+    // takes state and makes it available inside components
+    this.vehicleService
+      .clientHistory()
+      .subscribe(
+        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
+      );
   }
-
-  trackById(index: number, value: VehicleRegistration) {
-    return value.id;
-  }
-
-
 }

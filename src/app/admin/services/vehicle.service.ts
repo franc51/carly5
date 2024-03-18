@@ -36,6 +36,12 @@ export class VehicleService {
         )
       );
   }
+  clientHistory() {
+    console.log('Fetching history...');
+    return this.http.get<VehicleRegistration[]>(
+      `http://localhost:3000/vehicles`
+    );
+  }
 
   // readOne(id: string) {
   //   const vehicle = this.read().find(

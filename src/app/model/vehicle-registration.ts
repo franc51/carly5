@@ -18,6 +18,9 @@ export interface VehicleRegistration {
   vehicleNumberPlate: string;
   certificatePaymentProof?: boolean;
   ownershipProof?: string;
-  details: 'Lipsă asigurare' | 'Cerere trimisă';
+  details:
+    | 'Lipsă asigurare'
+    | 'Cerere trimisă'
+    | 'Certificatul de inm. și plăcuțele au fost trimise';
   status: 'În așteptare' | 'Respins';
 }

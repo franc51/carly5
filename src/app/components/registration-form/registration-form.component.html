@@ -167,23 +167,15 @@
             <mat-icon>send</mat-icon>
             Trimite cerere
           </button>
-          <button
-            mat-raised-button
-            style="
-              background-color: rgba(0, 128, 0, 0.575);
-              margin-bottom: 1rem;
-              color: white;
-            "
-            (click)="handleUpdate(form)"
-          >
-            <mat-icon>send</mat-icon>
-            Schimbă cerere
-          </button>
         </form>
       </div>
     </mat-tab>
     <mat-tab label="Istoric înmatriculări">
-      <div class="history-list"><app-paginator></app-paginator></div>
+      <div class="history-list">
+        <app-registration-history
+          style="margin: 1rem"
+        ></app-registration-history>
+      </div>
 
       <ng-template #noRegistrations>
         <p class="novehicles">Nu aveți vehicule inmatriculate</p>

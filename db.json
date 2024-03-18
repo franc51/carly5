@@ -17,6 +17,46 @@
       "vehicleNumberPlate": "MM47GHK",
       "certificatePaymentProof": true,
       "ownershipProof": "ownershipProof",
+      "details": "Certificatul de inm. și plăcuțele au fost trimise",
+      "status": "Aprobat"
+    },
+    {
+      "id": "B02JF33",
+      "date": "24.03.2024",
+      "ownerName": "Szasz",
+      "ownerSurname": "Francisco",
+      "ownerPhone": "0720628821",
+      "ownerEmail": "francisc.szasz@saguna.ro",
+      "ownerCNP": "2324",
+      "ownerIdentityCard": "ownerIdentityCard",
+      "vehicleManufacturer": "KIA",
+      "vehicleModel": "CEED",
+      "vehicleYear": "2003",
+      "vehicleVinNumber": "WVW527HF7FF320A",
+      "vehicleIdentityCard": "vehicleIdentityCard",
+      "vehicleNumberPlate": "MM47GHK",
+      "certificatePaymentProof": true,
+      "ownershipProof": "ownershipProof",
+      "details": "Cerere trimisă",
+      "status": "În așteptare"
+    },
+    {
+      "id": "B02JF33",
+      "date": "24.03.2024",
+      "ownerName": "Szasz",
+      "ownerSurname": "Francisco",
+      "ownerPhone": "0720628821",
+      "ownerEmail": "francisc.szasz@saguna.ro",
+      "ownerCNP": "2324",
+      "ownerIdentityCard": "ownerIdentityCard",
+      "vehicleManufacturer": "KIA",
+      "vehicleModel": "CEED",
+      "vehicleYear": "2003",
+      "vehicleVinNumber": "WVW527HF7FF320A",
+      "vehicleIdentityCard": "vehicleIdentityCard",
+      "vehicleNumberPlate": "MM47GHK",
+      "certificatePaymentProof": true,
+      "ownershipProof": "ownershipProof",
       "details": "Lipsă asigurare",
       "status": "Respins"
     },
@@ -37,8 +77,8 @@
       "vehicleNumberPlate": "MM47GHK",
       "certificatePaymentProof": true,
       "ownershipProof": "ownershipProof",
-      "details": "",
-      "status": "Aprobat"
+      "details": "Lipsă asigurare",
+      "status": "Respins"
     },
     {
       "id": "B02JF33",
@@ -57,8 +97,8 @@
       "vehicleNumberPlate": "MM47GHK",
       "certificatePaymentProof": true,
       "ownershipProof": "ownershipProof",
-      "details": "",
-      "status": "Aprobat"
+      "details": "Cerere trimisă",
+      "status": "În așteptare"
     }
   ]
 }
