@@ -3,7 +3,7 @@ export interface VehicleRegistration {
   items: any;
   total_count: number;
   id?: string;
-  date: string;
+  date: Date;
   ownerName: string;
   ownerSurname: string;
   ownerEmail: string;

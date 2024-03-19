@@ -2,11 +2,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 import { VehicleService } from '../../admin/services/vehicle.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
   styleUrl: './registration-form.component.css',
+  providers: [DatePipe],
 })
 export class RegistrationFormComponent {
   @Output() make = new EventEmitter<VehicleRegistration>();
@@ -44,7 +46,10 @@ export class RegistrationFormComponent {
   }
 
   // provides the service
-  constructor(public vehicleService: VehicleService) {}
+  constructor(
+    public vehicleService: VehicleService,
+    private datePipe: DatePipe
+  ) {}
 
   trackById(index: number, value: VehicleRegistration) {
     return value.id;
@@ -61,13 +66,11 @@ export class RegistrationFormComponent {
   handleCreate(form: NgForm) {
     if (form.valid) {
       this.make.emit(form.value);
+      console.log(form.value);
     }
     return;
   }
-  handleUpdate(form: NgForm) {
-    if (form.valid) {
-      this.update.emit({ id: this.vehicle.id, ...form.value });
-    }
-    return;
+  formatDate(date: Date): string {
+    return this.datePipe.transform(date, 'dd/MM/yyyy') || ''; // Adjust format as per your requirement
   }
 }

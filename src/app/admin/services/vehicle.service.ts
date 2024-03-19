@@ -13,7 +13,7 @@ export class VehicleService {
   constructor(private http: HttpClient) {}
 
   read() {
-    console.log('Fetching history...');
+    console.log('Fetching admin history');
     return this.http
       .get<VehicleRegistration[]>(`http://localhost:3000/vehicles`)
       .pipe(
@@ -25,7 +25,7 @@ export class VehicleService {
       );
   }
   readHistory() {
-    console.log('Fetching history...');
+    console.log('Fetching admin history...');
     return this.http
       .get<VehicleRegistration[]>(`http://localhost:3000/vehicles`)
       .pipe(
@@ -37,7 +37,7 @@ export class VehicleService {
       );
   }
   clientHistory() {
-    console.log('Fetching history...');
+    console.log('Fetching client history...');
     return this.http.get<VehicleRegistration[]>(
       `http://localhost:3000/vehicles`
     );
@@ -72,10 +72,13 @@ export class VehicleService {
   //   } as VehicleRegistration;
   // }
 
-  giveBirth(payload: VehicleRegistration) {
+  giveBirth(payload: VehicleRegistration, date: Date) {
+    // Assign the date to the payload object before adding it to the array
+    payload.date = date;
     this.vehicles = [...this.vehicles, payload];
-    console.log(this.vehicles);
+    console.log('This is the create method: ', this.vehicles);
   }
+
   update(payload: VehicleRegistration) {
     this.vehicles = this.vehicles.map((vehicle: VehicleRegistration) => {
       if (vehicle.id === payload.id) {

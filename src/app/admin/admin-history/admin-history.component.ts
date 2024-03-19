@@ -21,8 +21,6 @@ export class AdminHistoryComponent implements OnInit {
     'vehicleModel',
     'numberPlate',
     'date',
-    'details',
-    'status',
   ];
   dataSource = this.vehicleService.read();
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { VehicleService } from '../../admin/services/vehicle.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-registrations',
@@ -9,37 +10,44 @@ import { VehicleService } from '../../admin/services/vehicle.service';
 })
 export class RegistrationsComponent implements OnInit {
   vehicle: VehicleRegistration = {
-    id: 'B02JF33',
-    date: '24.03.2024',
-    ownerName: 'Szasz',
-    ownerSurname: 'Francisco',
-    ownerPhone: '0720628821',
-    ownerEmail: 'francisc.szasz@saguna.ro',
-    ownerCNP: '2324',
-    ownerIdentityCard: 'ownerIdentityCard',
-    vehicleManufacturer: 'KIA',
-    vehicleModel: 'CEED',
-    vehicleYear: '2003',
-    vehicleVinNumber: 'WVW527HF7FF320A',
-    vehicleIdentityCard: 'vehicleIdentityCard',
-    vehicleNumberPlate: 'MM47GHK',
-    certificatePaymentProof: true,
-    ownershipProof: 'ownershipProof',
-    details: 'Lipsă asigurare',
-    status: 'Respins',
+    id: '',
+    date: new Date(),
+    ownerName: '',
+    ownerSurname: '',
+    ownerPhone: '',
+    ownerEmail: '',
+    ownerCNP: '',
+    ownerIdentityCard: '',
+    vehicleManufacturer: '',
+    vehicleModel: '',
+    vehicleYear: '',
+    vehicleVinNumber: '',
+    vehicleIdentityCard: '',
+    vehicleNumberPlate: '',
+    certificatePaymentProof: false,
+    ownershipProof: '',
+    details: 'Cerere trimisă',
+    status: 'În așteptare',
     count: 0,
     items: undefined,
     total_count: 0,
     isAccepted: false,
   };
+  datePipe: any;
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
     // this.vehicle = this.vehicleService.readOne('B02JF33');
   }
   onCreate(vehicle: VehicleRegistration) {
-    this.vehicleService.giveBirth(vehicle);
+    const currentDate = new Date();
+    const formattedDate = this.datePipe.transform(
+      currentDate,
+      'yyyy-MM-dd HH:mm:ss'
+    );
+    this.vehicleService.giveBirth(vehicle, formattedDate);
   }
+
   onUpdate(vehicle: VehicleRegistration) {
     this.vehicleService.update(vehicle);
   }

@@ -3,6 +3,7 @@
     <mat-tab label="Înmatriculare">
       <div class="register-form">
         <form action="" #form="ngForm" class="formabro">
+          <pre>{{ formatDate(vehicle.date) }}</pre>
           <mat-form-field color="accent">
             <mat-label>Nume Proprietar</mat-label>
             <input
