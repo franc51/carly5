@@ -35,19 +35,19 @@ export class AdminDashboardComponent implements OnInit {
   handleUpdate(form: NgForm, vehicle: VehicleRegistration) {
     if (form.valid && vehicle) {
       if (confirm('Sigur respingi cererea?')) {
-        {
-          this.update.emit({ id: vehicle.id, ...form.value });
-          console.log(this.vehicles);
+        // Emit the update event
+        this.update.emit({ id: vehicle.id, ...form.value });
+
+        // Remove the row from the DOM
+        const row = document.querySelector(`[data-id="${vehicle.id}"]`);
+        if (row) {
+          row.remove();
         }
       }
     }
     return;
   }
 
-  handleDelete() {
-    this.delete.emit({ ...this.vehicle });
-    return;
-  }
 
   ngOnInit(): void {
     // takes state and makes it available inside components

@@ -30,6 +30,7 @@ export class RegistrationsComponent implements OnInit {
     count: 0,
     items: undefined,
     total_count: 0,
+    isAccepted: false,
   };
   constructor(private vehicleService: VehicleService) {}
 

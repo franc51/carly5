@@ -108,7 +108,6 @@
                       <button
                         matTooltip="Respinge cerere"
                         (click)="handleUpdate(form, vehicle)"
-                        (click)="handleDelete()"
                       >
                         <img
                           src="https://i.ibb.co/W3M8b9X/eliminat.png"
@@ -131,7 +130,7 @@
               </form>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              <tr mat-row *matRowDef="let vehicle; columns: displayedColumns" [attr.data-id]="vehicle.id"></tr>
             </table>
           </div>
         </div>

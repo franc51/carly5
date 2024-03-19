@@ -23,4 +23,5 @@ export interface VehicleRegistration {
     | 'Cerere trimisă'
     | 'Certificatul de inm. și plăcuțele au fost trimise';
   status: 'În așteptare' | 'Respins';
+  isAccepted: boolean;
 }

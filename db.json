@@ -23,8 +23,8 @@
     {
       "id": "B02JF33",
       "date": "24.03.2024",
-      "ownerName": "Szasz",
-      "ownerSurname": "Francisco",
+      "ownerName": "Bujie",
+      "ownerSurname": "Costea",
       "ownerPhone": "0720628821",
       "ownerEmail": "francisc.szasz@saguna.ro",
       "ownerCNP": "2324",
@@ -38,13 +38,14 @@
       "certificatePaymentProof": true,
       "ownershipProof": "ownershipProof",
       "details": "Cerere trimisă",
-      "status": "În așteptare"
+      "status": "În așteptare",
+      "isAccepted": false
     },
     {
       "id": "B02JF33",
       "date": "24.03.2024",
-      "ownerName": "Szasz",
-      "ownerSurname": "Francisco",
+      "ownerName": "Kilimanjaro",
+      "ownerSurname": "Paparute",
       "ownerPhone": "0720628821",
       "ownerEmail": "francisc.szasz@saguna.ro",
       "ownerCNP": "2324",
@@ -63,8 +64,8 @@
     {
       "id": "B02JF33",
       "date": "24.03.2024",
-      "ownerName": "Szasz",
-      "ownerSurname": "Francisco",
+      "ownerName": "Costel",
+      "ownerSurname": "Biju",
       "ownerPhone": "0720628821",
       "ownerEmail": "francisc.szasz@saguna.ro",
       "ownerCNP": "2324",
@@ -83,8 +84,8 @@
     {
       "id": "B02JF33",
       "date": "24.03.2024",
-      "ownerName": "Szasz",
-      "ownerSurname": "Francisco",
+      "ownerName": "Liaco",
+      "ownerSurname": "Bobonete",
       "ownerPhone": "0720628821",
       "ownerEmail": "francisc.szasz@saguna.ro",
       "ownerCNP": "2324",
