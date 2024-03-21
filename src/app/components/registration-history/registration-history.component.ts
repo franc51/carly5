@@ -26,12 +26,12 @@ export class RegistrationHistoryComponent implements OnInit {
     'details',
     'status',
   ];
-  dataSource = this.vehicleService.read();
+  dataSource = this.vehicleService.getAllVehicles();
 
   ngOnInit(): void {
     // takes state and makes it available inside components
     this.vehicleService
-      .clientHistory()
+      .getAllVehicles()
       .subscribe(
         (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
       );

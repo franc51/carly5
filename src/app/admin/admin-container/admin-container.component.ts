@@ -15,10 +15,7 @@ export class AdminContainerComponent {
   @Output() update = new EventEmitter<VehicleRegistration>();
 
   onUpdate(vehicle: VehicleRegistration) {
-    this.vehicleService.update(vehicle);
-  }
-  onDelete(vehicle: VehicleRegistration) {
-    this.vehicleService.delete(vehicle);
+    this.vehicleService.updateVehicle(vehicle);
   }
   constructor(private vehicleService: VehicleService) {}
 }

@@ -22,12 +22,12 @@ export class AdminHistoryComponent implements OnInit {
     'numberPlate',
     'date',
   ];
-  dataSource = this.vehicleService.read();
+  dataSource = this.vehicleService.getAllVehicles();
 
   ngOnInit(): void {
     // takes state and makes it available inside components
     this.vehicleService
-      .readHistory()
+      .getAllVehicles()
       .subscribe(
         (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
       );

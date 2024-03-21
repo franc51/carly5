@@ -14,6 +14,8 @@ import * as LR from '@uploadcare/blocks';
 
 // --proxy-config proxy.conf.json
 
+// API KEY : 9TovKkSejN4Bd7mzySHsjwT4FCBtRHHRkHBRaybZC5wUw532QQ7RhwneS5eGDBq0
+
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 

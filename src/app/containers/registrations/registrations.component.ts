@@ -45,10 +45,10 @@ export class RegistrationsComponent implements OnInit {
       currentDate,
       'yyyy-MM-dd HH:mm:ss'
     );
-    this.vehicleService.giveBirth(vehicle, formattedDate);
+    this.vehicleService.createVehicle(vehicle);
   }
 
   onUpdate(vehicle: VehicleRegistration) {
-    this.vehicleService.update(vehicle);
+    this.vehicleService.updateVehicle(vehicle);
   }
 }

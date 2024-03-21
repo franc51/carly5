@@ -30,7 +30,7 @@ export class AdminDashboardComponent implements OnInit {
     'date',
     'details',
   ];
-  dataSource = this.vehicleService.read();
+  dataSource = this.vehicleService.getAllVehicles();
 
   handleUpdate(form: NgForm, vehicle: VehicleRegistration) {
     if (form.touched && vehicle) {
@@ -52,7 +52,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
     // takes state and makes it available inside components
     this.vehicleService
-      .read()
+      .getAllVehicles()
       .subscribe(
         (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
       );
