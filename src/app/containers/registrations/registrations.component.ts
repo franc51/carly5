@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { VehicleService } from '../../admin/services/vehicle.service';
 import { DatePipe } from '@angular/common';
+import { ObjectId } from 'mongodb';
 
 @Component({
   selector: 'app-registrations',
@@ -10,25 +11,24 @@ import { DatePipe } from '@angular/common';
 })
 export class RegistrationsComponent implements OnInit {
   vehicle: VehicleRegistration = {
-    _id : '',
     date: new Date(),
-    ownerName: 'string',
-    ownerSurname: 'string',
+    ownerName: '',
+    ownerSurname: '',
     ownerPhone: 0,
-    ownerEmail: 'string',
+    ownerEmail: '',
     ownerCNP: 0,
-    ownerIdentityCard: 'string',
-    vehicleManufacturer: 'string',
-    vehicleModel: 'string',
+    ownerIdentityCard: '',
+    vehicleManufacturer: '',
+    vehicleModel: '',
     vehicleYear: 0,
-    vehicleVinNumber: 'string',
-    vehicleIdentityCard: 'string',
-    vehicleNumberPlate: 'string',
+    vehicleVinNumber: '',
+    vehicleIdentityCard: '',
+    vehicleNumberPlate: '',
     certificatePaymentProof: false,
-    ownershipProof: 'string',
+    ownershipProof: '',
     details:"Cerere trimisă",
     status:"În așteptare",
-    items:[]
+    count: 0,
   };
 
   constructor(private vehicleService: VehicleService) {}

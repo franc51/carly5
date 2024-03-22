@@ -1,5 +1,4 @@
 export interface VehicleRegistration {
-  _id : string,
   date: Date,
   ownerName: string,
   ownerSurname: string,
@@ -17,5 +16,6 @@ export interface VehicleRegistration {
   ownershipProof: string,
   details:"Lipsă asigurare" | "Cerere trimisă",
   status:"Respins" | "Aprobat" | "În așteptare",
-  items:[]
+  count: 0,
+
 }

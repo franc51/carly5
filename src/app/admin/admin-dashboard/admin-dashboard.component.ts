@@ -19,7 +19,7 @@ export class AdminDashboardComponent implements OnInit {
   @Output() delete = new EventEmitter<VehicleRegistration>();
 
   trackById(index: number, value: VehicleRegistration) {
-    return value._id;
+
   }
 
   displayedColumns: string[] = [

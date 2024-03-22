@@ -23,9 +23,17 @@ export class RegistrationFormComponent {
 
   onCreateVehicle(form: NgForm): void {
     if (form.valid) {
-      const newVehicle: VehicleRegistration = form.value;
-      newVehicle.date = new Date();
-      newVehicle.status = 'În așteptare'; // Set default value for status
+      const formValue = form.value;
+
+      // Ensure all required properties are present
+      const newVehicle: VehicleRegistration = {
+        ...formValue,
+        date: new Date(), // Assign a new Date object
+        status: 'În așteptare', // Set default value for status
+        isAccepted: false,
+        count: 0
+      };
+
       this.create.emit(newVehicle);
       form.reset();
     }

@@ -23,7 +23,7 @@ export class VehicleService {
   }
 
   updateVehicle(vehicle: VehicleRegistration): Observable<VehicleRegistration> {
-    const url = `${this.baseUrl}/${vehicle._id}`;
+    const url = `${this.baseUrl}/${vehicle}`;
     return this.http.put<VehicleRegistration>(url, vehicle);
   }
 
