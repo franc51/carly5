@@ -29,9 +29,18 @@ export class RegistrationFormComponent {
       const newVehicle: VehicleRegistration = {
         ...formValue,
         date: new Date(), // Assign a new Date object
-        status: 'În așteptare', // Set default value for status
+        details:"Cerere trimisă",
+        status:"În așteptare",
+        ownerCNP: 1,
+        ownerIdentityCard: 's',
+        vehicleYear: 1,
+        vehicleIdentityCard: 'string',
+        certificatePaymentProof: false,
+        ownershipProof: 'string',
         isAccepted: false,
-        count: 0
+        count: 0,
+        vehicleNumberPlate: 0,
+        total_count:0
       };
 
       this.create.emit(newVehicle);
