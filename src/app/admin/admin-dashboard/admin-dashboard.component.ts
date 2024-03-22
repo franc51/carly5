@@ -1,16 +1,17 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { VehicleRegistration } from '../../model/vehicle-registration';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { VehicleRegistration } from '../../model/vehicle-registration';
 import { VehicleService } from '../services/vehicle.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css',
+  styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  vehicle!: VehicleRegistration;
-  vehicles!: VehicleRegistration[];
+  vehicles: VehicleRegistration[] = [];
+  dataSource: VehicleRegistration[] = [];
 
   constructor(private vehicleService: VehicleService) {}
 
@@ -18,8 +19,9 @@ export class AdminDashboardComponent implements OnInit {
   @Output() delete = new EventEmitter<VehicleRegistration>();
 
   trackById(index: number, value: VehicleRegistration) {
-    return value.id;
+    return value._id;
   }
+
   displayedColumns: string[] = [
     'ownerName',
     'ownerSurname',
@@ -30,31 +32,33 @@ export class AdminDashboardComponent implements OnInit {
     'date',
     'details',
   ];
-  dataSource = this.vehicleService.getAllVehicles();
-
-  handleUpdate(form: NgForm, vehicle: VehicleRegistration) {
-    if (form.touched && vehicle) {
-      if (confirm('Sigur respingi cererea?')) {
-        // Emit the update event
-        this.update.emit({ id: vehicle.id, ...form.value });
-        console.log(vehicle);
-
-        // Remove the row from the DOM
-        const row = document.querySelector(`[data-id="${vehicle.id}"]`);
-        if (row) {
-          row.remove();
-        }
-      }
-    }
-    return;
-  }
 
   ngOnInit(): void {
-    // takes state and makes it available inside components
-    this.vehicleService
-      .getAllVehicles()
-      .subscribe(
-        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
-      );
+    this.loadVehicles();
+  }
+
+  loadVehicles(): void {
+    this.vehicleService.getAcceptedVehicles().subscribe(
+      (vehicles: VehicleRegistration[]) => {
+        this.vehicles = vehicles;
+        this.dataSource = vehicles;
+      },
+      (error) => {
+        console.error('Error fetching vehicles:', error);
+      }
+    );
+  }
+
+
+  onUpdateVehicle(form: NgForm,updatedVehicle: VehicleRegistration): void {
+    this.vehicleService.updateVehicle(updatedVehicle).subscribe(
+      (response: VehicleRegistration) => {
+        console.log('Vehicle updated successfully:', response);
+        this.loadVehicles(); // Reload the vehicles after successful update
+      },
+      (error) => {
+        console.error('Error updating vehicle:', error);
+      }
+    );
   }
 }

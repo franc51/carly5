@@ -1,27 +1,21 @@
 export interface VehicleRegistration {
-  count: number;
-  items: any;
-  total_count: number;
-  id?: string;
-  date: Date;
-  ownerName: string;
-  ownerSurname: string;
-  ownerEmail: string;
-  ownerPhone: string;
-  ownerCNP?: string;
-  ownerIdentityCard?: string;
-  vehicleManufacturer: string;
-  vehicleModel: string;
-  vehicleYear?: string;
-  vehicleVinNumber: string;
-  vehicleIdentityCard?: string;
-  vehicleNumberPlate: string;
-  certificatePaymentProof?: boolean;
-  ownershipProof?: string;
-  details:
-    | 'Lipsă asigurare'
-    | 'Cerere trimisă'
-    | 'Certificatul de inm. și plăcuțele au fost trimise';
-  status: 'În așteptare' | 'Respins';
-  isAccepted: boolean;
+  _id : string,
+  date: Date,
+  ownerName: string,
+  ownerSurname: string,
+  ownerPhone: number,
+  ownerEmail: string,
+  ownerCNP: number,
+  ownerIdentityCard: string,
+  vehicleManufacturer: string,
+  vehicleModel: string,
+  vehicleYear:number,
+  vehicleVinNumber: string,
+  vehicleIdentityCard: string,
+  vehicleNumberPlate: string,
+  certificatePaymentProof: boolean,
+  ownershipProof: string,
+  details:"Lipsă asigurare" | "Cerere trimisă",
+  status:"Respins" | "Aprobat" | "În așteptare",
+  items:[]
 }

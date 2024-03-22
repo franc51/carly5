@@ -131,11 +131,10 @@
 
           <!-- Form validations -->
 
-          <ng-container
-            *ngIf="!this.isMatchingPattern(this.userInput) && form.submitted"
-          >
+          <ng-container >
             <p class="error">Numarul de înm. trebuie sa fie de forma LLCCLLL</p>
           </ng-container>
+
 
           <ng-container *ngIf="form.invalid && form.submitted">
             <p class="error">Numele nu este valid</p>
@@ -163,7 +162,7 @@
           <button
             mat-raised-button
             style="background-color: green; margin-bottom: 1rem; color: white"
-            (click)="handleCreate(form)"
+            (click)="onCreateVehicle(form)"
           >
             <mat-icon>send</mat-icon>
             Trimite cerere

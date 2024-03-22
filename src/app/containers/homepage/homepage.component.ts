@@ -10,5 +10,5 @@ export class HomepageComponent {
   constructor(public auth: AuthService) {}
   loaded: any;
   events: string[] = [];
-  opened: boolean = false;
+  opened: boolean = true;
 }
