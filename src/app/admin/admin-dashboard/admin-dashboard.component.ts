@@ -18,9 +18,7 @@ export class AdminDashboardComponent implements OnInit {
   @Output() update = new EventEmitter<VehicleRegistration>();
   @Output() delete = new EventEmitter<VehicleRegistration>();
 
-  trackById(index: number, value: VehicleRegistration) {
-
-  }
+  trackById(index: number, value: VehicleRegistration) {}
 
   displayedColumns: string[] = [
     'ownerName',
@@ -49,12 +47,24 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
+  onUpdateVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
+    // Update the status field of the updatedVehicle object
+    updatedVehicle.status = 'Respins'; // Or any other status you want to set
 
-  onUpdateVehicle(form: NgForm,updatedVehicle: VehicleRegistration): void {
     this.vehicleService.updateVehicle(updatedVehicle).subscribe(
       (response: VehicleRegistration) => {
         console.log('Vehicle updated successfully:', response);
-        this.loadVehicles(); // Reload the vehicles after successful update
+        // Find the index of the updated vehicle in the vehicles array based on its _id
+        const index = this.vehicles.findIndex(
+          (vehicle) => vehicle._id === response._id
+        );
+        if (index !== -1) {
+          // Update the vehicle in the vehicles array with the updated values
+          this.vehicles[index] = response;
+
+          // Update the dataSource array as well
+          this.dataSource = [...this.vehicles];
+        }
       },
       (error) => {
         console.error('Error updating vehicle:', error);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { VehicleService } from '../../admin/services/vehicle.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-registration-history',
@@ -9,11 +9,14 @@ import { VehicleService } from '../../admin/services/vehicle.service';
   styleUrls: ['./registration-history.component.css'],
 })
 export class RegistrationHistoryComponent implements OnInit {
-  vehicle!: VehicleRegistration;
-  vehicles!: VehicleRegistration[];
-  isLoadingResults = false;
+  vehicles: VehicleRegistration[] = [];
+  isLoadingResults = true;
+  userEmail!: string;
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(
+    private vehicleService: VehicleService,
+    public auth: AuthService
+  ) {}
 
   displayedColumns: string[] = [
     'ownerName',
@@ -26,14 +29,32 @@ export class RegistrationHistoryComponent implements OnInit {
     'details',
     'status',
   ];
-  dataSource = this.vehicleService.getAllVehicles();
+  dataSource: VehicleRegistration[] = [];
 
   ngOnInit(): void {
-    // takes state and makes it available inside components
-    this.vehicleService
-      .getAllVehicles()
-      .subscribe(
-        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
-      );
+    // Subscribe to Auth0's user$ observable to get user information
+    this.auth.user$.subscribe((user) => {
+      if (user) {
+        this.userEmail = user.email as string; // Get the logged-in user's email
+        // Call the method from the VehicleService instance
+        this.vehicleService.getAllVehiclesForUser(this.userEmail).subscribe(
+          (vehicles: VehicleRegistration[]) => {
+            // Filter vehicles to render only the ones belonging to the logged-in user
+            this.vehicles = vehicles.filter(
+              (vehicle) => vehicle.ownerEmail === this.userEmail
+            );
+            // Reverse the vehicles array to render the last object first
+            this.vehicles = vehicles.reverse();
+            // Assign fetched vehicles to the dataSource
+            this.dataSource = this.vehicles;
+            console.log(this.userEmail);
+            this.isLoadingResults = false;
+          },
+          (error) => {
+            console.error('Error fetching vehicles:', error);
+          }
+        );
+      }
+    });
   }
 }

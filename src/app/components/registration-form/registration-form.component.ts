@@ -3,6 +3,7 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 import { VehicleService } from '../../admin/services/vehicle.service';
 import { DatePipe } from '@angular/common';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-registration-form',
@@ -28,27 +29,24 @@ export class RegistrationFormComponent {
       // Ensure all required properties are present
       const newVehicle: VehicleRegistration = {
         ...formValue,
+        _id: uuidv4(),
         date: new Date(), // Assign a new Date object
-        details:"Cerere trimisă",
-        status:"În așteptare",
+        details: 'Cerere trimisă',
+        status: 'În așteptare',
         ownerCNP: 1,
         ownerIdentityCard: 's',
         vehicleYear: 1,
-        vehicleIdentityCard: 'string',
+        vehicleIdentityCard: 'file',
         certificatePaymentProof: false,
-        ownershipProof: 'string',
+        ownershipProof: 'file',
         isAccepted: false,
-        count: 0,
-        vehicleNumberPlate: 0,
-        total_count:0
+        vehicleNumberPlate: this.userInput,
       };
 
       this.create.emit(newVehicle);
       form.reset();
     }
   }
-
-
 
   isInputMatchingPattern(input: string): boolean {
     // Define your pattern matching logic here

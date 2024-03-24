@@ -1,10 +1,10 @@
 // routes/vehicleRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Vehicle = require('./vehicle'); // Assuming this is your Mongoose model for vehicles
+const Vehicle = require("./vehicle"); // Assuming this is your Mongoose model for vehicles
 
 // GET all vehicles
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const vehicles = await Vehicle.find();
     res.json(vehicles);
@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
 });
 
 // POST a new vehicle
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const vehicle = new Vehicle(req.body);
   try {
-    const newVehicle = await vehicle.save(); // Use vehicle.save() instead of Vehicle.save()
+    const newVehicle = await vehicle.save();
     res.status(201).json(newVehicle);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -25,12 +25,14 @@ router.post('/', async (req, res) => {
 });
 
 // PUT (update) a vehicle
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedVehicle = await Vehicle.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!updatedVehicle) {
-      return res.status(404).json({ message: 'Vehicle not found' });
+      return res.status(404).json({ message: "Vehicle not found" });
     }
     res.json(updatedVehicle);
   } catch (err) {
@@ -39,14 +41,14 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE a vehicle
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const deletedVehicle = await Vehicle.findByIdAndDelete(id);
     if (!deletedVehicle) {
-      return res.status(404).json({ message: 'Vehicle not found' });
+      return res.status(404).json({ message: "Vehicle not found" });
     }
-    res.json({ message: 'Vehicle deleted' });
+    res.json({ message: "Vehicle deleted" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

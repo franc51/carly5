@@ -15,123 +15,132 @@
                 placeholder="nume, tel, serie"
               />
             </mat-form-field>
-
-            <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
-              <!--- Note that these columns can be defined in any order.
+            <ng-container *ngIf="vehicles.length">
+              <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
+                <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
 
-              <!-- Name Column -->
-              <ng-container matColumnDef="ownerName">
-                <th mat-header-cell *matHeaderCellDef>Nume</th>
-                <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.ownerName }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="ownerSurname">
-                <th mat-header-cell *matHeaderCellDef>Prenume</th>
-                <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.ownerSurname }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="ownerPhone">
-                <th mat-header-cell *matHeaderCellDef>Numar Telefon</th>
-                <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.ownerPhone }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="vehicleManufacturer">
-                <th mat-header-cell *matHeaderCellDef>Autovehicul</th>
-                <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.vehicleManufacturer }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="vehicleModel">
-                <th mat-header-cell *matHeaderCellDef>Model</th>
-                <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.vehicleModel }}
-                </td>
-              </ng-container>
-
-              <!-- placute Column -->
-              <ng-container matColumnDef="numberPlate">
-                <th mat-header-cell *matHeaderCellDef>Nr. Înmatriculare</th>
-                <td mat-cell *matCellDef="let vehicle">
-                  {{ vehicle.vehicleNumberPlate }}
-                </td>
-              </ng-container>
-
-              <!-- Date Column -->
-              <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef>Data</th>
-                <td mat-cell *matCellDef="let vehicle">{{ vehicle.date }}</td>
-              </ng-container>
-
-              <!-- details Column -->
-              <form #form="ngForm">
-                <ng-container matColumnDef="details">
-                  <th mat-header-cell *matHeaderCellDef>Detalii</th>
-                  <td mat-cell *matCellDef="let vehicle" class="admin-power">
-                    <mat-form-field style="margin-top: 1rem" color="accent">
-                      <mat-label>Motivul respingerii</mat-label>
-                      <mat-select
-                        name="details"
-                        #details="ngModel"
-                        [(ngModel)]="vehicle.details"
-                        required
-                      >
-                        <mat-option value="Lipsă asigurare"
-                          >Lipsă asigurare</mat-option
-                        >
-                        <mat-option value="Lipsă CI">Lipsă CI</mat-option>
-                        <mat-option value="Lipsă contract"
-                          >Lipsă contract</mat-option
-                        >
-                        <mat-option value="Lipsă dovada plății talon"
-                          >Lipsă dovada plății talon</mat-option
-                        >
-                        <mat-option value="">Date incorecte</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-
-                    <div class="action-btns">
-                      <button matTooltip="Descarcă documentele">
-                        <img
-                          src="https://i.ibb.co/Nx7hPs2/descarca.png"
-                          alt=""
-                        />
-                      </button>
-
-                      <button
-                        matTooltip="Respinge cerere"
-                        (click)="onUpdateVehicle(form, vehicle)"
-                      >
-                        <img
-                          src="https://i.ibb.co/W3M8b9X/eliminat.png"
-                          alt=""
-                        />
-                      </button>
-                      <button matTooltip="Aprobă cerere">
-                        <img
-                          src="https://i.ibb.co/cxJ1zSh/aprobat.png"
-                          alt=""
-                        />
-                      </button>
-
-                      <ng-container *ngIf="form.touched">
-                        <p style="color: red">Alege un motiv</p>
-                      </ng-container>
-                    </div>
+                <!-- Name Column -->
+                <ng-container matColumnDef="ownerName">
+                  <th mat-header-cell *matHeaderCellDef>Nume</th>
+                  <td mat-cell *matCellDef="let vehicle">
+                    {{ vehicle.ownerName }}
                   </td>
                 </ng-container>
-              </form>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let vehicle; columns: displayedColumns" [attr.data-id]="vehicle.id"></tr>
-            </table>
+                <ng-container matColumnDef="ownerSurname">
+                  <th mat-header-cell *matHeaderCellDef>Prenume</th>
+                  <td mat-cell *matCellDef="let vehicle">
+                    {{ vehicle.ownerSurname }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ownerPhone">
+                  <th mat-header-cell *matHeaderCellDef>Numar Telefon</th>
+                  <td mat-cell *matCellDef="let vehicle">
+                    {{ vehicle.ownerPhone }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicleManufacturer">
+                  <th mat-header-cell *matHeaderCellDef>Autovehicul</th>
+                  <td mat-cell *matCellDef="let vehicle">
+                    {{ vehicle.vehicleManufacturer }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicleModel">
+                  <th mat-header-cell *matHeaderCellDef>Model</th>
+                  <td mat-cell *matCellDef="let vehicle">
+                    {{ vehicle.vehicleModel }}
+                  </td>
+                </ng-container>
+
+                <!-- placute Column -->
+                <ng-container matColumnDef="numberPlate">
+                  <th mat-header-cell *matHeaderCellDef>Nr. Înmatriculare</th>
+                  <td mat-cell *matCellDef="let vehicle">
+                    {{ vehicle.vehicleNumberPlate }}
+                  </td>
+                </ng-container>
+
+                <!-- Date Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef>Data</th>
+                  <td mat-cell *matCellDef="let vehicle">{{ vehicle.date }}</td>
+                </ng-container>
+
+                <!-- details Column -->
+                <form #form="ngForm">
+                  <ng-container matColumnDef="details">
+                    <th mat-header-cell *matHeaderCellDef>Detalii</th>
+                    <td mat-cell *matCellDef="let vehicle" class="admin-power">
+                      <mat-form-field style="margin-top: 1rem" color="accent">
+                        <mat-label>Motivul respingerii</mat-label>
+                        <mat-select
+                          name="details"
+                          #details="ngModel"
+                          [(ngModel)]="vehicle.details"
+                          value="details"
+                          required
+                        >
+                          <mat-option value="Lipsă asigurare"
+                            >Lipsă asigurare</mat-option
+                          >
+                          <mat-option value="Lipsă CI">Lipsă CI</mat-option>
+                          <mat-option value="Lipsă contract"
+                            >Lipsă contract</mat-option
+                          >
+                          <mat-option value="Lipsă dovada plății talon"
+                            >Lipsă dovada plății talon</mat-option
+                          >
+                          <mat-option value="">Date incorecte</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <div class="action-btns">
+                        <button matTooltip="Descarcă documentele">
+                          <img
+                            src="https://i.ibb.co/Nx7hPs2/descarca.png"
+                            alt=""
+                          />
+                        </button>
+
+                        <button
+                          matTooltip="Respinge cerere"
+                          (click)="onUpdateVehicle(form, vehicle)"
+                        >
+                          <img
+                            src="https://i.ibb.co/W3M8b9X/eliminat.png"
+                            alt=""
+                          />
+                        </button>
+                        <button matTooltip="Aprobă cerere">
+                          <img
+                            src="https://i.ibb.co/cxJ1zSh/aprobat.png"
+                            alt=""
+                          />
+                        </button>
+
+                        <ng-container *ngIf="form.touched">
+                          <p style="color: red">Alege un motiv</p>
+                        </ng-container>
+                      </div>
+                    </td>
+                  </ng-container>
+                </form>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let vehicle; columns: displayedColumns"
+                  [attr.data-id]="vehicle.id"
+                ></tr>
+              </table>
+            </ng-container>
+            <ng-container *ngIf="!vehicles.length">
+              <p>Nu sunt cereri de inmatriculare</p>
+            </ng-container>
           </div>
         </div>
       </div>

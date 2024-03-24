@@ -1,17 +1,10 @@
 // models/Vehicle.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const vehicleSchema = new mongoose.Schema({
-  count: {
-    type: Number,
-    required: true,
-  },
+  _id: String,
   items: {
     type: Array, // You might want to adjust this based on your data structure
-    required: true,
-  },
-  total_count: {
-    type: Number,
     required: true,
   },
   date: {
@@ -58,12 +51,16 @@ const vehicleSchema = new mongoose.Schema({
   ownershipProof: String,
   details: {
     type: String,
-    enum: ['Lipsă asigurare', 'Cerere trimisă', 'Certificatul de inm. și plăcuțele au fost trimise'],
+    enum: [
+      "Lipsă asigurare",
+      "Cerere trimisă",
+      "Certificatul de inm. și plăcuțele au fost trimise",
+    ],
     required: true,
   },
   status: {
     type: String,
-    enum: ['În așteptare', 'Respins'],
+    enum: ["În așteptare", "Respins"],
     required: true,
   },
   isAccepted: {
@@ -72,4 +69,4 @@ const vehicleSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Vehicle', vehicleSchema);
+module.exports = mongoose.model("Vehicle", vehicleSchema);
