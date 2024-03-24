@@ -43,8 +43,10 @@ export class RegistrationHistoryComponent implements OnInit {
             this.vehicles = vehicles.filter(
               (vehicle) => vehicle.ownerEmail === this.userEmail
             );
-            // Reverse the vehicles array to render the last object first
-            this.vehicles = vehicles.reverse();
+
+            // Reverse the order of fetched vehicles
+            this.vehicles.reverse();
+
             // Assign fetched vehicles to the dataSource
             this.dataSource = this.vehicles;
             console.log(this.userEmail);
