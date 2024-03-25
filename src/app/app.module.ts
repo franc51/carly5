@@ -53,6 +53,7 @@ import {
 import { MatInputModule } from '@angular/material/input';
 
 // form
+import { MatAccordion } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -66,9 +67,6 @@ import { HelpComponent } from './containers/help/help.component';
 import { RegistrationHistoryComponent } from './components/registration-history/registration-history.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { UploadcareComponent } from './components/uploadcare/uploadcare.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
-import { SimplepaginatorComponent } from './components/simplepaginator/simplepaginator.component';
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
 import { DatepipeComponent } from './components/datepipe/datepipe.component';
 import { AdminContainerComponent } from './admin/admin-container/admin-container.component';
@@ -91,15 +89,13 @@ import { AdminHistoryComponent } from './admin/admin-history/admin-history.compo
     RegistrationHistoryComponent,
     RegistrationFormComponent,
     AdminDashboardComponent,
-    UploadcareComponent,
-    PaginatorComponent,
-    SimplepaginatorComponent,
     RegistrationsComponent,
     DatepipeComponent,
     AdminContainerComponent,
     AdminHistoryComponent,
   ],
   imports: [
+    MatAccordion,
     MatDialogClose,
     MatDialogActions,
     MatDialogContent,
