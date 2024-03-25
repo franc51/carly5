@@ -10,6 +10,8 @@ import { VehicleService } from '../services/vehicle.service';
 export class AdminHistoryComponent implements OnInit {
   vehicle!: VehicleRegistration;
   vehicles!: VehicleRegistration[];
+  isLoadingResults = true;
+
 
   constructor(private vehicleService: VehicleService) {}
 
@@ -31,5 +33,7 @@ export class AdminHistoryComponent implements OnInit {
       .subscribe(
         (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles, vehicles = vehicles.reverse())
       );
+      this.isLoadingResults = false;
+
   }
 }

@@ -34,6 +34,9 @@ table {
 
 .example-loading-shade {
   position: absolute;
+  height:max-content;
+  margin: 1rem;
+  height: 10rem;
   background-color: rgba(0, 0, 0, 0.075);
   top: 0;
   left: 0;

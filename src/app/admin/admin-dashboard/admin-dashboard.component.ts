@@ -12,6 +12,7 @@ import { Observable, map } from 'rxjs';
 export class AdminDashboardComponent implements OnInit {
   vehicles: VehicleRegistration[] = [];
   dataSource: VehicleRegistration[] = [];
+  isLoadingResults = true;
 
   constructor(private vehicleService: VehicleService) {}
 
@@ -40,6 +41,7 @@ export class AdminDashboardComponent implements OnInit {
       (vehicles: VehicleRegistration[]) => {
         this.vehicles = vehicles;
         this.dataSource = vehicles;
+        this.isLoadingResults = false;
       },
       (error) => {
         console.error('Error fetching vehicles:', error);
