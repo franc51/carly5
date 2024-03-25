@@ -37,7 +37,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   loadVehicles(): void {
-    this.vehicleService.getAcceptedVehicles().subscribe(
+    this.vehicleService.getAllRequests().subscribe(
       (vehicles: VehicleRegistration[]) => {
         this.vehicles = vehicles;
         this.dataSource = vehicles;
@@ -49,9 +49,9 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  onUpdateVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
+  onRejectVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     // Update the status field of the updatedVehicle object
-    updatedVehicle.status = 'Respins'; // Or any other status you want to set
+    updatedVehicle.status = 'Respins';
 
     this.vehicleService.updateVehicle(updatedVehicle).subscribe(
       (response: VehicleRegistration) => {
@@ -61,8 +61,36 @@ export class AdminDashboardComponent implements OnInit {
           (vehicle) => vehicle._id === response._id
         );
         if (index !== -1) {
-            // Reverse the order of fetched vehicles
-            this.vehicles.reverse();
+          // Reverse the order of fetched vehicles
+          this.vehicles.reverse();
+          // Update the vehicle in the vehicles array with the updated values
+          this.vehicles[index] = response;
+
+          // Update the dataSource array as well
+          this.dataSource = [...this.vehicles];
+        }
+      },
+      (error) => {
+        console.error('Error updating vehicle:', error);
+      }
+    );
+  }
+
+  onApproveVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
+    // Update the status field of the updatedVehicle object
+    updatedVehicle.status = 'Aprobat'; // Updating status
+    updatedVehicle.details =
+      'Certificatul de înmatriculare și numerele de înmatriculare au fost trimise.';
+    this.vehicleService.updateVehicle(updatedVehicle).subscribe(
+      (response: VehicleRegistration) => {
+        console.log('Vehicle updated successfully:', response);
+        // Find the index of the updated vehicle in the vehicles array based on its _id
+        const index = this.vehicles.findIndex(
+          (vehicle) => vehicle._id === response._id
+        );
+        if (index !== -1) {
+          // Reverse the order of fetched vehicles
+          this.vehicles.reverse();
           // Update the vehicle in the vehicles array with the updated values
           this.vehicles[index] = response;
 

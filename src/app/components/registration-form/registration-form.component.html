@@ -131,10 +131,9 @@
 
           <!-- Form validations -->
 
-          <ng-container >
+          <ng-container>
             <p class="error">Numarul de înm. trebuie sa fie de forma LLCCLLL</p>
           </ng-container>
-
 
           <ng-container *ngIf="form.invalid && form.submitted">
             <p class="error">Numele nu este valid</p>
@@ -152,7 +151,7 @@
             <p class="error">Email invalid</p>
           </ng-container>
 
-          <ng-container *ngIf="form.submitted && form.valid">
+          <ng-container *ngIf="form.touched && form.submitted">
             <div class="green">
               <h3>Cerere trimisă cu succes!</h3>
             </div>

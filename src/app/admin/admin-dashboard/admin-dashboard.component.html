@@ -112,14 +112,17 @@
 
                         <button
                           matTooltip="Respinge cerere"
-                          (click)="onUpdateVehicle(form, vehicle)"
+                          (click)="onRejectVehicle(form, vehicle)"
                         >
                           <img
                             src="https://i.ibb.co/W3M8b9X/eliminat.png"
                             alt=""
                           />
                         </button>
-                        <button matTooltip="Aprobă cerere">
+                        <button
+                          matTooltip="Aprobă cerere"
+                          (click)="onApproveVehicle(form, vehicle)"
+                        >
                           <img
                             src="https://i.ibb.co/cxJ1zSh/aprobat.png"
                             alt=""

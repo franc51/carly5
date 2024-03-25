@@ -16,6 +16,7 @@ export class RegistrationFormComponent {
 
   @Input() vehicle!: VehicleRegistration;
   userInput: any;
+  formSubmitted = false;
 
   constructor(
     private vehicleService: VehicleService,
@@ -23,7 +24,7 @@ export class RegistrationFormComponent {
   ) {}
 
   onCreateVehicle(form: NgForm): void {
-    if (form.valid) {
+    if (form.valid && form.submitted) {
       const formValue = form.value;
 
       // Ensure all required properties are present

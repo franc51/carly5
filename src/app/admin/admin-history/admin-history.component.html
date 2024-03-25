@@ -11,7 +11,9 @@
           placeholder="nume, tel, serie"
         />
       </mat-form-field>
-
+      <div *ngIf="isLoadingResults" class="example-loading-shade">
+        <mat-spinner></mat-spinner>
+      </div>
       <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -64,6 +66,13 @@
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>Data</th>
           <td mat-cell *matCellDef="let vehicle">{{ vehicle.date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef>Detalii</th>
+          <td mat-cell *matCellDef="let vehicle">
+            {{ vehicle.details }}
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

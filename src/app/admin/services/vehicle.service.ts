@@ -35,7 +35,27 @@ export class VehicleService {
     return this.http.delete<void>(url);
   }
 
+  getAdminHistory(): Observable<VehicleRegistration[]> {
+    return this.getAllVehicles().pipe(
+      map((vehicles: VehicleRegistration[]) => {
+        return vehicles.filter(
+          (vehicle) => vehicle.details !== 'Cerere trimisă'
+        );
+      })
+    );
+  }
+
   getAcceptedVehicles(): Observable<VehicleRegistration[]> {
+    return this.getAllVehicles().pipe(
+      map((vehicles: VehicleRegistration[]) => {
+        return vehicles.filter(
+          (vehicle) => vehicle.details !== 'Cerere trimisă'
+        );
+      })
+    );
+  }
+
+  getAllRequests(): Observable<VehicleRegistration[]> {
     return this.getAllVehicles().pipe(
       map((vehicles: VehicleRegistration[]) => {
         return vehicles.filter(

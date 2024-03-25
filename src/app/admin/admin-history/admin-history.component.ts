@@ -12,7 +12,6 @@ export class AdminHistoryComponent implements OnInit {
   vehicles!: VehicleRegistration[];
   isLoadingResults = true;
 
-
   constructor(private vehicleService: VehicleService) {}
 
   displayedColumns: string[] = [
@@ -23,17 +22,20 @@ export class AdminHistoryComponent implements OnInit {
     'vehicleModel',
     'numberPlate',
     'date',
+    'details',
   ];
   dataSource = this.vehicleService.getAllVehicles();
 
   ngOnInit(): void {
     // takes state and makes it available inside components
     this.vehicleService
-      .getAllVehicles()
+      .getAdminHistory()
       .subscribe(
-        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles, vehicles = vehicles.reverse())
+        (vehicles: VehicleRegistration[]) => (
+          (this.vehicles = vehicles),
+          (vehicles = vehicles.reverse()),
+          (this.isLoadingResults = false)
+        )
       );
-      this.isLoadingResults = false;
-
   }
 }

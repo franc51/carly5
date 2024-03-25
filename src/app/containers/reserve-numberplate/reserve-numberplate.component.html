@@ -73,12 +73,12 @@
       <div class="reserve-numberplate">
         <button
           type="submit"
-          style="background-color: green"
+          style="background-color: green; color: white"
           (click)="searchNumberPlate(userInput)"
           mat-raised-button
           class="reserve-numberplate"
           *ngIf="(auth.isAuthenticated$ | async) === true"
-          routerLink="/reserve-numberplate"
+          onclick="window.location.href='https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY'"
         >
           <mat-icon>save</mat-icon>
           Rezervă
