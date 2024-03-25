@@ -29,7 +29,7 @@ export class AdminHistoryComponent implements OnInit {
     this.vehicleService
       .getAllVehicles()
       .subscribe(
-        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles)
+        (vehicles: VehicleRegistration[]) => (this.vehicles = vehicles, vehicles = vehicles.reverse())
       );
   }
 }

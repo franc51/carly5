@@ -59,6 +59,8 @@ export class AdminDashboardComponent implements OnInit {
           (vehicle) => vehicle._id === response._id
         );
         if (index !== -1) {
+            // Reverse the order of fetched vehicles
+            this.vehicles.reverse();
           // Update the vehicle in the vehicles array with the updated values
           this.vehicles[index] = response;
 
