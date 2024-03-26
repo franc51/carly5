@@ -23,67 +23,79 @@
       </p>
     </mat-expansion-panel>
 
-    <form #form="ngForm" class="nr-inmatriculare">
+    <form class="nr-inmatriculare">
       <input
         type="text"
         class="input"
-        name="numberPlate"
+        name="userInput"
         oninput="this.value = this.value.toUpperCase()"
         required
         minlength="7"
         maxlength="7"
-        [(ngModel)]="userInput"
       />
-      <ng-container *ngIf="form.invalid && form.touched">
-        <p class="error">Te rog introdu 7 caractere!</p>
-      </ng-container>
 
-      <ng-container
-        *ngIf="!this.isMatchingPattern(this.userInput) && form.submitted"
-      >
-        <p class="error">Numarul trebuie sa fie de forma AA12BBB</p>
-      </ng-container>
-
-      <ng-container
-        *ngIf="matchingNumberPlate && form.submitted && form.touched"
-      >
-        <p class="error">
-          Numarul {{ matchingNumberPlate }} nu este disponibil.
-        </p>
-      </ng-container>
-
-      <ng-container
-        *ngIf="
-          matchingNumberPlate === undefined &&
-          form.submitted &&
-          form.touched &&
-          this.isMatchingPattern(this.userInput)
-        "
-      >
-        <p class="available">
-          Numarul {{ userInput }} este rezervat cu succes.
-        </p>
-      </ng-container>
       <div class="div-pret">
         <h3>
           Prețul rezervării:
           <span class="pret">Lei 7,99</span>
         </h3>
       </div>
-      <div class="reserve-numberplate">
-        <button
-          type="submit"
-          style="background-color: green; color: white"
-          (click)="searchNumberPlate(userInput)"
-          mat-raised-button
-          class="reserve-numberplate"
-          *ngIf="(auth.isAuthenticated$ | async) === true"
-          onclick="window.location.href='https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY'"
-        >
-          <mat-icon>save</mat-icon>
-          Rezervă
-        </button>
+      <div class="reserve-numberplate" >
+
       </div>
     </form>
+    <button
+    mat-raised-button
+    class="searchnumberplate"
+    style="color: white;"
+    (click)="searchNumberPlates(userInput)"
+  >
+    <mat-icon>search</mat-icon>
+    Caută
+  </button>
+      <button
+        type="submit"
+        style="background-color: green; color: white"
+        mat-raised-button
+        class="reserve-numberplate"
+        *ngIf="(auth.isAuthenticated$ | async) === true"
+      >
+        <mat-icon>save</mat-icon>
+        Rezervă
+      </button>
   </div>
+
+<div class="reserved-numberplates-history">
+  <table [dataSource]="vehicles" mat-table class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nr. înmatriculare">
+      <th mat-header-cell *matHeaderCellDef>Nr. înmatriculare</th>
+      <td mat-cell *matCellDef="let vehicle">
+        {{ vehicle.vehicleNumberPlate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Rezervat în data">
+      <th mat-header-cell *matHeaderCellDef>Rezervat în data</th>
+      <td mat-cell *matCellDef="let vehicle">
+        {{ vehicle.ownerSurname }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Valabil până la data">
+      <th mat-header-cell *matHeaderCellDef>Valabil până la data</th>
+      <td mat-cell *matCellDef="let vehicle">
+        {{ vehicle.ownerPhone }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
+
+</div>
+

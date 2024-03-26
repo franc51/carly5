@@ -7,7 +7,7 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
   providedIn: 'root',
 })
 export class VehicleService {
-  private baseUrl = 'http://localhost:3000/api/vehicles'; // Adjust the URL
+  private baseUrl = 'http://localhost:3000/api/vehicles';
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +15,7 @@ export class VehicleService {
     return this.http.get<VehicleRegistration[]>(this.baseUrl);
   }
 
-  // New method to fetch vehicles for a specific user
+  // method to fetch vehicles for a specific user
   getAllVehiclesForUser(email: string): Observable<VehicleRegistration[]> {
     const url = `${this.baseUrl}?email=${email}`;
     return this.http.get<VehicleRegistration[]>(url);
@@ -64,4 +64,15 @@ export class VehicleService {
       })
     );
   }
+
+  getUsedNumberPlates(): Observable<VehicleRegistration[]> {
+    return this.getAllVehicles().pipe(
+      map((vehicles: VehicleRegistration[]) => {
+        return vehicles.filter(
+          (vehicle) => vehicle.vehicleNumberPlate === 'Cerere trimisă'
+        );
+      })
+    );
+  }
+
 }

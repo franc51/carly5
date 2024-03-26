@@ -100,6 +100,11 @@ h3 {
   font-weight: bolder;
 }
 
+.reserved-numberplates-history {
+  margin: 1rem;
+  width: 25rem;
+}
+
 @media only screen and (max-width: 600px) {
   .notauth {
     background-color: #5cadfe;

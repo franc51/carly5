@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { VehicleRegistration } from '../../model/vehicle-registration';
+import { VehicleService } from '../../admin/services/vehicle.service';
+import { NgForm } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-reserve-numberplate',
@@ -7,39 +11,21 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrl: './reserve-numberplate.component.css',
 })
 export class ReserveNumberplateComponent {
-  constructor(public auth: AuthService) {}
+  @Output() create = new EventEmitter<VehicleRegistration>();
+  vehicles: VehicleRegistration[] = [];
+  userEmail!: string;
+  isLoadingResults = true;
 
-  // these are test arrays
-  // will be replace with an API service
-
-  reservedNumberPlate: string[] = ['HD55AFC', 'BV15ABC'];
-
-  numberPlate: string[] = [
-    'BV15ABC',
-    'MM64FHS',
-    'BV29XYZ',
-    'BV73ABC',
-    'BV56LMN',
-    'BV84PQR',
-    'BV12DEF',
-    'BV48GHI',
-    'BV65JKL',
-    'BV37MNO',
-    'BV91STU',
-    'BV18VWX',
-    'BV42YZA',
-    'BV79BCD',
-    'BV53EFG',
-    'BV28HIJ',
-    'BV94KLM',
-    'BV61NOP',
-    'BV73QRS',
-    'BV89TUV',
-    'BV15WXY',
-    'BV46ZAB',
+  constructor(public auth: AuthService, private vehicleService: VehicleService) {}
+  displayedColumns: string[] = [
+    'Nr. înmatriculare',
+    'Rezervat în data',
+    'Valabil până la data',
   ];
 
-  userInput: string = '';
+  dataSource: VehicleRegistration[] = [];
+
+  userInput!: string ;
   matchingNumberPlate: string | undefined;
 
   isMatchingPattern = (userInput: string): boolean => {
@@ -49,16 +35,62 @@ export class ReserveNumberplateComponent {
 
   result = this.isMatchingPattern(this.userInput);
 
-  searchNumberPlate(reservedNumberPlate: String): void {
-    if (this.isMatchingPattern) {
-      console.log(this.isMatchingPattern(this.userInput));
-      this.matchingNumberPlate = this.reservedNumberPlate.find(
-        (item) => item === this.userInput
+  onCreateReservedNumberPlate(form: NgForm): void {
+    if (form.valid && form.submitted) {
+      const formValue = form.value;
+
+      // Ensure all required properties are present
+      const newVehicle: VehicleRegistration = {
+        ...formValue,
+        _id: uuidv4(),
+        date: new Date(), // Assign a new Date object
+        vehicleNumberPlate: this.userInput,
+        availability: 'soon'
+      };
+      this.create.emit(newVehicle);
+      console.log(newVehicle);
+      form.reset();
+    }
+  }
+
+  searchNumberPlates(userInput: string): void {
+      const foundVehicle = this.dataSource.find(vehicle =>
+        vehicle.vehicleNumberPlate.includes(this.userInput)
       );
-      this.reservedNumberPlate.push(this.userInput);
-      console.log(reservedNumberPlate);
-    }
-    if (this.matchingNumberPlate === this.userInput) {
-    }
+      if (foundVehicle) {
+        this.matchingNumberPlate = foundVehicle.vehicleNumberPlate;
+        console.log(this.userInput);
+        console.log(this.matchingNumberPlate);
+      }
+  }
+
+
+  ngOnInit(): void {
+    // Subscribe to Auth0's user$ observable to get user information
+    this.auth.user$.subscribe((user) => {
+      if (user) {
+        this.userEmail = user.email as string; // Get the logged-in user's email
+        // Call the method from the VehicleService instance
+        this.vehicleService.getAllVehiclesForUser(this.userEmail).subscribe(
+          (vehicles: VehicleRegistration[]) => {
+            // Filter vehicles to render only the ones belonging to the logged-in user
+            this.vehicles = vehicles.filter(
+              (vehicle) => vehicle.ownerEmail === this.userEmail
+            );
+
+            // Reverse the order of fetched vehicles
+            this.vehicles.reverse();
+
+            // Assign fetched vehicles to the dataSource
+            this.dataSource = this.vehicles;
+            console.log(this.userEmail);
+            this.isLoadingResults = false;
+          },
+          (error) => {
+            console.error('Error fetching vehicles:', error);
+          }
+        );
+      }
+    });
   }
 }
