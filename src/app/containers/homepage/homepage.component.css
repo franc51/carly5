@@ -124,12 +124,6 @@
     color: black !important;
     padding: 0;
   }
-  .notauth {
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-  }
-
   .example-container {
     position: absolute;
     top: 4rem;
@@ -138,7 +132,10 @@
     right: 0;
     background-color: #eff7ff;
   }
-
+.notauth{
+padding: 1rem 0;
+margin: 1rem 0;
+}
   .logo {
     font-family: "conthrax";
     font-size: 1rem;
@@ -163,3 +160,4 @@
     overflow: hidden;
   }
 }
+
