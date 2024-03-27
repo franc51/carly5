@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/api/vehicles", vehicleRoutes);
 
 // Fetch data from MongoDB and serve it
-app.get("/api/fetchVehicles", async (req, res) => {
+app.get("/api/vehicles", async (req, res) => {
   try {
     // Fetch vehicles from MongoDB
     const vehicles = await Vehicle.find();
