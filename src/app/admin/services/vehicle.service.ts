@@ -7,7 +7,7 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
   providedIn: 'root',
 })
 export class VehicleService {
-  private baseUrl = 'http://localhost:3000/api/vehicles';
+  private baseUrl = 'https://carly-58c95.cloudfunctions.net/api/vehicles';
 
   constructor(private http: HttpClient) {}
 
