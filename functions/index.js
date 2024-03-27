@@ -20,8 +20,3 @@ app.use(express.json());
 
 // Routes
 app.use("/api/vehicles", vehicleRoutes);
-
-const PORT = 4444;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
