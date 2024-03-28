@@ -1,39 +1,29 @@
 import { Injectable } from '@angular/core';
-import { initializeApp, FirebaseApp } from 'firebase/app';
-import { getAnalytics, Analytics } from 'firebase/analytics';
+import { FirebaseApp } from 'firebase/app';
+import { Analytics } from 'firebase/analytics';
+import { Database } from 'firebase/database';
+import { Observable, from } from 'rxjs';
+import { VehicleRegistration } from '../../model/vehicle-registration';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirebaseService {
-
-  private firebaseConfig = {
-    apiKey: 'YOUR_API_KEY',
-    authDomain: 'YOUR_AUTH_DOMAIN',
-    projectId: 'YOUR_PROJECT_ID',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    appId: 'YOUR_APP_ID',
-    measurementId: 'YOUR_MEASUREMENT_ID'
-  };
-
   private firebaseApp!: FirebaseApp;
   private analytics!: Analytics;
+  private database!: Database;
 
-  constructor() {
-    this.initializeFirebaseApp();
+  constructor(private http: HttpClient) {}
+
+  private databaseUrl = 'https://vehicles-9f2ad.firebaseio.com';
+
+  createVehicle(vehicle: VehicleRegistration): Observable<any> {
+    const url = `${this.databaseUrl}/vehicles.json`; // .json is required by Firebase REST API
+    return this.http.post(url, vehicle);
   }
-
-  private initializeFirebaseApp(): void {
-    this.firebaseApp = initializeApp(this.firebaseConfig); // Use this.firebaseConfig here
-    this.analytics = getAnalytics(this.firebaseApp);
-  }
-
-  getFirebaseApp(): FirebaseApp {
-    return this.firebaseApp;
-  }
-
-  getAnalytics(): Analytics {
-    return this.analytics;
+  getAllVehicles(userEmail: string): Observable<VehicleRegistration[]> {
+    const url = `${this.databaseUrl}/vehicles.json?orderBy="ownerEmail"&equalTo="${userEmail}"`;
+    return this.http.get<VehicleRegistration[]>(url);
   }
 }

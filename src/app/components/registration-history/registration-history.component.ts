@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { VehicleService } from '../../admin/services/vehicle.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { FirebaseService } from '../../admin/services/firebase.service';
 
 @Component({
   selector: 'app-registration-history',
@@ -15,6 +16,7 @@ export class RegistrationHistoryComponent implements OnInit {
 
   constructor(
     private vehicleService: VehicleService,
+    private firebaseService: FirebaseService,
     public auth: AuthService
   ) {}
 
@@ -32,24 +34,17 @@ export class RegistrationHistoryComponent implements OnInit {
   dataSource: VehicleRegistration[] = [];
 
   ngOnInit(): void {
-    // Subscribe to Auth0's user$ observable to get user information
     this.auth.user$.subscribe((user) => {
       if (user) {
-        this.userEmail = user.email as string; // Get the logged-in user's email
-        // Call the method from the VehicleService instance
-        this.vehicleService.getAllVehiclesForUser(this.userEmail).subscribe(
-          (vehicles: VehicleRegistration[]) => {
-            // Filter vehicles to render only the ones belonging to the logged-in user
-            this.vehicles = vehicles.filter(
-              (vehicle) => vehicle.ownerEmail === this.userEmail
-            );
-
+        this.userEmail = user.email as string;
+        this.firebaseService.getAllVehicles(this.userEmail).subscribe(
+          (data: any) => {
+            // Convert the object into an array of VehicleRegistration objects
+            this.vehicles = Object.values(data).map((vehicle: any) => vehicle);
             // Reverse the order of fetched vehicles
             this.vehicles.reverse();
-
             // Assign fetched vehicles to the dataSource
             this.dataSource = this.vehicles;
-            console.log(this.userEmail);
             this.isLoadingResults = false;
           },
           (error) => {

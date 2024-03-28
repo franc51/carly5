@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FirebaseService } from './admin/services/firebase.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,22 +9,15 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { HomepageComponent } from './containers/homepage/homepage.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
-// styles
+import { initializeApp } from 'firebase/app';
 
 import * as LR from '@uploadcare/blocks';
 
-// --proxy-config proxy.conf.json
-
-// API KEY : 9TovKkSejN4Bd7mzySHsjwT4FCBtRHHRkHBRaybZC5wUw532QQ7RhwneS5eGDBq0
-
-import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
 LR.registerBlocks(LR);
 
 import {
-  MatDialog,
-  MatDialogRef,
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
@@ -45,11 +39,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInput } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import {
-  MatOption,
-  MatSelect,
-  MatSelectModule,
-} from '@angular/material/select';
+import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 // form
@@ -71,7 +61,10 @@ import { RegistrationsComponent } from './containers/registrations/registrations
 import { DatepipeComponent } from './components/datepipe/datepipe.component';
 import { AdminContainerComponent } from './admin/admin-container/admin-container.component';
 import { AdminHistoryComponent } from './admin/admin-history/admin-history.component';
-import { initializeApp as initializeApp_alias, provideFirebaseApp } from '@angular/fire/app';
+import {
+  initializeApp as initializeApp_alias,
+  provideFirebaseApp,
+} from '@angular/fire/app';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 
 @NgModule({
@@ -132,10 +125,21 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
         redirect_uri: window.location.origin,
       },
     }),
-    provideFirebaseApp(() => initializeApp({"projectId":"carly-58c95","appId":"1:811853117687:web:11594b1523e42a962a3bf2","databaseURL":"https://carly-58c95-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"carly-58c95.appspot.com","apiKey":"AIzaSyDraEcH4AENNMX0jP5tnGW4MlkhUApXFrY","authDomain":"carly-58c95.firebaseapp.com","messagingSenderId":"811853117687","measurementId":"G-F8934N76TW"})),
+    provideFirebaseApp(() =>
+      initializeApp({
+        projectId: 'carly-58c95',
+        appId: '1:811853117687:web:11594b1523e42a962a3bf2',
+        databaseURL: 'https://vehicles-9f2ad.firebaseio.com',
+        storageBucket: 'carly-58c95.appspot.com',
+        apiKey: 'AIzaSyDraEcH4AENNMX0jP5tnGW4MlkhUApXFrY',
+        authDomain: 'carly-58c95.firebaseapp.com',
+        messagingSenderId: '811853117687',
+        measurementId: 'G-F8934N76TW',
+      })
+    ),
     provideFunctions(() => getFunctions()),
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(), FirebaseService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

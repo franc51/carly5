@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { VehicleService } from '../../admin/services/vehicle.service';
+import { FirebaseService } from '../../admin/services/firebase.service';
 import { DatePipe } from '@angular/common';
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
@@ -32,12 +33,15 @@ export class RegistrationsComponent implements OnInit {
     count: 0,
   };
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(
+    private vehicleService: VehicleService,
+    private firebaseService: FirebaseService
+  ) {}
 
   ngOnInit(): void {}
 
   onCreate(vehicle: VehicleRegistration) {
-    this.vehicleService.createVehicle(vehicle).subscribe(
+    this.firebaseService.createVehicle(vehicle).subscribe(
       (createdVehicle: VehicleRegistration) => {
         console.log('Vehicle created successfully:', createdVehicle);
         // Handle the created vehicle as needed
