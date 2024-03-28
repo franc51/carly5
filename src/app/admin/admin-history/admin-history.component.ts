@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { VehicleService } from '../services/vehicle.service';
+import { FirebaseService } from '../services/firebase.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-admin-history',
@@ -12,7 +13,10 @@ export class AdminHistoryComponent implements OnInit {
   vehicles!: VehicleRegistration[];
   isLoadingResults = true;
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    public auth: AuthService
+  ) {}
 
   displayedColumns: string[] = [
     'ownerName',
@@ -24,18 +28,24 @@ export class AdminHistoryComponent implements OnInit {
     'date',
     'details',
   ];
-  dataSource = this.vehicleService.getAllVehicles();
 
+  dataSource = this.firebaseService.getAdminDashboard();
   ngOnInit(): void {
-    // takes state and makes it available inside components
-    this.vehicleService
-      .getAdminHistory()
-      .subscribe(
-        (vehicles: VehicleRegistration[]) => (
-          (this.vehicles = vehicles),
-          (vehicles = vehicles.reverse()),
-          (this.isLoadingResults = false)
-        )
-      );
+    this.auth.user$.subscribe((user) => {
+      if (user && user.email) {
+        const userEmail = user.email;
+        this.firebaseService.getAllVehicles(userEmail).subscribe(
+          (vehicles: VehicleRegistration[]) => {
+            this.isLoadingResults = false;
+          },
+          (error: any) => {
+            console.error('Error fetching vehicles:', error);
+          }
+        );
+      } else {
+        console.error('User email is undefined');
+        // Handle undefined email if necessary
+      }
+    });
   }
 }

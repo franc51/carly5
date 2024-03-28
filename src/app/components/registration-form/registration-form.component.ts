@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
-import { VehicleService } from '../../admin/services/vehicle.service';
 import { DatePipe } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,10 +17,7 @@ export class RegistrationFormComponent {
   userInput: any;
   formSubmitted = false;
 
-  constructor(
-    private vehicleService: VehicleService,
-    private datePipe: DatePipe
-  ) {}
+  constructor(private datePipe: DatePipe) {}
 
   onCreateVehicle(form: NgForm): void {
     if (form.valid && form.submitted) {

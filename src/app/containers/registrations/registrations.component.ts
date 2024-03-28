@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { VehicleService } from '../../admin/services/vehicle.service';
 import { FirebaseService } from '../../admin/services/firebase.service';
 import { DatePipe } from '@angular/common';
 import { ObjectId } from 'mongodb';
@@ -33,10 +32,7 @@ export class RegistrationsComponent implements OnInit {
     count: 0,
   };
 
-  constructor(
-    private vehicleService: VehicleService,
-    private firebaseService: FirebaseService
-  ) {}
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {}
 

@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { VehicleService } from '../../admin/services/vehicle.service';
 import { NgForm } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
+import { FirebaseService } from '../../admin/services/firebase.service';
 
 @Component({
   selector: 'app-reserve-numberplate',
@@ -16,7 +16,10 @@ export class ReserveNumberplateComponent {
   userEmail!: string;
   isLoadingResults = true;
 
-  constructor(public auth: AuthService, private vehicleService: VehicleService) {}
+  constructor(
+    public auth: AuthService,
+    private firebaseService: FirebaseService
+  ) {}
   displayedColumns: string[] = [
     'Nr. înmatriculare',
     'Rezervat în data',
@@ -25,7 +28,7 @@ export class ReserveNumberplateComponent {
 
   dataSource: VehicleRegistration[] = [];
 
-  userInput!: string ;
+  userInput!: string;
   matchingNumberPlate: string | undefined;
 
   isMatchingPattern = (userInput: string): boolean => {
@@ -45,7 +48,7 @@ export class ReserveNumberplateComponent {
         _id: uuidv4(),
         date: new Date(), // Assign a new Date object
         vehicleNumberPlate: this.userInput,
-        availability: 'soon'
+        availability: 'soon',
       };
       this.create.emit(newVehicle);
       console.log(newVehicle);
@@ -54,16 +57,15 @@ export class ReserveNumberplateComponent {
   }
 
   searchNumberPlates(userInput: string): void {
-      const foundVehicle = this.dataSource.find(vehicle =>
-        vehicle.vehicleNumberPlate.includes(this.userInput)
-      );
-      if (foundVehicle) {
-        this.matchingNumberPlate = foundVehicle.vehicleNumberPlate;
-        console.log(this.userInput);
-        console.log(this.matchingNumberPlate);
-      }
+    const foundVehicle = this.dataSource.find((vehicle) =>
+      vehicle.vehicleNumberPlate.includes(this.userInput)
+    );
+    if (foundVehicle) {
+      this.matchingNumberPlate = foundVehicle.vehicleNumberPlate;
+      console.log(this.userInput);
+      console.log(this.matchingNumberPlate);
+    }
   }
-
 
   ngOnInit(): void {
     // Subscribe to Auth0's user$ observable to get user information
@@ -71,7 +73,7 @@ export class ReserveNumberplateComponent {
       if (user) {
         this.userEmail = user.email as string; // Get the logged-in user's email
         // Call the method from the VehicleService instance
-        this.vehicleService.getAllVehiclesForUser(this.userEmail).subscribe(
+        this.firebaseService.getAllVehicles(this.userEmail).subscribe(
           (vehicles: VehicleRegistration[]) => {
             // Filter vehicles to render only the ones belonging to the logged-in user
             this.vehicles = vehicles.filter(

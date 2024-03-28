@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
-import { VehicleService } from '../../admin/services/vehicle.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { FirebaseService } from '../../admin/services/firebase.service';
 
@@ -15,9 +14,8 @@ export class RegistrationHistoryComponent implements OnInit {
   userEmail!: string;
 
   constructor(
-    private vehicleService: VehicleService,
-    private firebaseService: FirebaseService,
-    public auth: AuthService
+    public auth: AuthService,
+    public firebaseService: FirebaseService
   ) {}
 
   displayedColumns: string[] = [
@@ -34,13 +32,25 @@ export class RegistrationHistoryComponent implements OnInit {
   dataSource: VehicleRegistration[] = [];
 
   ngOnInit(): void {
+    // Subscribe to Auth0's user$ observable to get user information
     this.auth.user$.subscribe((user) => {
       if (user) {
-        this.userEmail = user.email as string;
+        this.userEmail = user.email as string; // Get the logged-in user's email
+
+        // Check if userEmail is undefined
+        if (!this.userEmail) {
+          console.error('User email is undefined');
+          return;
+        }
+
+        // Call the method from the FirebaseService instance
         this.firebaseService.getAllVehicles(this.userEmail).subscribe(
-          (data: any) => {
-            // Convert the object into an array of VehicleRegistration objects
-            this.vehicles = Object.values(data).map((vehicle: any) => vehicle);
+          (vehiclesArray: VehicleRegistration[]) => {
+            // Filter vehicles to render only the ones belonging to the logged-in user
+            this.vehicles = vehiclesArray.filter(
+              (vehicle) => vehicle.ownerEmail === this.userEmail
+            );
+
             // Reverse the order of fetched vehicles
             this.vehicles.reverse();
             // Assign fetched vehicles to the dataSource
