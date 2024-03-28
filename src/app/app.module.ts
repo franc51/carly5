@@ -71,6 +71,8 @@ import { RegistrationsComponent } from './containers/registrations/registrations
 import { DatepipeComponent } from './components/datepipe/datepipe.component';
 import { AdminContainerComponent } from './admin/admin-container/admin-container.component';
 import { AdminHistoryComponent } from './admin/admin-history/admin-history.component';
+import { initializeApp as initializeApp_alias, provideFirebaseApp } from '@angular/fire/app';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -130,6 +132,8 @@ import { AdminHistoryComponent } from './admin/admin-history/admin-history.compo
         redirect_uri: window.location.origin,
       },
     }),
+    provideFirebaseApp(() => initializeApp({"projectId":"carly-58c95","appId":"1:811853117687:web:11594b1523e42a962a3bf2","databaseURL":"https://carly-58c95-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"carly-58c95.appspot.com","apiKey":"AIzaSyDraEcH4AENNMX0jP5tnGW4MlkhUApXFrY","authDomain":"carly-58c95.firebaseapp.com","messagingSenderId":"811853117687","measurementId":"G-F8934N76TW"})),
+    provideFunctions(() => getFunctions()),
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

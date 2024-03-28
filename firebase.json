@@ -1,18 +1,25 @@
 {
-  "hosting": {
-    "public": "dist/carly/browser",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "index.html"
-      }
-    ]
-  },
+  "hosting": [
+    {
+      "public": "dist/carly/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "index.html"
+        }
+      ]
+    },
+    {
+      "target": "carly",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ],
   "functions": [
     {
       "source": "functions",

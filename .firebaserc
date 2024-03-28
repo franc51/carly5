@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "carly-58c95"
+  },
+  "targets": {
+    "carly-58c95": {
+      "hosting": {
+        "carly": [
+          "carly-58c95"
+        ]
+      }
+    }
   }
 }
