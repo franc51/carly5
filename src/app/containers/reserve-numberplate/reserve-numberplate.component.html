@@ -53,16 +53,18 @@
     <mat-icon>search</mat-icon>
     Caută
   </button>
-      <button
-        type="submit"
-        style="background-color: green; color: white"
-        mat-raised-button
-        class="reserve-numberplate"
-        *ngIf="(auth.isAuthenticated$ | async) === true"
-      >
-        <mat-icon>save</mat-icon>
-        Rezervă
-      </button>
+  <button
+  type="submit"
+  style="background-color: green; color: white"
+  mat-raised-button
+  class="reserve-numberplate"
+  *ngIf="(auth.isAuthenticated$ | async) === true"
+  (click)="openLink()"
+>
+  <mat-icon>save</mat-icon>
+  Rezervă
+</button>
+
   </div>
 
 <div class="reserved-numberplates-history">

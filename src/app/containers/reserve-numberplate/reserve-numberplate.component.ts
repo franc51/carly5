@@ -66,7 +66,9 @@ export class ReserveNumberplateComponent {
       console.log(this.matchingNumberPlate);
     }
   }
-
+  openLink() {
+    window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');
+  }
   ngOnInit(): void {
     // Subscribe to Auth0's user$ observable to get user information
     this.auth.user$.subscribe((user) => {

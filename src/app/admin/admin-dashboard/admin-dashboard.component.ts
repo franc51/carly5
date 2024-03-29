@@ -42,8 +42,11 @@ export class AdminDashboardComponent implements OnInit {
     this.firebaseService.getAdminDashboard().subscribe(
       (vehicles: VehicleRegistration[] | null) => {
         if (vehicles && Array.isArray(vehicles)) {
-          this.vehicles = vehicles;
-          this.dataSource = vehicles;
+          // Filter vehicles where details property is "Cerere trimisa"
+          const filteredVehicles = vehicles.filter(vehicle => vehicle.details === "Cerere trimisa");
+
+          this.vehicles = filteredVehicles;
+          this.dataSource = filteredVehicles; // Assign filtered vehicles to dataSource
           this.isLoadingResults = false;
         } else {
           console.error('Error fetching vehicles: Invalid data format');
@@ -54,6 +57,7 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
   }
+
 
   onRejectVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     // Update the status field of the updatedVehicle object
