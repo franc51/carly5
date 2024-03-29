@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { AuthService } from '@auth0/auth0-angular';
 import { FirebaseService } from '../../admin/services/firebase.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration-history',
@@ -15,7 +16,8 @@ export class RegistrationHistoryComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    public firebaseService: FirebaseService
+    public firebaseService: FirebaseService,
+    public http: HttpClient
   ) {}
 
   displayedColumns: string[] = [
@@ -32,28 +34,28 @@ export class RegistrationHistoryComponent implements OnInit {
   dataSource: VehicleRegistration[] = [];
 
   ngOnInit(): void {
-    // Subscribe to Auth0's user$ observable to get user information
+    this.loadVehiclesForUser();
+  }
+  loadVehiclesForUser() {
     this.auth.user$.subscribe((user) => {
       if (user) {
-        this.userEmail = user.email as string; // Get the logged-in user's email
+        this.userEmail = user.email as string;
 
-        // Check if userEmail is undefined
         if (!this.userEmail) {
           console.error('User email is undefined');
           return;
         }
 
-        // Call the method from the FirebaseService instance
-        this.firebaseService.getAllVehicles(this.userEmail).subscribe(
-          (vehiclesArray: VehicleRegistration[]) => {
+        // Make HTTP GET request to fetch vehicles from Firebase
+        this.http.get<{ [key: string]: VehicleRegistration }>('https://vehicles-9f2ad.firebaseio.com/vehicles.json').subscribe(
+          (vehiclesData) => {
+            // Convert the response data to an array
+            const vehiclesArray: VehicleRegistration[] = Object.values(vehiclesData);
             // Filter vehicles to render only the ones belonging to the logged-in user
             this.vehicles = vehiclesArray.filter(
               (vehicle) => vehicle.ownerEmail === this.userEmail
             );
-
-            // Reverse the order of fetched vehicles
             this.vehicles.reverse();
-            // Assign fetched vehicles to the dataSource
             this.dataSource = this.vehicles;
             this.isLoadingResults = false;
           },
