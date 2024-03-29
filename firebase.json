@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/carly",
+    "public": "dist/carly/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
