@@ -44,7 +44,9 @@ export class AdminDashboardComponent implements OnInit {
         if (vehicles && Array.isArray(vehicles)) {
           this.vehicles = vehicles.reverse();
           // Filter vehicles where details property is "Cerere trimisa"
-          const filteredVehicles = vehicles.filter(vehicle => vehicle.details === "Cerere trimisă");
+          const filteredVehicles = vehicles.filter(
+            (vehicle) => vehicle.details === 'Cerere trimisă'
+          );
 
           this.vehicles = filteredVehicles;
           this.dataSource = filteredVehicles; // Assign filtered vehicles to dataSource
@@ -58,7 +60,6 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
   }
-
 
   onRejectVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     // Update the status field of the updatedVehicle object

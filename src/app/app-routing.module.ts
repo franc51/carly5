@@ -9,6 +9,7 @@ import { HelpComponent } from './containers/help/help.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
+import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'register-vehicle', component: RegistrationsComponent },
   { path: 'radiate-vehicle', component: RadiateVehicleComponent },
   { path: 'technical-appointment', component: TechnicalAppointmentComponent },
-  { path: 'reserve-numberplate', component: ReserveNumberplateComponent },
+  { path: 'reserve-container', component: ReserveContainerComponent },
   { path: 'taxes', component: TaxesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },

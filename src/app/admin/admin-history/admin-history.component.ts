@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { FirebaseService } from '../services/firebase.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-history',
@@ -27,25 +28,36 @@ export class AdminHistoryComponent implements OnInit {
     'numberPlate',
     'date',
     'details',
+    'status',
   ];
 
   dataSource = this.firebaseService.getAdminDashboard();
   ngOnInit(): void {
-    this.auth.user$.subscribe((user) => {
-      if (user && user.email) {
-        const userEmail = user.email;
-        this.firebaseService.getAllVehicles(userEmail).subscribe(
-          (vehicles: VehicleRegistration[]) => {
-            this.isLoadingResults = false;
-          },
-          (error: any) => {
-            console.error('Error fetching vehicles:', error);
-          }
-        );
-      } else {
-        console.error('User email is undefined');
-        // Handle undefined email if necessary
+    this.loadVehicles();
+  }
+  loadVehicles(): void {
+    this.firebaseService.getAdminDashboard().subscribe(
+      (vehicles: VehicleRegistration[] | null) => {
+        if (vehicles && Array.isArray(vehicles)) {
+          this.vehicles = vehicles.reverse();
+          // Filter vehicles where details property is "Cerere trimisa"
+          const filteredVehicles = vehicles.filter(
+            (vehicle) => vehicle.details !== 'Cerere trimisă'
+          );
+
+          this.vehicles = filteredVehicles;
+          this.dataSource = new Observable((observer) => {
+            observer.next(filteredVehicles); // Emit filtered vehicles
+            observer.complete(); // Complete the Observable
+          });
+          this.isLoadingResults = false;
+        } else {
+          console.error('Error fetching vehicles: Invalid data format');
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching vehicles:', error);
       }
-    });
+    );
   }
 }

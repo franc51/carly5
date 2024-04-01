@@ -27,6 +27,7 @@ export class FirebaseService {
     return this.http.get<VehicleRegistration[]>(url);
   }
   getAdminDashboard(): Observable<VehicleRegistration[]> {
+    // this method also retrieves numberPlates in the reserveNumberplates component
     const url = `${this.databaseUrl}/vehicles.json`;
     return this.http.get<{ [key: string]: VehicleRegistration }>(url).pipe(
       map((response) => {

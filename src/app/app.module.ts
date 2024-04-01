@@ -66,6 +66,7 @@ import {
   provideFirebaseApp,
 } from '@angular/fire/app';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
+import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
     DatepipeComponent,
     AdminContainerComponent,
     AdminHistoryComponent,
+    ReserveContainerComponent,
   ],
   imports: [
     MatAccordion,
