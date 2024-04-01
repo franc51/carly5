@@ -30,8 +30,7 @@
         oninput="this.value = this.value.toUpperCase()"
         minlength="7"
         maxlength="7"
-        [(ngModel)]="userInput"
-        [ngModelOptions]="{ updateOn: 'submit' }"
+        name="userInput"
       />
       <div class="div-pret">
         <h3>
@@ -60,7 +59,7 @@
         style="background-color: green; color: white"
         mat-raised-button
         class="reserve-numberplate"
-        (click)="onCreateReservation(form)"
+        (click)="onCreateReservation(userInput)"
       >
         <mat-icon>save</mat-icon>
         Rezervă

@@ -46,7 +46,7 @@ export class ReserveNumberplateComponent implements OnInit {
   result = this.isMatchingPattern(this.userInput);
 
   onCreateReservation(form: NgForm): void {
-    if (form.valid && this.result) {
+    if (form.valid) {
       const formValue = form.value;
 
       // Ensure all required properties are present
