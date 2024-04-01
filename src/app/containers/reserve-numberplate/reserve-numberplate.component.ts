@@ -57,7 +57,8 @@ export class ReserveNumberplateComponent implements OnInit {
     }
   }
 
-  searchNumberPlates(userInput: string): void {
+  searchNumberPlates(inputElement: HTMLInputElement): void {
+    const userInput = inputElement.value; // Extracting the value from the HTMLInputElement
     console.log('User Input:', userInput);
 
     this.isLoadingResults = true;
@@ -73,8 +74,6 @@ export class ReserveNumberplateComponent implements OnInit {
           this.vehicles = filteredVehicles;
           this.dataSource = filteredVehicles;
           this.isLoadingResults = false;
-          this.matchedNumberPlate = true;
-
         } else {
           console.error('Error fetching vehicles: Invalid data format');
         }

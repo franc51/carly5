@@ -23,7 +23,7 @@
       </p>
     </mat-expansion-panel>
 
-    <form class="nr-inmatriculare" #form="ngForm">
+    <form class="nr-inmatriculare">
       <input
         type="text"
         class="input"
@@ -32,16 +32,22 @@
         minlength="7"
         maxlength="7"
         name="userInput"
-        #userInput="ngModel"
-        [ngModel]="userInput"
-      />
-
+        #userInput
+        ngModel
+        [ngModelOptions]="{ updateOn: 'submit' }"/>
       <div class="div-pret">
         <h3>
           Prețul rezervării:
           <span class="pret">Lei 7,99</span>
         </h3>
       </div>
+      <ng-conntainer *ngIf="dataSource.length">
+        <p><strong class="error">Numărul {{userInput.value}} nu este disponibil</strong></p>
+      </ng-conntainer>
+      <ng-container *ngIf="!dataSource.length">
+        <p><strong class="available">Numărul {{userInput.value}} este disponibil</strong></p>
+      </ng-container>
+
 
     </form>
     <div class="reserve-numberplate" >
@@ -49,7 +55,7 @@
       mat-raised-button
       class="searchnumberplate"
       style="color: white;"
-      (click)="searchNumberPlates(userInput.value)"
+      (click)="searchNumberPlates(userInput)"
     >
       <mat-icon>search</mat-icon>
       Caută
@@ -68,7 +74,7 @@
     </div>
   </div>
   <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-<div class="reserved-numberplates-history" >
+<div class="reserved-numberplates-history" *ngIf="dataSource.length">
   <table [dataSource]="vehicles" mat-table class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
