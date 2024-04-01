@@ -25,7 +25,20 @@ export class NumberPlatesService {
   createReservedNumberPlate(
     reservedNumberPlate: NumberPlates
   ): Observable<any> {
-    const url = `${this.databaseUrl}`;
+    const url = `${this.databaseUrl}/number-plates.json`;
     return this.http.post(url, reservedNumberPlate);
+  }
+  checkNumberPlateExists(numberPlate: string): Observable<boolean> {
+    const url = `${this.databaseUrl}/number-plates.json`;
+    return this.http.get<any>(url).pipe(
+      map((data: { [key: string]: NumberPlates }) => {
+        // Check if the number plate already exists in the database
+        const numberPlates = Object.values(data || {});
+        return numberPlates.some(
+          (plate: NumberPlates) =>
+            plate.reservedVehicleNumberPlate === numberPlate
+        );
+      })
+    );
   }
 }

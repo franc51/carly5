@@ -11,8 +11,11 @@ import { NumberPlatesService } from '../../admin/services/number-plates.service'
   styleUrl: './reserve-container.component.css',
 })
 export class ReserveContainerComponent {
+  plateExistsError = false;
+
   constructor(private numberPlateService: NumberPlatesService) {}
-  userInput!: string;
+
+  userInput = '';
 
   reservedNumberPlate: NumberPlates = {
     _id: uuidv4(), // Generate UUID for _id
@@ -21,18 +24,36 @@ export class ReserveContainerComponent {
     availability: new Date(),
     reservedBy: 'string',
   };
-
   onCreateReservedNumberPlate(reservedNumberPlate: NumberPlates): void {
-    console.log('helo');
+    // Check if the same number plate already exists
     this.numberPlateService
-      .createReservedNumberPlate(reservedNumberPlate)
+      .checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
       .subscribe(
-        (createdReservation: NumberPlates) => {
-          console.log('reservation succes:', createdReservation);
-          // Handle the created reservation
+        (exists: boolean) => {
+          if (exists) {
+            this.plateExistsError = false;
+
+            console.error('Error: Number plate already exists');
+            // Handle error: Number plate already exists
+          } else {
+            this.plateExistsError = false;
+            // Number plate does not exist, proceed to create reservation
+            this.numberPlateService
+              .createReservedNumberPlate(reservedNumberPlate)
+              .subscribe(
+                (createdReservation: NumberPlates) => {
+                  console.log('Reservation successful:', createdReservation);
+                  // Handle the created reservation
+                },
+                (error) => {
+                  console.error('Error reserving number plate:', error);
+                  // Handle error
+                }
+              );
+          }
         },
         (error) => {
-          console.error('Error reservating nr:', error);
+          console.error('Error checking number plate existence:', error);
           // Handle error
         }
       );

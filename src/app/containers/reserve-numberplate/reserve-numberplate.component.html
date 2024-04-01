@@ -30,8 +30,8 @@
         oninput="this.value = this.value.toUpperCase()"
         minlength="7"
         maxlength="7"
-        #reservedVehicleNumberPlate
-        ngModel="reservedVehicleNumberPlate"
+        #userInput
+        [(ngModel)]="userInput"
         [ngModelOptions]="{ updateOn: 'submit' }"
       />
       <div class="div-pret">
@@ -40,12 +40,12 @@
           <span class="pret">Lei 7,99</span>
         </h3>
       </div>
-      <ng-conntainer *ngIf="dataSource.length">
+      <ng-conntainer *ngIf="plateExists">
         <p>
           <strong class="error">Numărul nu este disponibil</strong>
         </p>
       </ng-conntainer>
-      <ng-container *ngIf="form.pristine">
+      <ng-container *ngIf="!plateExists">
         <p>
           <strong class="available">Numărul este disponibil</strong>
         </p>

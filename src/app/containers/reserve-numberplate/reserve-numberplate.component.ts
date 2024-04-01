@@ -15,11 +15,12 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
+  @Output() plateExists = new EventEmitter<boolean>();
+
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
   userEmail!: string;
   isLoadingResults = true;
-  matchedNumberPlate = false;
 
   constructor(
     public auth: AuthService,
@@ -45,8 +46,7 @@ export class ReserveNumberplateComponent implements OnInit {
   result = this.isMatchingPattern(this.userInput);
 
   onCreateReservation(form: NgForm): void {
-    console.log('form value: ', form.value);
-    if (form.valid) {
+    if (form.valid && this.result) {
       const formValue = form.value;
 
       // Ensure all required properties are present

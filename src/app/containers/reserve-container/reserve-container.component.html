@@ -1,3 +1,8 @@
 <app-reserve-numberplate
   (reserve)="onCreateReservedNumberPlate($event)"
 ></app-reserve-numberplate>
+<div class="spinner">
+  <ng-container *ngIf="plateExistsError">
+    <mat-spinner></mat-spinner>
+  </ng-container>
+</div>
