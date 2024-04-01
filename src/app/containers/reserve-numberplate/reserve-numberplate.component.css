@@ -89,8 +89,8 @@ label {
 .reserve-numberplate{
   display: flex;
   flex-direction: row;
-  margin: 0.5rem;
-
+  justify-content: center;
+  align-items: center;
 }
 
 h3 {

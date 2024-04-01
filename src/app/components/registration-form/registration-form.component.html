@@ -131,27 +131,27 @@
 
           <!-- Form validations -->
 
-          <ng-container>
+          <ng-container *ngIf="form.valid">
             <p class="error">Numarul de înm. trebuie sa fie de forma LLCCLLL</p>
           </ng-container>
 
-          <ng-container *ngIf="form.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid">
             <p class="error">Numele nu este valid</p>
           </ng-container>
 
-          <ng-container *ngIf="form.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid">
             <p class="error">Prenumele nu este valid</p>
           </ng-container>
 
-          <ng-container *ngIf="form.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid">
             <p class="error">Numărul de telefon nu este valid</p>
           </ng-container>
 
-          <ng-container *ngIf="form.invalid && form.submitted">
+          <ng-container *ngIf="form.invalid">
             <p class="error">Email invalid</p>
           </ng-container>
 
-          <ng-container *ngIf="form.touched && form.submitted">
+          <ng-container *ngIf="form.valid">
             <div class="green">
               <h3>Cerere trimisă cu succes!</h3>
             </div>

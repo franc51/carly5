@@ -52,4 +52,8 @@ export class FirebaseService {
     const url = `${this.databaseUrl}/vehicles/${vehicleId}.json`;
     return this.http.put(url, updatedVehicle);
   }
+  getAllNumberPlates(): Observable<VehicleRegistration[]> {
+    const url = `${this.databaseUrl}/vehicles.json`;
+    return this.http.get<VehicleRegistration[]>(url);
+  }
 }

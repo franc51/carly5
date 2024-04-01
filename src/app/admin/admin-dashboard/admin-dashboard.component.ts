@@ -42,8 +42,9 @@ export class AdminDashboardComponent implements OnInit {
     this.firebaseService.getAdminDashboard().subscribe(
       (vehicles: VehicleRegistration[] | null) => {
         if (vehicles && Array.isArray(vehicles)) {
+          this.vehicles = vehicles.reverse();
           // Filter vehicles where details property is "Cerere trimisa"
-          const filteredVehicles = vehicles.filter(vehicle => vehicle.details === "Cerere trimisa");
+          const filteredVehicles = vehicles.filter(vehicle => vehicle.details === "Cerere trimisă");
 
           this.vehicles = filteredVehicles;
           this.dataSource = filteredVehicles; // Assign filtered vehicles to dataSource
@@ -78,6 +79,7 @@ export class AdminDashboardComponent implements OnInit {
 
             // Update the dataSource array as well
             this.dataSource = [...this.vehicles];
+            location.reload();
           }
         },
         (error) => {
@@ -90,7 +92,7 @@ export class AdminDashboardComponent implements OnInit {
     // Update the status field of the updatedVehicle object
     updatedVehicle.status = 'Aprobat'; // Updating status
     updatedVehicle.details =
-      'Certificatul de înmatriculare și numerele de înmatriculare au fost trimise.';
+      'Certif. de înm, și nr. de înm. au fost trimise la adr. din CI';
 
     this.firebaseService
       .updateVehicle(updatedVehicle._id, updatedVehicle)
@@ -109,6 +111,7 @@ export class AdminDashboardComponent implements OnInit {
 
             // Update the dataSource array as well
             this.dataSource = [...this.vehicles];
+            location.reload();
           }
         },
         (error) => {

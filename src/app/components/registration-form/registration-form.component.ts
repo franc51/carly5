@@ -20,7 +20,7 @@ export class RegistrationFormComponent {
   constructor(private datePipe: DatePipe) {}
 
   onCreateVehicle(form: NgForm): void {
-    if (form.valid && form.submitted) {
+    if (form.valid) {
       const formValue = form.value;
 
       // Ensure all required properties are present
@@ -39,9 +39,8 @@ export class RegistrationFormComponent {
         isAccepted: false,
         vehicleNumberPlate: this.userInput,
       };
-
-      this.create.emit(newVehicle);
       form.reset();
+      this.create.emit(newVehicle);
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
@@ -10,11 +10,12 @@ import { FirebaseService } from '../../admin/services/firebase.service';
   templateUrl: './reserve-numberplate.component.html',
   styleUrl: './reserve-numberplate.component.css',
 })
-export class ReserveNumberplateComponent {
+export class ReserveNumberplateComponent implements OnInit {
   @Output() create = new EventEmitter<VehicleRegistration>();
   vehicles: VehicleRegistration[] = [];
   userEmail!: string;
   isLoadingResults = true;
+  matchedNumberPlate = false;
 
   constructor(
     public auth: AuthService,
@@ -57,44 +58,37 @@ export class ReserveNumberplateComponent {
   }
 
   searchNumberPlates(userInput: string): void {
-    const foundVehicle = this.dataSource.find((vehicle) =>
-      vehicle.vehicleNumberPlate.includes(this.userInput)
+    console.log('User Input:', userInput);
+
+    this.isLoadingResults = true;
+    this.firebaseService.getAdminDashboard().subscribe(
+      (vehicles: VehicleRegistration[]) => {
+        console.log('Vehicles:', vehicles);
+
+        if (vehicles && Array.isArray(vehicles)) {
+          const filteredVehicles = vehicles.filter(vehicle => vehicle.vehicleNumberPlate === userInput);
+
+          console.log('Filtered Vehicles:', filteredVehicles);
+
+          this.vehicles = filteredVehicles;
+          this.dataSource = filteredVehicles;
+          this.isLoadingResults = false;
+          this.matchedNumberPlate = true;
+
+        } else {
+          console.error('Error fetching vehicles: Invalid data format');
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching vehicles:', error);
+      }
     );
-    if (foundVehicle) {
-      this.matchingNumberPlate = foundVehicle.vehicleNumberPlate;
-      console.log(this.userInput);
-      console.log(this.matchingNumberPlate);
-    }
   }
+
+ngOnInit(): void {
+    this.isLoadingResults = false;
+}
   openLink() {
     window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');
-  }
-  ngOnInit(): void {
-    // Subscribe to Auth0's user$ observable to get user information
-    this.auth.user$.subscribe((user) => {
-      if (user) {
-        this.userEmail = user.email as string; // Get the logged-in user's email
-        // Call the method from the VehicleService instance
-        this.firebaseService.getAllVehicles(this.userEmail).subscribe(
-          (vehicles: VehicleRegistration[]) => {
-            // Filter vehicles to render only the ones belonging to the logged-in user
-            this.vehicles = vehicles.filter(
-              (vehicle) => vehicle.ownerEmail === this.userEmail
-            );
-
-            // Reverse the order of fetched vehicles
-            this.vehicles.reverse();
-
-            // Assign fetched vehicles to the dataSource
-            this.dataSource = this.vehicles;
-            console.log(this.userEmail);
-            this.isLoadingResults = false;
-          },
-          (error) => {
-            console.error('Error fetching vehicles:', error);
-          }
-        );
-      }
-    });
   }
 }
