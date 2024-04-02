@@ -60,7 +60,7 @@ export class ReserveNumberplateComponent implements OnInit {
       };
       form.reset();
       this.reserve.emit(reservedNumberPlate);
-      console.log(reservedNumberPlate);
+      console.log("OncreateReservation method: " , reservedNumberPlate);
     }
   }
 

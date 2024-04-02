@@ -12,6 +12,8 @@ import { NumberPlatesService } from '../../admin/services/number-plates.service'
 })
 export class ReserveContainerComponent {
   plateExistsError = false;
+  reservation: any;
+  exits!: boolean;
 
   constructor(private numberPlateService: NumberPlatesService) {}
 
@@ -26,9 +28,8 @@ export class ReserveContainerComponent {
   };
   onCreateReservedNumberPlate(reservedNumberPlate: NumberPlates): void {
     // Check if the same number plate already exists
-    this.numberPlateService
-      .checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
-      .subscribe(
+    const reservation = this.numberPlateService.checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
+    reservation.subscribe(
         (exists: boolean) => {
           if (exists) {
             this.plateExistsError = false;
@@ -52,7 +53,7 @@ export class ReserveContainerComponent {
               );
           }
         },
-        (error) => {
+        (error: any) => {
           console.error('Error checking number plate existence:', error);
           // Handle error
         }
