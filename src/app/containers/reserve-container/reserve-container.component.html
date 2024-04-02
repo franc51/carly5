@@ -2,7 +2,7 @@
   (reserve)="onCreateReservedNumberPlate($event)"
 ></app-reserve-numberplate>
 <div class="spinner">
-  <ng-container *ngIf="plateExistsError">
+  <ng-container *ngIf="reservationSuccesful">
     <mat-spinner></mat-spinner>
   </ng-container>
 </div>

@@ -21,6 +21,7 @@ export class ReserveNumberplateComponent implements OnInit {
   reservedNumberPlates: NumberPlates[] = [];
   userEmail!: string;
   isLoadingResults = true;
+  foundNumberPlate!: boolean;
 
   constructor(
     public auth: AuthService,
@@ -54,7 +55,6 @@ export class ReserveNumberplateComponent implements OnInit {
         ...formValue,
         _id: uuidv4(),
         date: new Date(), // Assign a new Date object
-        reservedVehicleNumberPlate: this.userInput,
         availability: new Date(),
         reservedBy: 'user',
       };
@@ -64,8 +64,8 @@ export class ReserveNumberplateComponent implements OnInit {
     }
   }
 
-  searchNumberPlates(inputElement: HTMLInputElement): void {
-    const userInput = inputElement.value; // Extracting the value from the HTMLInputElement
+  searchNumberPlates(form: NgForm): void {
+    const userInput = form.value; // Extracting the value from the HTMLInputElement
     console.log('User Input:', userInput);
 
     this.isLoadingResults = true;
@@ -75,7 +75,7 @@ export class ReserveNumberplateComponent implements OnInit {
 
         if (vehicles && Array.isArray(vehicles)) {
           const filteredVehicles = vehicles.filter(
-            (vehicle) => vehicle.vehicleNumberPlate === userInput
+            (vehicle) => vehicle.vehicleNumberPlate === userInput.reservedNumberPlate
           );
 
           console.log('Filtered Vehicles:', filteredVehicles);
@@ -83,6 +83,7 @@ export class ReserveNumberplateComponent implements OnInit {
           this.vehicles = filteredVehicles;
           this.dataSource = filteredVehicles;
           this.isLoadingResults = false;
+          this.foundNumberPlate = true;
         } else {
           console.error('Error fetching vehicles: Invalid data format');
         }

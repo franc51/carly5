@@ -11,10 +11,8 @@ import { NumberPlatesService } from '../../admin/services/number-plates.service'
   styleUrl: './reserve-container.component.css',
 })
 export class ReserveContainerComponent {
-  plateExistsError = false;
+  reservationSuccesful!: boolean;
   reservation: any;
-  exits!: boolean;
-
   constructor(private numberPlateService: NumberPlatesService) {}
 
   userInput = '';
@@ -28,22 +26,21 @@ export class ReserveContainerComponent {
   };
   onCreateReservedNumberPlate(reservedNumberPlate: NumberPlates): void {
     // Check if the same number plate already exists
-    const reservation = this.numberPlateService.checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
-    reservation.subscribe(
+    this.numberPlateService.checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
+      .subscribe(
         (exists: boolean) => {
-          if (exists) {
-            this.plateExistsError = false;
-
-            console.error('Error: Number plate already exists');
+          if (!exists) {
+            this.reservationSuccesful = false;
+            console.error('Error: Number plate already exists', exists);
             // Handle error: Number plate already exists
           } else {
-            this.plateExistsError = false;
+            this.reservationSuccesful = true;
             // Number plate does not exist, proceed to create reservation
-            this.numberPlateService
-              .createReservedNumberPlate(reservedNumberPlate)
+            this.numberPlateService.createReservedNumberPlate(reservedNumberPlate)
               .subscribe(
                 (createdReservation: NumberPlates) => {
                   console.log('Reservation successful:', createdReservation);
+                  this.reservationSuccesful = false;
                   // Handle the created reservation
                 },
                 (error) => {
@@ -59,4 +56,5 @@ export class ReserveContainerComponent {
         }
       );
   }
+
 }

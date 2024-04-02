@@ -30,8 +30,8 @@
         oninput="this.value = this.value.toUpperCase()"
         minlength="7"
         maxlength="7"
-        name="reservedNumberPlates"
-        #reservedNumberPlates="ngModel"
+        name="reservedNumberPlate"
+        #reservedNumberPlate="ngModel"
         ngModel
       />
       <div class="div-pret">
@@ -40,19 +40,19 @@
           <span class="pret">Lei 7,99</span>
         </h3>
       </div>
-      <ng-conntainer *ngIf="plateExists">
+      <ng-conntainer *ngIf="foundNumberPlate && form.touched">
         <p>
           <strong class="error">Numărul nu este disponibil</strong>
         </p>
       </ng-conntainer>
-      <ng-container *ngIf="!plateExists">
+      <ng-container *ngIf="!foundNumberPlate && form.touched">
         <p>
           <strong class="available">Numărul este disponibil</strong>
         </p>
       </ng-container>
     </form>
     <div class="reserve-numberplate">
-      <button mat-raised-button class="searchnumberplate" style="color: white">
+      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchNumberPlates(form)">
         <mat-icon>search</mat-icon>
         Caută
       </button>

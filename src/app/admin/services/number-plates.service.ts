@@ -6,6 +6,7 @@ import { Observable, catchError, from, map } from 'rxjs';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { HttpClient } from '@angular/common/http';
 import { NumberPlates } from '../../model/number-plates';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,11 @@ export class NumberPlatesService {
           (plate: NumberPlates) =>
             plate.reservedVehicleNumberPlate === numberPlate
         );
+      }),
+      catchError(error => {
+        console.error('Error fetching number plates:', error);
+        // You can handle the error here or rethrow it
+        return throwError('Error fetching number plates');
       })
     );
   }
