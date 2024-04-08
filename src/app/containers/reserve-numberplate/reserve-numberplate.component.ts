@@ -34,7 +34,7 @@ export class ReserveNumberplateComponent implements OnInit {
     'Valabil până la data',
   ];
 
-  dataSource: VehicleRegistration[] = [];
+  dataSource: NumberPlates[] = [];
 
   userInput!: string;
   matchingNumberPlate: string | undefined;
@@ -77,12 +77,7 @@ export class ReserveNumberplateComponent implements OnInit {
           const filteredVehicles = vehicles.filter(
             (vehicle) => vehicle.vehicleNumberPlate === userInput.reservedNumberPlate
           );
-
           console.log('Filtered Vehicles:', filteredVehicles);
-
-          this.vehicles = filteredVehicles;
-          this.dataSource = filteredVehicles;
-          this.isLoadingResults = false;
           this.foundNumberPlate = true;
         } else {
           console.error('Error fetching vehicles: Invalid data format');
@@ -90,6 +85,43 @@ export class ReserveNumberplateComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching vehicles:', error);
+      }
+    );
+  }
+
+  searchReservedNumberPlates(form: NgForm): void {
+    const userInput = form.value.reservedNumberPlate; // Extract the number plate from the form
+    console.log('User Input:', userInput);
+
+    this.isLoadingResults = true;
+    this.reservedNumbers.checkNumberPlateExists(userInput).subscribe(
+      (plateExists: boolean) => {
+        console.log('Plate Exists:', plateExists);
+        this.isLoadingResults = false;
+        this.foundNumberPlate = plateExists;
+
+        if (plateExists) {
+          // Fetch vehicles associated with the found number plates
+          this.reservedNumbers.getNumberPlates(userInput).subscribe(
+            (reservedNumberPlate: NumberPlates[]) => {
+              console.log('reservedNumberPlate:', reservedNumberPlate);
+
+              if (reservedNumberPlate && Array.isArray(reservedNumberPlate)) {
+                this.dataSource = reservedNumberPlate;
+                console.log("reserved numberplate:", reservedNumberPlate)
+              } else {
+                console.error('Error fetching vehicles: Invalid data format');
+              }
+            },
+            (error: any) => {
+              console.error('Error fetching vehicles:', error);
+            }
+          );
+        }
+      },
+      (error: any) => {
+        console.error('Error checking number plate:', error);
+        this.isLoadingResults = false;
       }
     );
   }
