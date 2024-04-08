@@ -15,8 +15,7 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
-  @Output() plateExists = new EventEmitter<boolean>();
-
+  plateExists!: boolean;
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
   userEmail!: string;
@@ -89,8 +88,8 @@ export class ReserveNumberplateComponent implements OnInit {
     );
   }
 
-  searchReservedNumberPlates(form: NgForm): void {
-    const userInput = form.value.reservedNumberPlate; // Extract the number plate from the form
+  searchReservedNumberPlate(form: NgForm): void {
+    const userInput = form.value; // Extract the number plate from the form
     console.log('User Input:', userInput);
 
     this.isLoadingResults = true;
@@ -126,27 +125,10 @@ export class ReserveNumberplateComponent implements OnInit {
     );
   }
 
-  // searchReservedNumberPlates(inputElement: HTMLInputElement): void {
-  //   const userInput = inputElement.value.toUpperCase(); // Extracting the value from the HTMLInputElement and converting to uppercase
-  //   console.log('User Input:', userInput);
-
-  //   this.isLoadingResults = true;
-  //   this.reservedNumbers.getNumberPlates().subscribe(
-  //     (result: NumberPlates[]) => {
-  //       console.log('Search Result:', result);
-
-  //       this.reservedNumberPlates = result;
-  //       this.isLoadingResults = false;
-  //     },
-  //     (error: any) => {
-  //       console.error('Error searching reserved number plates:', error);
-  //       this.isLoadingResults = false;
-  //     }
-  //   );
-  // }
 
   ngOnInit(): void {
     this.isLoadingResults = false;
+    this.plateExists = false;
   }
   openLink() {
     window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');

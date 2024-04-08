@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseApp } from 'firebase/app';
 import { Analytics } from 'firebase/analytics';
 import { Database } from 'firebase/database';
-import { Observable, catchError, from, map } from 'rxjs';
+import { Observable, catchError, from, map, tap } from 'rxjs';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { HttpClient } from '@angular/common/http';
 import { NumberPlates } from '../../model/number-plates';
@@ -29,16 +29,25 @@ export class NumberPlatesService {
     const url = `${this.databaseUrl}/number-plates.json`;
     return this.http.post(url, reservedNumberPlate);
   }
-  checkNumberPlateExists(numberPlate: string): Observable<boolean> {
+
+
+  checkNumberPlateExists(userInput: string): Observable<boolean> {
     const url = `${this.databaseUrl}/number-plates.json`;
     return this.http.get<any>(url).pipe(
-      map((data: { [key: string]: NumberPlates }) => {
-        // Check if the number plate already exists in the database
+      map((data: { [key: string]: any }) => {
+        // Iterate over the values of the object
         const numberPlates = Object.values(data || {});
-        return numberPlates.some(
-          (plate: NumberPlates) =>
-            plate.reservedVehicleNumberPlate === numberPlate
-        );
+        console.log('Number plates:', numberPlates);
+
+        // Check if any of the nested objects contain the user input
+        return numberPlates.some((plate: any) => {
+          // Check if the nested object has the reservedNumberPlate property
+          if (plate.reservedNumberPlate) {
+            console.log('Nested:', plate);
+            return plate.reservedNumberPlate === userInput;
+          }
+          return false;
+        });
       }),
       catchError(error => {
         console.error('Error fetching number plates:', error);
@@ -47,4 +56,5 @@ export class NumberPlatesService {
       })
     );
   }
+
 }

@@ -16,7 +16,7 @@
       </p>
       <p>
         Rezervarea numărului de înmatriculare se face pentru perioada de
-        <span style="font-weight: bolder">7 zile.</span>
+        <span style="font-weight: bolder">14 zile.</span>
       </p>
       <p *ngIf="(auth.isAuthenticated$ | async) === false">
         Pentru a rezerva un număr trebuie să fii logat în cont.
@@ -30,14 +30,14 @@
         oninput="this.value = this.value.toUpperCase()"
         minlength="7"
         maxlength="7"
-        name="reservedNumberPlate"
-        #reservedNumberPlate="ngModel"
+        name="reservedVehicleNumberPlate"
+        #reservedVehicleNumberPlate="ngModel"
         ngModel
       />
       <div class="div-pret">
         <h3>
           Prețul rezervării:
-          <span class="pret">Lei 7,99</span>
+          <span class="pret">Lei 14,99</span>
         </h3>
       </div>
       <ng-conntainer *ngIf="foundNumberPlate && form.touched">
@@ -45,6 +45,9 @@
           <strong class="error">Numărul nu este disponibil</strong>
         </p>
       </ng-conntainer>
+      <ng-container class="error" *ngIf="plateExists && form.touched">
+        <p>Numărul este deja rezervat până la data de:</p>
+      </ng-container>
       <ng-container *ngIf="!foundNumberPlate && form.touched">
         <p>
           <strong class="available">Numărul este disponibil</strong>
@@ -52,7 +55,7 @@
       </ng-container>
     </form>
     <div class="reserve-numberplate">
-      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlates(form)">
+      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)">
         <mat-icon>search</mat-icon>
         Caută
       </button>

@@ -29,7 +29,7 @@ export class ReserveContainerComponent {
     this.numberPlateService.checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
       .subscribe(
         (exists: boolean) => {
-          if (!exists) {
+          if (exists) {
             this.reservationSuccesful = false;
             console.error('Error: Number plate already exists', exists);
             // Handle error: Number plate already exists
