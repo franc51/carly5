@@ -1,0 +1,56 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 0.5rem;
+  text-align: center;
+  border-radius: 2px;
+  margin: 1rem 1rem;
+}
+.formabro {
+  padding: 1rem 2rem !important;
+}
+
+.history-below {
+  margin: 0.5rem;
+}
+.history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.novehicles {
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+}
+mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+h2 {
+  color: gray;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+.example-container {
+  background-color: white !important;
+}
+form {
+  background-color: white !important;
+  box-shadow: 1px 6px 10px 4px rgb(192, 192, 192);
+  width: 28rem;
+}
+.error {
+  color: red;
+}
+.green {
+  background-color: rgba(0, 255, 0, 0.079);
+  padding-top: 1rem;
+  margin: 1rem 5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 128, 0, 0.753);
+}
+.wide-input{
+  width: 400px;
+}

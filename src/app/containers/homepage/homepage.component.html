@@ -4,13 +4,15 @@
     <app-login></app-login>
   </nav>
   <div class="container">
-    <div class="homepage-content" *ngIf="auth.user$">
+    <div class="homepage-content">
+      <mat-spinner class="spinner" *ngIf="auth.isLoading$ | async"></mat-spinner>
       <mat-sidenav-container
         class="example-container"
         *ngIf="auth.isAuthenticated$ | async"
       >
         <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav1">
           <app-dashboard></app-dashboard>
+          <mat-spinner class="spinner" *ngIf="auth.isLoading$ | async"></mat-spinner>
         </mat-sidenav>
 
         <mat-sidenav-content class="sidenav">

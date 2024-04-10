@@ -67,6 +67,7 @@ import {
 } from '@angular/fire/app';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
+import { RadiationsComponent } from './containers/radiations/radiations.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ReserveContainerComponent } from './containers/reserve-container/reserv
     AdminContainerComponent,
     AdminHistoryComponent,
     ReserveContainerComponent,
+    RadiationsComponent,
   ],
   imports: [
     MatAccordion,
