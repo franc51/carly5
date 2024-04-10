@@ -89,7 +89,7 @@ export class ReserveNumberplateComponent implements OnInit {
   }
 
   searchReservedNumberPlate(form: NgForm): void {
-    const userInput = form.value; // Extract the number plate from the form
+    const userInput = form.value.reservedVehicleNumberPlate; // Extract the number plate from the form
     console.log('User Input:', userInput);
 
     this.isLoadingResults = true;
