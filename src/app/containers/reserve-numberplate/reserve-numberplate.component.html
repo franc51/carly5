@@ -66,6 +66,12 @@
         </p>
       </ng-container>
 
+      <ng-container *ngIf="reservationExists">
+        <p>
+          <strong class="error">Acest număr este deja rezervat.</strong>
+        </p>
+      </ng-container>
+
     </form>
     <div class="reserve-numberplate">
       <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)">

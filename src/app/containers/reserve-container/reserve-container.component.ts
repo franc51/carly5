@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { FirebaseService } from '../../admin/services/firebase.service';
@@ -11,8 +11,8 @@ import { NumberPlatesService } from '../../admin/services/number-plates.service'
   styleUrl: './reserve-container.component.css',
 })
 export class ReserveContainerComponent {
-  reservationSuccesful!: boolean;
-  reservation: any;
+  reservationExists!: boolean;
+
   constructor(private numberPlateService: NumberPlatesService) {}
 
   userInput = '';
@@ -24,23 +24,22 @@ export class ReserveContainerComponent {
     availability: new Date(),
     reservedBy: 'string',
   };
+
   onCreateReservedNumberPlate(reservedNumberPlate: NumberPlates): void {
     // Check if the same number plate already exists
     this.numberPlateService.checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
       .subscribe(
         (exists: boolean) => {
           if (exists) {
-            this.reservationSuccesful = false;
+            this.reservationExists = true;
             console.error('Error: Number plate already exists', exists);
             // Handle error: Number plate already exists
           } else {
-            this.reservationSuccesful = true;
             // Number plate does not exist, proceed to create reservation
             this.numberPlateService.createReservedNumberPlate(reservedNumberPlate)
               .subscribe(
                 (createdReservation: NumberPlates) => {
                   console.log('Reservation successful:', createdReservation);
-                  this.reservationSuccesful = false;
                   // Handle the created reservation
                 },
                 (error) => {

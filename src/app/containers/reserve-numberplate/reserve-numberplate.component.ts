@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
@@ -15,6 +15,7 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
+  @Input() reservationExists!: boolean;
 
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
@@ -66,7 +67,8 @@ export class ReserveNumberplateComponent implements OnInit {
   };
 
   onCreateReservation(form: NgForm): void {
-    if (form.valid) {
+    this.userInput = form.value.reservedVehicleNumberPlate;
+    if (form.valid && this.isMatchingPattern(this.userInput)) {
       const formValue = form.value;
 
       // Ensure all required properties are present
@@ -80,6 +82,9 @@ export class ReserveNumberplateComponent implements OnInit {
       form.reset();
       this.reserve.emit(reservedNumberPlate);
       console.log("OncreateReservation method: " , reservedNumberPlate);
+    }
+    else {
+      this.isNotMatchingPattern = true;
     }
   }
 
