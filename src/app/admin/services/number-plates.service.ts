@@ -39,13 +39,10 @@ export class NumberPlatesService {
       map((data: { [key: string]: any }) => {
         // Iterate over the values of the object
         const numberPlates = Object.values(data || {});
-        console.log('Number plates:', numberPlates);
-
         // Check if any of the nested objects contain the user input
         return numberPlates.some((plate: any) => {
           // Check if the nested object has the reservedVehicleNumberPlate property
           if (plate.reservedVehicleNumberPlate) {
-            console.log('Nested:', plate);
             // Convert both stored plate and user input to uppercase for case-sensitive comparison
             return plate.reservedVehicleNumberPlate.toUpperCase() === userInput.toUpperCase();
           }

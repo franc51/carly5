@@ -17,8 +17,8 @@
         "source": "**",
         "headers": [
           {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
+            "key": "strict-origin-when-cross-origin",
+            "value": "http://localhost:4200"
           }
         ]
       }

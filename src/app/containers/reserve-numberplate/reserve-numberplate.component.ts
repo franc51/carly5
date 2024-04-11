@@ -15,12 +15,17 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
-  plateExists!: boolean;
+
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
   userEmail!: string;
   isLoadingResults = true;
-  foundNumberPlate!: boolean;
+  plateExists!: boolean;
+  reservedPlateExists!: boolean;
+  isReserved!: boolean;
+  isRegistered!: boolean;
+  isPlateExistsAndReserved!: boolean;
+
 
   constructor(
     public auth: AuthService,
@@ -64,7 +69,7 @@ export class ReserveNumberplateComponent implements OnInit {
   }
 
   searchNumberPlates(form: NgForm): void {
-    const userInput = form.value; // Extracting the value from the HTMLInputElement
+    const userInput = form.value.reservedVehicleNumberPlate; // Extract the number plate from the form
     console.log('User Input:', userInput);
 
     this.isLoadingResults = true;
@@ -73,20 +78,23 @@ export class ReserveNumberplateComponent implements OnInit {
         console.log('Vehicles:', vehicles);
 
         if (vehicles && Array.isArray(vehicles)) {
-          const filteredVehicles = vehicles.filter(
-            (vehicle) => vehicle.vehicleNumberPlate === userInput.reservedNumberPlate
+          const plateExists = vehicles.some(
+            (vehicle) => vehicle.vehicleNumberPlate === userInput
           );
-          console.log('Filtered Vehicles:', filteredVehicles);
-          this.foundNumberPlate = true;
+          this.isRegistered = plateExists;
+          console.log("plateExists: ", plateExists);
         } else {
           console.error('Error fetching vehicles: Invalid data format');
         }
+        this.isLoadingResults = false;
       },
       (error: any) => {
         console.error('Error fetching vehicles:', error);
+        this.isLoadingResults = false;
       }
     );
-  }
+}
+
 
   searchReservedNumberPlate(form: NgForm): void {
     const userInput = form.value.reservedVehicleNumberPlate; // Extract the number plate from the form
@@ -94,29 +102,10 @@ export class ReserveNumberplateComponent implements OnInit {
 
     this.isLoadingResults = true;
     this.reservedNumbers.checkNumberPlateExists(userInput).subscribe(
-      (plateExists: boolean) => {
-        console.log('Plate Exists:', plateExists);
+      (reservedPlateExists: boolean) => {
+        console.log('reservedPlateExists:', reservedPlateExists);
         this.isLoadingResults = false;
-        this.foundNumberPlate = plateExists;
-
-        if (plateExists) {
-          // Fetch vehicles associated with the found number plates
-          this.reservedNumbers.getNumberPlates(userInput).subscribe(
-            (reservedNumberPlate: NumberPlates[]) => {
-              console.log('reservedNumberPlate:', reservedNumberPlate);
-
-              if (reservedNumberPlate && Array.isArray(reservedNumberPlate)) {
-                this.dataSource = reservedNumberPlate;
-                console.log("reserved numberplate:", reservedNumberPlate)
-              } else {
-                console.error('Error fetching vehicles: Invalid data format');
-              }
-            },
-            (error: any) => {
-              console.error('Error fetching vehicles:', error);
-            }
-          );
-        }
+        this.isReserved = reservedPlateExists;
       },
       (error: any) => {
         console.error('Error checking number plate:', error);

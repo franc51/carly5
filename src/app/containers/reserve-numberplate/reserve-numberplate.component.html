@@ -40,22 +40,29 @@
           <span class="pret">Lei 14,99</span>
         </h3>
       </div>
-      <ng-conntainer *ngIf="foundNumberPlate && form.touched">
+
+      <ng-container *ngIf="isReserved">
         <p>
-          <strong class="error">Numărul nu este disponibil</strong>
-        </p>
-      </ng-conntainer>
-      <ng-container class="error" *ngIf="plateExists && form.touched">
-        <p>Numărul este deja rezervat până la data de:</p>
-      </ng-container>
-      <ng-container *ngIf="!foundNumberPlate && form.touched">
-        <p>
-          <strong class="available">Numărul este disponibil</strong>
+          <strong class="error">Numărul este deja rezervat!</strong>
         </p>
       </ng-container>
+
+      <ng-container *ngIf="isRegistered">
+        <p>
+          <strong class="error">Numărul este deja înmatriculat!</strong>
+        </p>
+      </ng-container>
+
+      <ng-container *ngIf="!isRegistered && !isReserved &&form.touched">
+        <p>
+          <strong class="available">Numărul este disponibil! Pentru rezervare faceți click pe <strong>Rezervă!</strong></strong>
+        </p>
+      </ng-container>
+
+
     </form>
     <div class="reserve-numberplate">
-      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)">
+      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)" (click)="searchNumberPlates(form)">
         <mat-icon>search</mat-icon>
         Caută
       </button>
