@@ -53,16 +53,22 @@
         </p>
       </ng-container>
 
-      <ng-container *ngIf="!isRegistered && !isReserved &&form.touched">
+      <ng-container *ngIf="!isRegistered && !isReserved && !isNotMatchingPattern && form.touched">
         <p>
-          <strong class="available">Numărul este disponibil! Pentru rezervare faceți click pe <strong>Rezervă!</strong></strong>
+          <strong class="available">Numărul este disponibil!</strong>
+        </p>
+        <p class="available">Pentru rezervare faceți click pe <strong>Rezervă!</strong></p>
+      </ng-container>
+
+      <ng-container *ngIf="isNotMatchingPattern">
+        <p>
+          <strong class="error">Numărul trebuie să fie de forma BV12ABC</strong>
         </p>
       </ng-container>
 
-
     </form>
     <div class="reserve-numberplate">
-      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)" (click)="searchNumberPlates(form)">
+      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)">
         <mat-icon>search</mat-icon>
         Caută
       </button>

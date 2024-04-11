@@ -18,14 +18,29 @@ export class ReserveNumberplateComponent implements OnInit {
 
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
+
+  //variable for displaying
   userEmail!: string;
+
+  // variable for displaying the spinner when anything loads
   isLoadingResults = true;
+
   plateExists!: boolean;
   reservedPlateExists!: boolean;
+
+     // variable for checking numberplates in the reserved-numberplates database
   isReserved!: boolean;
+
+  // variable for checking numberplates in the vehicle registrations database
   isRegistered!: boolean;
+
   isPlateExistsAndReserved!: boolean;
 
+  // variable for testing user input for the pattern
+  result!: boolean;
+
+  // showing in UI if it's NOT matching pattern
+  isNotMatchingPattern!: boolean;
 
   constructor(
     public auth: AuthService,
@@ -43,12 +58,12 @@ export class ReserveNumberplateComponent implements OnInit {
   userInput!: string;
   matchingNumberPlate: string | undefined;
 
-  isMatchingPattern = (userInput: string): boolean => {
+  isMatchingPattern(userInput: string): boolean {
     const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
+    console.log("userinput from matching pattern: ", userInput);
+    this.isNotMatchingPattern = false;
     return pattern.test(userInput);
   };
-
-  result = this.isMatchingPattern(this.userInput);
 
   onCreateReservation(form: NgForm): void {
     if (form.valid) {
@@ -69,8 +84,11 @@ export class ReserveNumberplateComponent implements OnInit {
   }
 
   searchNumberPlates(form: NgForm): void {
-    const userInput = form.value.reservedVehicleNumberPlate; // Extract the number plate from the form
-    console.log('User Input:', userInput);
+    const userInput = form.value.reservedVehicleNumberPlate;
+    // Extract the number plate from the form
+   if(this.isMatchingPattern(userInput)){
+    console.log("isMatchingPattern: ",this.isMatchingPattern);
+    console.log("after is matching pattern");
 
     this.isLoadingResults = true;
     this.firebaseService.getAdminDashboard().subscribe(
@@ -93,13 +111,14 @@ export class ReserveNumberplateComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
+   }
 }
 
 
   searchReservedNumberPlate(form: NgForm): void {
-    const userInput = form.value.reservedVehicleNumberPlate; // Extract the number plate from the form
-    console.log('User Input:', userInput);
-
+    const userInput = form.value.reservedVehicleNumberPlate;
+    console.log(userInput);
+    if(this.isMatchingPattern(userInput)){
     this.isLoadingResults = true;
     this.reservedNumbers.checkNumberPlateExists(userInput).subscribe(
       (reservedPlateExists: boolean) => {
@@ -112,12 +131,15 @@ export class ReserveNumberplateComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
+    }
+    else {
+      this.isNotMatchingPattern = true;
+    }
   }
 
 
   ngOnInit(): void {
     this.isLoadingResults = false;
-    this.plateExists = false;
   }
   openLink() {
     window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');

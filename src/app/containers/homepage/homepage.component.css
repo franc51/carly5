@@ -11,11 +11,12 @@
   align-items: center;
 }
 .spinner{
-  background-color: rgba(255, 0, 191, 0.212);
+  background-color: rgba(0, 174, 255, 0.075);
   position: absolute;
   z-index: 1;
-  height:100vh;
+  height: 80vh;
   width: 100vw;
+  padding-bottom: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
