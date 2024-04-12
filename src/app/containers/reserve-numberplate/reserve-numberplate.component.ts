@@ -79,9 +79,10 @@ export class ReserveNumberplateComponent implements OnInit {
         availability: new Date(),
         reservedBy: 'user',
       };
-      form.reset();
       this.reserve.emit(reservedNumberPlate);
       console.log("OncreateReservation method: " , reservedNumberPlate);
+      this.isReserved = true;
+      this.reservationExists = false;
     }
     else {
       this.isNotMatchingPattern = true;
@@ -92,19 +93,16 @@ export class ReserveNumberplateComponent implements OnInit {
     const userInput = form.value.reservedVehicleNumberPlate;
     // Extract the number plate from the form
    if(this.isMatchingPattern(userInput)){
-    console.log("isMatchingPattern: ",this.isMatchingPattern);
-    console.log("after is matching pattern");
-
     this.isLoadingResults = true;
     this.firebaseService.getAdminDashboard().subscribe(
       (vehicles: VehicleRegistration[]) => {
         console.log('Vehicles:', vehicles);
-
         if (vehicles && Array.isArray(vehicles)) {
           const plateExists = vehicles.some(
             (vehicle) => vehicle.vehicleNumberPlate === userInput
           );
           this.isRegistered = plateExists;
+          console.log("registered: ",this.isRegistered);
           console.log("plateExists: ", plateExists);
         } else {
           console.error('Error fetching vehicles: Invalid data format');
@@ -130,6 +128,9 @@ export class ReserveNumberplateComponent implements OnInit {
         console.log('reservedPlateExists:', reservedPlateExists);
         this.isLoadingResults = false;
         this.isReserved = reservedPlateExists;
+        console.log("matching: ",this.isNotMatchingPattern);
+        console.log("reserved: ",this.isReserved);
+
       },
       (error: any) => {
         console.error('Error checking number plate:', error);
@@ -145,7 +146,11 @@ export class ReserveNumberplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoadingResults = false;
+
   }
+
+
+
   openLink() {
     window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');
   }

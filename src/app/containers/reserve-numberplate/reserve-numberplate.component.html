@@ -53,7 +53,7 @@
         </p>
       </ng-container>
 
-      <ng-container *ngIf="!isRegistered && !isReserved && !isNotMatchingPattern && form.touched">
+      <ng-container *ngIf="isRegistered === false && isReserved === false && isNotMatchingPattern === false">
         <p>
           <strong class="available">Numărul este disponibil!</strong>
         </p>
@@ -74,7 +74,7 @@
 
     </form>
     <div class="reserve-numberplate">
-      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)">
+      <button mat-raised-button class="searchnumberplate" style="color: white" (click)="searchReservedNumberPlate(form)" (click)="searchNumberPlates(form)">
         <mat-icon>search</mat-icon>
         Caută
       </button>
@@ -92,7 +92,7 @@
   </div>
   <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   <div class="reserved-numberplates-history" *ngIf="dataSource.length">
-    <table [dataSource]="vehicles" mat-table class="mat-elevation-z8">
+    <table [dataSource]="reservedNumberPlates" mat-table class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
 

@@ -12,6 +12,7 @@ import { NumberPlatesService } from '../../admin/services/number-plates.service'
 })
 export class ReserveContainerComponent {
   reservationExists!: boolean;
+  reservationSucces!: boolean;
 
   constructor(private numberPlateService: NumberPlatesService) {}
 
@@ -40,6 +41,7 @@ export class ReserveContainerComponent {
               .subscribe(
                 (createdReservation: NumberPlates) => {
                   console.log('Reservation successful:', createdReservation);
+                  this.reservationSucces = true;
                   // Handle the created reservation
                 },
                 (error) => {
