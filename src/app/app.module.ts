@@ -1,6 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FirebaseService } from './admin/services/firebase.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,11 +13,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 
-import * as LR from '@uploadcare/blocks';
-
 import { getAnalytics } from 'firebase/analytics';
-
-LR.registerBlocks(LR);
 
 import {
   MatDialogTitle,
@@ -30,7 +28,6 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -69,6 +66,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +107,6 @@ import { RadiationHistoryComponent } from './containers/radiation-history/radiat
     MatTabsModule,
     MatPaginator,
     MatPaginatorModule,
-    UcWidgetModule,
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
@@ -145,7 +142,11 @@ import { RadiationHistoryComponent } from './containers/radiation-history/radiat
     ),
     provideFunctions(() => getFunctions()),
   ],
-  providers: [provideAnimationsAsync(), FirebaseService],
+  providers: [
+    provideAnimationsAsync(),
+    FirebaseService,
+    AngularFireStorageModule,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

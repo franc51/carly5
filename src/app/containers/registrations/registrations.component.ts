@@ -30,11 +30,17 @@ export class RegistrationsComponent implements OnInit {
     details: 'Cerere trimisă',
     status: 'În așteptare',
     count: 0,
+    uploadedFileUrl: 'test',
   };
 
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {}
+
+  onFileUploaded(uploadedFileUrl: any): void {
+    console.log('Received uploaded file URL:', uploadedFileUrl);
+    // Here you can handle the received URL as needed
+  }
 
   onCreate(vehicle: VehicleRegistration) {
     this.firebaseService.createVehicle(vehicle).subscribe(
