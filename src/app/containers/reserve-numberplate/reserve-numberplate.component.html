@@ -66,9 +66,9 @@
         </p>
       </ng-container>
 
-      <ng-container *ngIf="reservationExists">
+      <ng-container *ngIf="plateReservedSuccesfully">
         <p>
-          <strong class="error">Acest număr este deja rezervat.</strong>
+          <strong class="available">Numărul a fost rezervat cu succes!</strong>
         </p>
       </ng-container>
 
@@ -91,7 +91,8 @@
     </div>
   </div>
   <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  <div class="reserved-numberplates-history" *ngIf="dataSource.length">
+
+  <div class="reserved-numberplates-history">
     <table [dataSource]="reservedNumberPlates" mat-table class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
@@ -100,7 +101,7 @@
       <ng-container matColumnDef="Nr. înmatriculare">
         <th mat-header-cell *matHeaderCellDef>Număr rezervat</th>
         <td mat-cell *matCellDef="let vehicle">
-          {{ reservedNumberPlates }}
+          {{ vehicle.reservedVehicleNumberPlate }}
         </td>
       </ng-container>
 

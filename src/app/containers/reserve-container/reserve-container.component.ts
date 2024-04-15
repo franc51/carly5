@@ -14,6 +14,8 @@ export class ReserveContainerComponent {
   reservationExists!: boolean;
   reservationSucces!: boolean;
 
+  ownerEmail!: string;
+
   constructor(private numberPlateService: NumberPlatesService) {}
 
   userInput = '';
@@ -23,7 +25,7 @@ export class ReserveContainerComponent {
     date: new Date(),
     reservedVehicleNumberPlate: this.userInput,
     availability: new Date(),
-    reservedBy: 'string',
+    ownerEmail: this.ownerEmail,
   };
 
   onCreateReservedNumberPlate(reservedNumberPlate: NumberPlates): void {

@@ -1,5 +1,4 @@
 import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,6 +6,9 @@ import { FirebaseService } from '../../admin/services/firebase.service';
 import { NumberPlates } from '../../model/number-plates';
 import { NumberPlatesService } from '../../admin/services/number-plates.service';
 import { ReserveContainerComponent } from '../reserve-container/reserve-container.component';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-reserve-numberplate',
@@ -19,6 +21,9 @@ export class ReserveNumberplateComponent implements OnInit {
 
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
+
+  // variable for getting the user data
+  ownerEmail!: string;
 
   //variable for displaying
   userEmail!: string;
@@ -35,18 +40,23 @@ export class ReserveNumberplateComponent implements OnInit {
   // variable for checking numberplates in the vehicle registrations database
   isRegistered!: boolean;
 
-  isPlateExistsAndReserved!: boolean;
-
   // variable for testing user input for the pattern
   result!: boolean;
+
+  // test variable for UI
+  hideAvailability!: boolean;
+
+  // variable for showing succes reservation
+  plateReservedSuccesfully!: boolean;
 
   // showing in UI if it's NOT matching pattern
   isNotMatchingPattern!: boolean;
 
   constructor(
+    public http: HttpClient,
     public auth: AuthService,
     private firebaseService: FirebaseService,
-    private reservedNumbers: NumberPlatesService
+    private numberPlateService: NumberPlatesService
   ) {}
   displayedColumns: string[] = [
     'Nr. înmatriculare',
@@ -77,12 +87,11 @@ export class ReserveNumberplateComponent implements OnInit {
         _id: uuidv4(),
         date: new Date(), // Assign a new Date object
         availability: new Date(),
-        reservedBy: 'user',
+        ownerEmail: this.userEmail,
       };
       this.reserve.emit(reservedNumberPlate);
       console.log("OncreateReservation method: " , reservedNumberPlate);
-      this.isReserved = true;
-      this.reservationExists = false;
+      this.plateReservedSuccesfully = true;
     }
     else {
       this.isNotMatchingPattern = true;
@@ -117,13 +126,12 @@ export class ReserveNumberplateComponent implements OnInit {
    }
 }
 
-
   searchReservedNumberPlate(form: NgForm): void {
     const userInput = form.value.reservedVehicleNumberPlate;
     console.log(userInput);
     if(this.isMatchingPattern(userInput)){
     this.isLoadingResults = true;
-    this.reservedNumbers.checkNumberPlateExists(userInput).subscribe(
+    this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
       (reservedPlateExists: boolean) => {
         console.log('reservedPlateExists:', reservedPlateExists);
         this.isLoadingResults = false;
@@ -143,12 +151,38 @@ export class ReserveNumberplateComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
+    this.loadPlatesForUser(this.userEmail);
     this.isLoadingResults = false;
-
   }
 
+  loadPlatesForUser(userEmail: string): void {
+    this.auth.user$.subscribe((user) => {
+      if (user) {
+        this.userEmail = user.email as string; // Assign to this.userEmail
+
+        console.log(this.userEmail); // Log the user email
+
+        if (!this.userEmail) {
+          console.error('User email is undefined');
+          return;
+        }
+        this.numberPlateService.getPlates(this.userEmail).subscribe(
+          (plates: NumberPlates[]) => {
+            if (plates.length === 0) {
+              console.error('No number plates found for user:', this.userEmail);
+            }
+            this.reservedNumberPlates= plates
+            this.dataSource = plates;
+            console.table(this.dataSource);
+          },
+          (error) => {
+            console.error('Error fetching number plates:', error);
+          }
+        );
+      }
+    });
+  }
 
 
   openLink() {

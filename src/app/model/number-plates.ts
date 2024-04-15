@@ -3,5 +3,5 @@ export interface NumberPlates {
   date: Date;
   reservedVehicleNumberPlate: string;
   availability: Date;
-  reservedBy: string;
+  ownerEmail: string;
 }
