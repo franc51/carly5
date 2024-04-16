@@ -1,8 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FirebaseService } from './admin/services/firebase.service';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+import * as LR from '@uploadcare/blocks';
+LR.registerBlocks(LR);
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { MatInput } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { UcWidgetModule } from 'ngx-uploadcare-widget';
 
 // form
 import { MatAccordion } from '@angular/material/expansion';
@@ -66,7 +68,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
-import { UploadComponent } from './components/upload/upload.component';
+
 
 @NgModule({
   declarations: [
@@ -94,6 +96,7 @@ import { UploadComponent } from './components/upload/upload.component';
     RadiationHistoryComponent,
   ],
   imports: [
+    UcWidgetModule,
     MatAccordion,
     MatDialogClose,
     MatDialogActions,
@@ -145,7 +148,6 @@ import { UploadComponent } from './components/upload/upload.component';
   providers: [
     provideAnimationsAsync(),
     FirebaseService,
-    AngularFireStorageModule,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
