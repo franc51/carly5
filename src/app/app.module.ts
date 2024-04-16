@@ -2,9 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FirebaseService } from './admin/services/firebase.service';
 
-import * as LR from '@uploadcare/blocks';
-LR.registerBlocks(LR);
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,12 +25,10 @@ import {
 } from '@angular/material/dialog';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DatePipe } from '@angular/common';
 import { MatTabGroup } from '@angular/material/tabs';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
