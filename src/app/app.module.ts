@@ -68,7 +68,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
-
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
