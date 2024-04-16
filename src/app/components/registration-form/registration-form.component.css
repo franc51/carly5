@@ -19,13 +19,12 @@
   display: flex;
   flex-direction: column;
 }
-
 .upload {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-app-uploadcare{
+.uploadcare{
   margin-bottom: 1rem;
 }
 

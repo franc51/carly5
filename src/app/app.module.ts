@@ -68,7 +68,6 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
-import { UploadcareComponent } from './components/uploadcare/uploadcare.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +93,6 @@ import { UploadcareComponent } from './components/uploadcare/uploadcare.componen
     ReserveContainerComponent,
     RadiationsComponent,
     RadiationHistoryComponent,
-    UploadcareComponent,
   ],
   imports: [
     UcWidgetModule,

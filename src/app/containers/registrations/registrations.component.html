@@ -1,4 +1,4 @@
 <app-registration-form
   [vehicle]="vehicle"
-  (create)="onCreate($event)"
+  (create)="onCreate($event.vehicle, $event.files)"
 ></app-registration-form>
