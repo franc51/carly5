@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-radiations',
   templateUrl: './radiations.component.html',
-  styleUrl: './radiations.component.css',
+  styleUrl: './radiations.component.css'
 })
 export class RadiationsComponent {
   vehicle: VehicleRegistration = {
@@ -31,7 +31,6 @@ export class RadiationsComponent {
     details: 'Cerere trimisă',
     status: 'În așteptare',
     count: 0,
-    uploadedFileUrl: '',
   };
 
   constructor(private firebaseService: FirebaseService) {}

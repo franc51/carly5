@@ -51,23 +51,6 @@ form {
   border-radius: 8px;
   border: 1px solid rgba(0, 128, 0, 0.753);
 }
-.wide-input {
+.wide-input{
   width: 400px;
-}
-.upload-btn-send-btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-@media only screen and (max-width: 600px) {
-  .register-form {
-    width: 100vw;
-  }
-  .formabro {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
 }

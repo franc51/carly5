@@ -18,5 +18,4 @@ export interface VehicleRegistration {
   details: string;
   status: string;
   count: number;
-  uploadedFileUrl: string;
 }

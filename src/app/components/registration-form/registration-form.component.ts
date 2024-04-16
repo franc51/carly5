@@ -14,18 +14,10 @@ export class RegistrationFormComponent {
   @Output() create = new EventEmitter<VehicleRegistration>();
 
   @Input() vehicle!: VehicleRegistration;
-
   userInput: any;
   formSubmitted = false;
-  uploadedFileUrl: string | null = null;
 
   constructor(private datePipe: DatePipe) {}
-
-  // Method to handle file upload event from Uploadcare component
-  onFileUploaded(fileUrl: string) {
-    console.log('upload works in the child component');
-    this.uploadedFileUrl = fileUrl;
-  }
 
   onCreateVehicle(form: NgForm): void {
     if (form.valid) {
@@ -41,12 +33,11 @@ export class RegistrationFormComponent {
         ownerCNP: 1,
         ownerIdentityCard: 's',
         vehicleYear: 1,
-        vehicleIdentityCard: '',
+        vehicleIdentityCard: 'file',
         certificatePaymentProof: false,
-        ownershipProof: '',
+        ownershipProof: 'file',
         isAccepted: false,
         vehicleNumberPlate: this.userInput,
-        uploadedFileUrl: this.uploadedFileUrl,
       };
       form.reset();
       this.create.emit(newVehicle);
