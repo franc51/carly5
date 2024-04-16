@@ -61,13 +61,6 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  sendToNewTab(vehicleIdentityCard: string): void {
-    // Perform actions to open a new tab with the provided vehicle identity card
-    console.log('Vehicle identity card:', vehicleIdentityCard);
-    // Example: Open a new tab with the vehicle identity card
-    window.open(vehicleIdentityCard);
-  }
-
   onRejectVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     // Update the status field of the updatedVehicle object
     updatedVehicle.status = 'Respins';

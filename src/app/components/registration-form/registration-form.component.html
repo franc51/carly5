@@ -77,27 +77,16 @@
               <p class="error">Formularul conține erori. Verificați datele introduse.</p>
             </div>
           </ng-container>
+             <div class="upload">
+              <app-uploadcare [theme]="'light'"></app-uploadcare>
 
-              <div class="uploadcare">
-                <lr-config
-                  ctx-name="my-uploader"
-                  pubkey="3ba1eff324c6fa9111c3"/>
-
-                <lr-file-uploader-regular
-                    ctx-name="my-uploader"
-                    css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks/web/lr-file-uploader-regular.min.css"
-                  />
-
-                <lr-upload-ctx-provider
-                       ctx-name="my-uploader"
-                      #ctxProvider
-                    />
-                    </div>
               <ng-container *ngIf="form.valid">
                 <div class="success-message">
                   <p class="success">Cerere trimisă cu succes!</p>
                 </div>
               </ng-container>
+             </div>
+
           <button mat-raised-button color="primary" (click)="onCreateVehicle(form)">Trimite cerere</button>
         </form>
       </div>

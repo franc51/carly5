@@ -1,10 +1,8 @@
-import { Component, ViewChild, ElementRef, Output, Input, OnInit, OnDestroy ,EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
-import * as LR from '@uploadcare/blocks';
-import { OutputFileEntry } from '@uploadcare/blocks';
 
 @Component({
   selector: 'app-registration-form',
@@ -12,18 +10,10 @@ import { OutputFileEntry } from '@uploadcare/blocks';
   styleUrls: ['./registration-form.component.css'],
   providers: [DatePipe],
 })
-export class RegistrationFormComponent implements OnInit, OnDestroy {
-  @Output() create = new EventEmitter<{ vehicle: VehicleRegistration, files: OutputFileEntry<'success'>[] }>();
-
+export class RegistrationFormComponent {
+  @Output() create = new EventEmitter<VehicleRegistration>();
 
   @Input() vehicle!: VehicleRegistration;
-
-  @Output() files: OutputFileEntry<'success'>[] = []; // temporary store urls
-
-@ViewChild('ctxProvider', { static: true }) ctxProviderRef!: ElementRef<
-InstanceType<LR.UploadCtxProvider>
->;
-
   userInput: any;
   formSubmitted = false;
 
@@ -43,15 +33,14 @@ InstanceType<LR.UploadCtxProvider>
         ownerCNP: 1,
         ownerIdentityCard: 's',
         vehicleYear: 1,
-        vehicleIdentityCard: this.files[0],
+        vehicleIdentityCard: 'file',
         certificatePaymentProof: false,
-        ownershipProof: this.files[1],
+        ownershipProof: 'file',
         isAccepted: false,
         vehicleNumberPlate: this.userInput,
       };
-      console.log(this.files[0]);
       form.reset();
-      this.create.emit({ vehicle: newVehicle, files: this.files });
+      this.create.emit(newVehicle);
     }
   }
 
@@ -64,19 +53,4 @@ InstanceType<LR.UploadCtxProvider>
   formatDate(date: Date): string {
     return this.datePipe.transform(date, 'dd/MM/yyyy') || ''; // Adjust format as per your requirement
   }
-  ngOnInit(): void {
-    this.ctxProviderRef.nativeElement.addEventListener(
-      'change',
-      this.handleChangeEvent,
-    );
-  }
-  ngOnDestroy(): void {
-    this.ctxProviderRef.nativeElement.removeEventListener(
-      'change',
-      this.handleChangeEvent,
-    );
-  }
-  handleChangeEvent = (event: LR.EventMap['change']): void => {
-    this.files = event.detail.allEntries.filter((file) => file.status === 'success') as OutputFileEntry<'success'>[];
-  };
 }
