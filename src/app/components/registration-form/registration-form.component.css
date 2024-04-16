@@ -20,6 +20,15 @@
   flex-direction: column;
 }
 
+.upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+app-uploadcare{
+  margin-bottom: 1rem;
+}
+
 .novehicles {
   color: white;
   border-radius: 4px;

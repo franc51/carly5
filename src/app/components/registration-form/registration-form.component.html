@@ -77,12 +77,15 @@
               <p class="error">Formularul conține erori. Verificați datele introduse.</p>
             </div>
           </ng-container>
+             <div class="upload">
+              <app-uploadcare [theme]="'light'"></app-uploadcare>
 
-          <ng-container *ngIf="form.valid">
-            <div class="success-message">
-              <p class="success">Cerere trimisă cu succes!</p>
-            </div>
-          </ng-container>
+              <ng-container *ngIf="form.valid">
+                <div class="success-message">
+                  <p class="success">Cerere trimisă cu succes!</p>
+                </div>
+              </ng-container>
+             </div>
 
           <button mat-raised-button color="primary" (click)="onCreateVehicle(form)">Trimite cerere</button>
         </form>
