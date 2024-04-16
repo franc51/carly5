@@ -1,19 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { FirebaseService } from '../../admin/services/firebase.service';
 import { DatePipe } from '@angular/common';
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
-import { OutputFileEntry } from '@uploadcare/blocks';
-
 @Component({
   selector: 'app-registrations',
   templateUrl: './registrations.component.html',
   styleUrls: ['./registrations.component.css'],
 })
 export class RegistrationsComponent implements OnInit {
-  files: OutputFileEntry<'success'>[] = [];
-
   vehicle: VehicleRegistration = {
     _id: uuidv4(), // Generate UUID for _id
     date: new Date(),
@@ -40,15 +36,8 @@ export class RegistrationsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onCreate(vehicle: VehicleRegistration, files: OutputFileEntry<'success'>[]): void {
-    // Convert the file URLs to strings before assigning them to the vehicle object
-    const vehicleWithUrls: VehicleRegistration = {
-      ...vehicle,
-      vehicleIdentityCard: files[0]?.cdnUrl || '', // Use optional chaining to access cdnUrl
-      ownershipProof: files[1]?.cdnUrl || '', // Use optional chaining to access cdnUrl
-    };
-
-    this.firebaseService.createVehicle(vehicleWithUrls).subscribe(
+  onCreate(vehicle: VehicleRegistration) {
+    this.firebaseService.createVehicle(vehicle).subscribe(
       (createdVehicle: VehicleRegistration) => {
         console.log('Vehicle created successfully:', createdVehicle);
         // Handle the created vehicle as needed
