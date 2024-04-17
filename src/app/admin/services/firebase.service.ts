@@ -26,6 +26,7 @@ export class FirebaseService {
     const url = `${this.databaseUrl}/vehicles.json?orderBy="ownerEmail"&equalTo="${userEmail}"`;
     return this.http.get<VehicleRegistration[]>(url);
   }
+
   getAdminDashboard(): Observable<VehicleRegistration[]> {
     // this method also retrieves numberPlates in the reserveNumberplates component
     const url = `${this.databaseUrl}/vehicles.json`;

@@ -52,16 +52,16 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
         details: 'Cerere trimisă',
         status: 'În așteptare',
         ownerCNP: 1,
-        ownerIdentityCard: 's',
+        ownerIdentityCard: this.files[0],
         vehicleYear: 1,
-        vehicleIdentityCard: this.files[0],
+        vehicleIdentityCard: this.files[1],
         certificatePaymentProof: false,
-        ownershipProof: this.files[1],
+        ownershipProof: this.files[2],
         isAccepted: false,
         vehicleNumberPlate: this.userInput,
       };
-      console.log(this.files[0]);
       form.reset();
+      console.log(" child component : ",this.files);
       this.create.emit({ vehicle: newVehicle, files: this.files });
     }
   }
@@ -87,9 +87,11 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
       this.handleChangeEvent
     );
   }
-  handleChangeEvent = (event: LR.EventMap['change']): void => {
-    this.files = event.detail.allEntries.filter(
-      (file) => file.status === 'success'
-    ) as OutputFileEntry<'success'>[];
+  handleChangeEvent = (event: CustomEvent<any>): void => {
+    if (event.type === 'change') {
+       this.files = event.detail.allEntries as OutputFileEntry<'success'>[];
+    }
+    console.log("in method: ", this.files);
   };
+
 }

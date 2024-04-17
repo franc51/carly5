@@ -1,0 +1,7 @@
+<div class="image-container">
+  <h2>Documente</h2>
+  <div class="spinner" *ngIf="auth.isLoading$ | async"><mat-spinner></mat-spinner></div>
+  <img #image1 class="gallery-image" [src]="imageUrls[0]" alt="Image 1">
+  <img #image2 class="gallery-image" [src]="imageUrls[1]" alt="Image 2">
+  <img #image3 class="gallery-image" [src]="imageUrls[2]" alt="Image 3">
+</div>

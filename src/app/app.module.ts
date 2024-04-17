@@ -2,6 +2,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FirebaseService } from './admin/services/firebase.service';
 
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule, MatDateFormats, NativeDateAdapter } from '@angular/material/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -40,6 +43,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 // form
 import { MatAccordion } from '@angular/material/expansion';
@@ -68,7 +73,7 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
-import { UploadcareComponent } from './components/uploadcare/uploadcare.component';
+import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 
 @NgModule({
   declarations: [
@@ -94,9 +99,10 @@ import { UploadcareComponent } from './components/uploadcare/uploadcare.componen
     ReserveContainerComponent,
     RadiationsComponent,
     RadiationHistoryComponent,
-    UploadcareComponent,
+    ImageGalleryComponent,
   ],
   imports: [
+    MatDatepickerModule,
     UcWidgetModule,
     MatAccordion,
     MatDialogClose,
@@ -148,6 +154,23 @@ import { UploadcareComponent } from './components/uploadcare/uploadcare.componen
     provideFunctions(() => getFunctions()),
   ],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' }, // You can set the locale according to your preference
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: 'input',
+        },
+        display: {
+          dateInput: 'input',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      } as MatDateFormats,
+    },
+    { provide: NativeDateAdapter, useValue: provideNativeDateAdapter() }, // Here is where provideNativeDateAdapter is used
+
     provideAnimationsAsync(),
     FirebaseService,
   ],

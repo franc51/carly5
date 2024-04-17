@@ -11,6 +11,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
+import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'taxes', component: TaxesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },
+  { path: 'admin/image-gallery', component: ImageGalleryComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

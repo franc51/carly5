@@ -24,6 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 app-uploadcare{
   margin-bottom: 1rem;

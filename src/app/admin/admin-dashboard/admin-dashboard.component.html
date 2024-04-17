@@ -103,11 +103,13 @@
                       </mat-form-field>
 
                       <div class="action-btns">
+
+                        <button matTooltip="Verifică documentele" (click)="onViewImages(vehicle)">
+                          <img src="https://i.ibb.co/Nx7hPs2/descarca.png" alt="">
+                        </button>
+
                         <button matTooltip="Descarcă documentele">
-                          <img
-                            src="https://i.ibb.co/Nx7hPs2/descarca.png"
-                            alt=""
-                          />
+                          <img src="https://i.ibb.co/PmFLQZD/download.png" alt="">
                         </button>
 
                         <button
@@ -147,6 +149,9 @@
             </ng-container>
             <ng-container *ngIf="!vehicles.length">
               <p>Nu sunt cereri de inmatriculare</p>
+            </ng-container>
+            <ng-container *ngIf="!vehicles.length">
+              <mat-spinner></mat-spinner>
             </ng-container>
           </div>
         </div>
