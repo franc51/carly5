@@ -74,7 +74,7 @@ import { ReserveContainerComponent } from './containers/reserve-container/reserv
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
-
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -167,6 +167,7 @@ import { ImageGalleryComponent } from './components/image-gallery/image-gallery.
           dateA11yLabel: 'LL',
           monthYearA11yLabel: 'MMMM YYYY',
         },
+        DatePipe,
       } as MatDateFormats,
     },
     { provide: NativeDateAdapter, useValue: provideNativeDateAdapter() }, // Here is where provideNativeDateAdapter is used

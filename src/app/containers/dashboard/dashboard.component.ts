@@ -17,6 +17,6 @@ export class DashboardComponent {
   }
   openBookingPage() {
     // Open the booking link in a new tab
-    window.open('https://book.timekit.io/carly-itp', '_blank');
+    window.open('https://carly.appointer.io/', '_self');
   }
 }

@@ -46,6 +46,10 @@ export class NumberPlatesService {
     return this.http.post(url, reservedNumberPlate);
   }
 
+  deleteReservedNumberPlate(numberPlateId: string): Observable<any> {
+    const url = `${this.databaseUrl}/number-plates/${numberPlateId}.json`;
+    return this.http.delete(url);
+  }
 
   checkNumberPlateExists(userInput: string): Observable<boolean> {
     console.log('Type of userInput:', typeof userInput); // Log the type of userInput

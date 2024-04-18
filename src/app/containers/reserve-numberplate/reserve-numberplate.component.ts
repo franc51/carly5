@@ -9,11 +9,13 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reserve-numberplate',
   templateUrl: './reserve-numberplate.component.html',
   styleUrl: './reserve-numberplate.component.css',
+  providers: [DatePipe]
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
@@ -56,7 +58,8 @@ export class ReserveNumberplateComponent implements OnInit {
     public http: HttpClient,
     public auth: AuthService,
     private firebaseService: FirebaseService,
-    private numberPlateService: NumberPlatesService
+    private numberPlateService: NumberPlatesService,
+    private datePipe: DatePipe
   ) {}
   displayedColumns: string[] = [
     'Nr. înmatriculare',
@@ -85,8 +88,8 @@ export class ReserveNumberplateComponent implements OnInit {
       const reservedNumberPlate: NumberPlates = {
         ...formValue,
         _id: uuidv4(),
-        date: new Date(), // Assign a new Date object
-        availability: new Date(),
+        date: new Date(),
+        availability: new Date(new Date().setDate(new Date().getDate()+14)),
         ownerEmail: this.userEmail,
       };
       this.reserve.emit(reservedNumberPlate);
@@ -161,20 +164,29 @@ export class ReserveNumberplateComponent implements OnInit {
       if (user) {
         this.userEmail = user.email as string; // Assign to this.userEmail
 
-        console.log(this.userEmail); // Log the user email
-
         if (!this.userEmail) {
           console.error('User email is undefined');
           return;
         }
+
         this.numberPlateService.getPlates(this.userEmail).subscribe(
           (plates: NumberPlates[]) => {
             if (plates.length === 0) {
               console.error('No number plates found for user:', this.userEmail);
             }
-            this.reservedNumberPlates= plates
-            this.dataSource = plates;
-            console.table(this.dataSource);
+            // Filter out plates with availability date same as present
+            const currentDate = new Date()
+            const filteredPlates = plates.filter((plate) => new Date(plate.availability) < currentDate);
+
+            // Delete filtered plates
+            filteredPlates.forEach((plate) => {
+              console.log(plates);
+              this.deletePlateIfExpired(plate);
+            });
+
+            // Update dataSource with remaining plates
+            this.reservedNumberPlates = plates.filter((plate) => !filteredPlates.includes(plate));
+            this.dataSource = this.reservedNumberPlates;
           },
           (error) => {
             console.error('Error fetching number plates:', error);
@@ -183,7 +195,20 @@ export class ReserveNumberplateComponent implements OnInit {
       }
     });
   }
-
+  deletePlateIfExpired(plate: NumberPlates): void {
+    const currentDate = new Date();
+    if (new Date(plate.availability) < currentDate) {
+      // Delete the plate
+      this.numberPlateService.deleteReservedNumberPlate(plate._id).subscribe(
+        () => {
+          console.log('Plate deleted successfully:', plate.reservedVehicleNumberPlate);
+        },
+        (error) => {
+          console.error('Error deleting plate:', error);
+        }
+      );
+    }
+  }
 
   openLink() {
     window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');
