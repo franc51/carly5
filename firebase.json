@@ -1,28 +1,14 @@
 {
   "hosting": {
-    "public": "dist/carly/browser",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "strict-origin-when-cross-origin",
-            "value": "http://localhost:4200"
-          }
-        ]
-      }
-    ]
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
   },
   "functions": [
     {
@@ -48,5 +34,8 @@
         "npm --prefix \"$RESOURCE_DIR\" run lint"
       ]
     }
-  ]
+  ],
+  "database": {
+    "rules": "database.rules.json"
+  }
 }

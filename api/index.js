@@ -4,17 +4,16 @@ const stripe = require("stripe")("sk_test_...");
 const endpointSecret = "whsec_...";
 exports.stripeWebhook = functions.https.onRequest((request, response) => {
   const sig = request.headers["stripe-signature"];
-  let paymentIntentSucceeded;
   try {
     const event = stripe.webhooks.constructEvent(
       request.rawBody,
       sig,
-      endpointSecret
+      endpointSecret,
     );
     // Handle the event
+    const paymentIntentSucceeded = event.data.object;
     switch (event.type) {
       case "payment_intent.succeeded":
-        paymentIntentSucceeded = event.data.object;
         // Handle payment success event
         console.log("Payment succeeded:", paymentIntentSucceeded);
         break;
