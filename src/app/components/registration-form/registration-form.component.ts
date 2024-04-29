@@ -14,6 +14,8 @@ import { DatePipe } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
 import * as LR from '@uploadcare/blocks';
 import { OutputFileEntry } from '@uploadcare/blocks';
+import { user } from 'firebase-functions/v1/auth';
+import { FirebaseService } from '../../admin/services/firebase.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -27,6 +29,10 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
     files: OutputFileEntry<'success'>[];
   }>();
 
+  isRegistered = false;
+
+  isLoading!: boolean;
+
   @Input() vehicle!: VehicleRegistration;
 
   @Output() files: OutputFileEntry<'success'>[] = []; // temporary store urls
@@ -38,7 +44,10 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   userInput: any;
   formSubmitted = false;
 
-  constructor(private datePipe: DatePipe) {}
+  constructor(
+    private datePipe: DatePipe,
+    private firebaseService: FirebaseService
+  ) {}
 
   onCreateVehicle(form: NgForm): void {
     if (form.valid) {
@@ -60,20 +69,34 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
         isAccepted: false,
         vehicleNumberPlate: this.userInput,
       };
-      form.reset();
-      console.log(" child component : ",this.files);
-      this.create.emit({ vehicle: newVehicle, files: this.files });
+
+      if (this.isInputMatchingPattern(this.userInput)) {
+        this.isLoading = true;
+        this.isRegistered = false;
+        this.firebaseService.vehicleExists(newVehicle).subscribe((exists) => {
+          if (!exists) {
+            // Vehicle doesn't exist in the database, proceed with creation
+            form.reset();
+            console.log(' child component : ', this.files);
+            this.create.emit({ vehicle: newVehicle, files: this.files });
+            this.isLoading = false;
+          } else {
+            // Vehicle already exists in the database
+            console.log('Vehicle already exists in the database');
+            this.isRegistered = true;
+            this.isLoading = false;
+          }
+        });
+      }
     }
   }
-
   isInputMatchingPattern(input: string): boolean {
-    // Define your pattern matching logic here
     const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
     return pattern.test(input);
   }
 
   formatDate(date: Date): string {
-    return this.datePipe.transform(date, 'dd/MM/yyyy') || ''; // Adjust format as per your requirement
+    return this.datePipe.transform(date, 'dd/MM/yyyy') || '';
   }
   ngOnInit(): void {
     this.ctxProviderRef.nativeElement.addEventListener(
@@ -89,9 +112,8 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   }
   handleChangeEvent = (event: CustomEvent<any>): void => {
     if (event.type === 'change') {
-       this.files = event.detail.allEntries as OutputFileEntry<'success'>[];
+      this.files = event.detail.allEntries as OutputFileEntry<'success'>[];
     }
-    console.log("in method: ", this.files);
+    console.log('in method: ', this.files);
   };
-
 }

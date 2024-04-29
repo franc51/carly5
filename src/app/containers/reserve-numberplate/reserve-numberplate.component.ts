@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
   selector: 'app-reserve-numberplate',
   templateUrl: './reserve-numberplate.component.html',
   styleUrl: './reserve-numberplate.component.css',
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
@@ -36,7 +36,7 @@ export class ReserveNumberplateComponent implements OnInit {
   plateExists!: boolean;
   reservedPlateExists!: boolean;
 
-     // variable for checking numberplates in the reserved-numberplates database
+  // variable for checking numberplates in the reserved-numberplates database
   isReserved!: boolean;
 
   // variable for checking numberplates in the vehicle registrations database
@@ -65,6 +65,7 @@ export class ReserveNumberplateComponent implements OnInit {
     'Nr. înmatriculare',
     'Rezervat în data',
     'Valabil până la data',
+    'Status',
   ];
 
   dataSource: NumberPlates[] = [];
@@ -74,10 +75,10 @@ export class ReserveNumberplateComponent implements OnInit {
 
   isMatchingPattern(userInput: string): boolean {
     const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
-    console.log("userinput from matching pattern: ", userInput);
+    console.log('userinput from matching pattern: ', userInput);
     this.isNotMatchingPattern = false;
     return pattern.test(userInput);
-  };
+  }
 
   onCreateReservation(form: NgForm): void {
     this.userInput = form.value.reservedVehicleNumberPlate;
@@ -89,14 +90,14 @@ export class ReserveNumberplateComponent implements OnInit {
         ...formValue,
         _id: uuidv4(),
         date: new Date(),
-        availability: new Date(new Date().setDate(new Date().getDate()+14)),
+        availability: new Date(new Date().setDate(new Date().getDate() + 14)),
         ownerEmail: this.userEmail,
+        status: 'valabil',
       };
       this.reserve.emit(reservedNumberPlate);
-      console.log("OncreateReservation method: " , reservedNumberPlate);
+      console.log('OncreateReservation method: ', reservedNumberPlate);
       this.plateReservedSuccesfully = true;
-    }
-    else {
+    } else {
       this.isNotMatchingPattern = true;
     }
   }
@@ -104,52 +105,50 @@ export class ReserveNumberplateComponent implements OnInit {
   searchNumberPlates(form: NgForm): void {
     const userInput = form.value.reservedVehicleNumberPlate;
     // Extract the number plate from the form
-   if(this.isMatchingPattern(userInput)){
-    this.isLoadingResults = true;
-    this.firebaseService.getAdminDashboard().subscribe(
-      (vehicles: VehicleRegistration[]) => {
-        console.log('Vehicles:', vehicles);
-        if (vehicles && Array.isArray(vehicles)) {
-          const plateExists = vehicles.some(
-            (vehicle) => vehicle.vehicleNumberPlate === userInput
-          );
-          this.isRegistered = plateExists;
-          console.log("registered: ",this.isRegistered);
-          console.log("plateExists: ", plateExists);
-        } else {
-          console.error('Error fetching vehicles: Invalid data format');
+    if (this.isMatchingPattern(userInput)) {
+      this.isLoadingResults = true;
+      this.firebaseService.getAdminDashboard().subscribe(
+        (vehicles: VehicleRegistration[]) => {
+          console.log('Vehicles:', vehicles);
+          if (vehicles && Array.isArray(vehicles)) {
+            const plateExists = vehicles.some(
+              (vehicle) => vehicle.vehicleNumberPlate === userInput
+            );
+            this.isRegistered = plateExists;
+            console.log('registered: ', this.isRegistered);
+            console.log('plateExists: ', plateExists);
+          } else {
+            console.error('Error fetching vehicles: Invalid data format');
+          }
+          this.isLoadingResults = false;
+        },
+        (error: any) => {
+          console.error('Error fetching vehicles:', error);
+          this.isLoadingResults = false;
         }
-        this.isLoadingResults = false;
-      },
-      (error: any) => {
-        console.error('Error fetching vehicles:', error);
-        this.isLoadingResults = false;
-      }
-    );
-   }
-}
+      );
+    }
+  }
 
   searchReservedNumberPlate(form: NgForm): void {
     const userInput = form.value.reservedVehicleNumberPlate;
     console.log(userInput);
-    if(this.isMatchingPattern(userInput)){
-    this.isLoadingResults = true;
-    this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
-      (reservedPlateExists: boolean) => {
-        console.log('reservedPlateExists:', reservedPlateExists);
-        this.isLoadingResults = false;
-        this.isReserved = reservedPlateExists;
-        console.log("matching: ",this.isNotMatchingPattern);
-        console.log("reserved: ",this.isReserved);
-
-      },
-      (error: any) => {
-        console.error('Error checking number plate:', error);
-        this.isLoadingResults = false;
-      }
-    );
-    }
-    else {
+    if (this.isMatchingPattern(userInput)) {
+      this.isLoadingResults = true;
+      this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
+        (reservedPlateExists: boolean) => {
+          console.log('reservedPlateExists:', reservedPlateExists);
+          this.isLoadingResults = false;
+          this.isReserved = reservedPlateExists;
+          console.log('matching: ', this.isNotMatchingPattern);
+          console.log('reserved: ', this.isReserved);
+        },
+        (error: any) => {
+          console.error('Error checking number plate:', error);
+          this.isLoadingResults = false;
+        }
+      );
+    } else {
       this.isNotMatchingPattern = true;
     }
   }
@@ -157,6 +156,7 @@ export class ReserveNumberplateComponent implements OnInit {
   ngOnInit(): void {
     this.loadPlatesForUser(this.userEmail);
     this.isLoadingResults = false;
+    this.isLoadingResults = true;
   }
 
   loadPlatesForUser(userEmail: string): void {
@@ -175,8 +175,10 @@ export class ReserveNumberplateComponent implements OnInit {
               console.error('No number plates found for user:', this.userEmail);
             }
             // Filter out plates with availability date same as present
-            const currentDate = new Date()
-            const filteredPlates = plates.filter((plate) => new Date(plate.availability) < currentDate);
+            const currentDate = new Date();
+            const filteredPlates = plates.filter(
+              (plate) => new Date(plate.availability) < currentDate
+            );
 
             // Delete filtered plates
             filteredPlates.forEach((plate) => {
@@ -185,8 +187,11 @@ export class ReserveNumberplateComponent implements OnInit {
             });
 
             // Update dataSource with remaining plates
-            this.reservedNumberPlates = plates.filter((plate) => !filteredPlates.includes(plate));
+            this.reservedNumberPlates = plates.filter(
+              (plate) => !filteredPlates.includes(plate)
+            );
             this.dataSource = this.reservedNumberPlates;
+            this.isLoadingResults = false;
           },
           (error) => {
             console.error('Error fetching number plates:', error);
@@ -201,7 +206,10 @@ export class ReserveNumberplateComponent implements OnInit {
       // Delete the plate
       this.numberPlateService.deleteReservedNumberPlate(plate._id).subscribe(
         () => {
-          console.log('Plate deleted successfully:', plate.reservedVehicleNumberPlate);
+          console.log(
+            'Plate deleted successfully:',
+            plate.reservedVehicleNumberPlate
+          );
         },
         (error) => {
           console.error('Error deleting plate:', error);

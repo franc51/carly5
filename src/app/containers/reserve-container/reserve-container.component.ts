@@ -26,11 +26,13 @@ export class ReserveContainerComponent {
     reservedVehicleNumberPlate: this.userInput,
     availability: new Date(),
     ownerEmail: this.ownerEmail,
+    status: 'valabil',
   };
 
   onCreateReservedNumberPlate(reservedNumberPlate: NumberPlates): void {
     // Check if the same number plate already exists
-    this.numberPlateService.checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
+    this.numberPlateService
+      .checkNumberPlateExists(reservedNumberPlate.reservedVehicleNumberPlate)
       .subscribe(
         (exists: boolean) => {
           if (exists) {
@@ -39,7 +41,8 @@ export class ReserveContainerComponent {
             // Handle error: Number plate already exists
           } else {
             // Number plate does not exist, proceed to create reservation
-            this.numberPlateService.createReservedNumberPlate(reservedNumberPlate)
+            this.numberPlateService
+              .createReservedNumberPlate(reservedNumberPlate)
               .subscribe(
                 (createdReservation: NumberPlates) => {
                   console.log('Reservation successful:', createdReservation);
@@ -59,5 +62,4 @@ export class ReserveContainerComponent {
         }
       );
   }
-
 }

@@ -54,7 +54,7 @@ export class RegistrationsComponent implements OnInit {
 
     this.firebaseService.createVehicle(vehicleWithUrls).subscribe(
       (createdVehicle: VehicleRegistration) => {
-        console.log(" parent component : ",files);
+        console.log(' parent component : ', files);
         console.log('Vehicle created successfully:', createdVehicle);
         // Handle the created vehicle as needed
       },

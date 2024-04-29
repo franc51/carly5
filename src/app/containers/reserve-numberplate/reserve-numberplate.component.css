@@ -1,3 +1,16 @@
+.valabil {
+  background-color: rgba(0, 128, 0, 0.582);
+  border-radius: 4px;
+  padding: 4px;
+  color: white;
+}
+.expirat {
+  background-color: rgba(255, 0, 0, 0.529);
+  border-radius: 4px;
+  padding: 4px;
+  color: white;
+}
+
 .red {
   height: 40rem;
   width: 50vw;
@@ -12,10 +25,10 @@
   padding: 2px;
   margin: 10px;
 }
-p{
+p {
   color: black;
 }
-.pret{
+.pret {
   background-color: rgba(9, 255, 0, 0.411);
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -86,7 +99,7 @@ label {
   transition: none !important;
   box-shadow: none !important;
 }
-.reserve-numberplate{
+.reserve-numberplate {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -102,7 +115,7 @@ h3 {
 
 .reserved-numberplates-history {
   margin: 1rem;
-  width: 25rem;
+  width: 32rem;
 }
 
 @media only screen and (max-width: 600px) {
@@ -150,5 +163,7 @@ h3 {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
-
+  .reserved-numberplates-history {
+    width: 95vw;
+  }
 }

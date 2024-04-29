@@ -4,4 +4,5 @@ export interface NumberPlates {
   reservedVehicleNumberPlate: string;
   availability: Date;
   ownerEmail: string;
+  status: 'valabil' | 'expirat';
 }
