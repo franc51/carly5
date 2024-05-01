@@ -41,7 +41,7 @@
     "mongoose": "^8.2.3",
     "ngx-uploadcare-widget": "^4.0.0",
     "rxjs": "~7.8.0",
-    "stripe": "^14.22.0",
+    "stripe": "^14.25.0",
     "tslib": "^2.3.0",
     "uploadcare-widget": "^3.21.2",
     "uuid": "^9.0.1",

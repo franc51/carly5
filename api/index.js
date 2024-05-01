@@ -1,30 +1,59 @@
-const functions = require("firebase-functions");
-const stripe = require("stripe")("sk_test_...");
-// This is your webhook secret from Stripe
-const endpointSecret = "whsec_...";
-exports.stripeWebhook = functions.https.onRequest((request, response) => {
-  const sig = request.headers["stripe-signature"];
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const stripe = require('stripe')(functions.config().stripe.secret_key);
+
+admin.initializeApp();
+
+exports.createStripeCheckout = functions.https.onCall(async (data, context) => {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    mode: 'payment',
+    line_items: [
+      {
+        quantity: 1,
+        price_data: {
+          currency: 'usd',
+          unit_amount: (100) * 100, // 10000 = 100 USD
+          product_data: {
+            name: 'number plate',
+          },
+        },
+      },
+    ],
+  });
+
+  return {
+    id: session.id,
+  };
+});
+
+exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
+  const stripe = require('stripe')(functions.config().stripe.token);
+  let event;
+
   try {
-    const event = stripe.webhooks.constructEvent(
-      request.rawBody,
-      sig,
-      endpointSecret,
+    const whSec = functions.config().stripe.payments_webhook_secret;
+
+    event = stripe.webhooks.constructEvent(
+      req.rawBody,
+      req.headers['stripe-signature'],
+      whSec,
     );
-    // Handle the event
-    const paymentIntentSucceeded = event.data.object;
-    switch (event.type) {
-      case "payment_intent.succeeded":
-        // Handle payment success event
-        console.log("Payment succeeded:", paymentIntentSucceeded);
-        break;
-      // Handle other event types as needed
-      default:
-        console.log(`Unhandled event type ${event.type}`);
-    }
-    // Send response to acknowledge receipt of the event
-    response.json({ received: true });
   } catch (err) {
-    console.error("Webhook Error:", err.message);
-    response.status(400).send(`Webhook Error: ${err.message}`);
+    console.error('⚠️ Webhook signature verification failed.');
+    return res.sendStatus(400);
   }
+
+  const dataObject = event.data.object;
+
+  // Save data to Firebase Realtime Database
+  await admin.database().ref('reserved-plates').push({
+    checkoutSessionId: dataObject.id,
+    paymentStatus: dataObject.payment_status,
+    shippingInfo: dataObject.shipping,
+    amountTotal: dataObject.amount_total,
+    timestamp: admin.database.ServerValue.TIMESTAMP,
+  });
+
+  return res.sendStatus(200);
 });
