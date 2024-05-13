@@ -43,7 +43,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 
 // form
@@ -102,7 +101,6 @@ import { DatePipe } from '@angular/common';
     ImageGalleryComponent,
   ],
   imports: [
-    MatDatepickerModule,
     UcWidgetModule,
     MatAccordion,
     MatDialogClose,

@@ -18,7 +18,7 @@ import { OutputFileEntry } from '@uploadcare/blocks';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css'],
+  styleUrls: ['./registration-form.component.css', ],
   providers: [DatePipe],
 })
 export class RegistrationFormComponent implements OnInit, OnDestroy {

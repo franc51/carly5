@@ -64,3 +64,10 @@ form {
 .wide-input{
   width: 400px;
 }
+lr-file-uploader-regular lr-simple-btn button {
+  background-color: #f00;
+  --darkmode: 1;
+--h-accent: 211;
+--s-accent: 100%;
+--l-accent: calc(50% - 5% * var(--darkmode));
+}

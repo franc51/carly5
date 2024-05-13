@@ -43,6 +43,7 @@
     "rxjs": "~7.8.0",
     "stripe": "^14.22.0",
     "tslib": "^2.3.0",
+    "uploadcare": "^0.4.8",
     "uploadcare-widget": "^3.21.2",
     "uuid": "^9.0.1",
     "zone.js": "~0.14.3"
