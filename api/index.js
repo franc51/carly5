@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const stripe = require('stripe')(functions.config().stripe.secret_key);
@@ -57,3 +58,5 @@ exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
 
   return res.sendStatus(200);
 });
+=======
+>>>>>>> parent of 541365c (adding stripe webhook function)

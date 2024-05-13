@@ -26,7 +26,7 @@
   justify-content: center;
   margin-bottom: 1rem;
 }
-app-uploadcare {
+app-uploadcare{
   margin-bottom: 1rem;
 }
 
@@ -61,11 +61,6 @@ form {
   border-radius: 8px;
   border: 1px solid rgba(0, 128, 0, 0.753);
 }
-.wide-input {
+.wide-input{
   width: 400px;
-}
-.spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
