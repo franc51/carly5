@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const stripe = require('stripe')(functions.config().stripe.secret_key);
@@ -32,31 +33,37 @@ exports.stripeWebhook = functions.https.onRequest(async (req, res) => {
   const stripe = require('stripe')(functions.config().stripe.token);
   let event;
 
+=======
+const functions = require("firebase-functions");
+const stripe = require("stripe")("sk_test_...");
+// This is your webhook secret from Stripe
+const endpointSecret = "whsec_...";
+exports.stripeWebhook = functions.https.onRequest((request, response) => {
+  const sig = request.headers["stripe-signature"];
+>>>>>>> parent of 8fa75f8 (started firebase functions (stripe webhook handler))
   try {
-    const whSec = functions.config().stripe.payments_webhook_secret;
-
-    event = stripe.webhooks.constructEvent(
-      req.rawBody,
-      req.headers['stripe-signature'],
-      whSec,
+    const event = stripe.webhooks.constructEvent(
+      request.rawBody,
+      sig,
+      endpointSecret,
     );
+    // Handle the event
+    const paymentIntentSucceeded = event.data.object;
+    switch (event.type) {
+      case "payment_intent.succeeded":
+        // Handle payment success event
+        console.log("Payment succeeded:", paymentIntentSucceeded);
+        break;
+      // Handle other event types as needed
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
+    // Send response to acknowledge receipt of the event
+    response.json({ received: true });
   } catch (err) {
-    console.error('⚠️ Webhook signature verification failed.');
-    return res.sendStatus(400);
+    console.error("Webhook Error:", err.message);
+    response.status(400).send(`Webhook Error: ${err.message}`);
   }
-
-  const dataObject = event.data.object;
-
-  // Save data to Firebase Realtime Database
-  await admin.database().ref('reserved-plates').push({
-    checkoutSessionId: dataObject.id,
-    paymentStatus: dataObject.payment_status,
-    shippingInfo: dataObject.shipping,
-    amountTotal: dataObject.amount_total,
-    timestamp: admin.database.ServerValue.TIMESTAMP,
-  });
-
-  return res.sendStatus(200);
 });
 =======
 >>>>>>> parent of 541365c (adding stripe webhook function)
