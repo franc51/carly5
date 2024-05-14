@@ -1,14 +1,10 @@
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@uploadcare/blocks/web/lr-file-uploader-regular.min.css"
->
 <div class="history-below">
   <mat-tab-group fitInkBarToContent>
-    <mat-tab label="Înmatriculare">
+    <mat-tab label="Înmatriculare / Radiere">
       <div class="register-form">
         <form action="" #form="ngForm" class="formabro">
           <div class="form-field">
-            <pre>{{ formatDate(vehicle.date) }}</pre>
+            <p>Completați formularul apoi alegeți dacă înmatriculați sau radiați vehiculul.</p>
           </div>
 
           <div class="form-field">
@@ -75,6 +71,16 @@
             </mat-form-field>
           </div>
 
+          <div class="form-field">
+            <mat-form-field color="accent" class="wide-input">
+              <mat-label>Activitate</mat-label>
+              <mat-select name="registerStatus" [ngModel]="registerStatus" #registerStatus="ngModel" [ngModelOptions]="{ updateOn: 'submit' }">
+                <mat-option value="INMATRICULARE">INMATRICULARE</mat-option>
+                <mat-option value="RADIERE">RADIERE</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
           <!-- Form validations -->
           <ng-container *ngIf="form.invalid">
             <div class="error-message">
@@ -85,7 +91,6 @@
               <lr-config
               ctx-name="my-uploader"
               pubkey="3ba1eff324c6fa9111c3"
-              css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks/web/lr-file-uploader-regular.min.css"
             />
             <lr-file-uploader-regular
               ctx-name="my-uploader"

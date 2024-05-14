@@ -31,6 +31,7 @@ export class RadiationsComponent {
     details: 'Cerere trimisă',
     status: 'În așteptare',
     count: 0,
+    registerStatus: '',
   };
 
   constructor(private firebaseService: FirebaseService) {}

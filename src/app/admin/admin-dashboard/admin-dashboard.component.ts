@@ -15,6 +15,7 @@ export class AdminDashboardComponent implements OnInit {
   vehicles: VehicleRegistration[] = [];
   dataSource: VehicleRegistration[] = [];
   isLoadingResults = true;
+  radiations: VehicleRegistration[] = [];
 
   constructor(
     private firebaseService: FirebaseService,
@@ -38,6 +39,7 @@ export class AdminDashboardComponent implements OnInit {
     'numberPlate',
     'date',
     'details',
+    'inm/rad',
   ];
 
   ngOnInit(): void {
@@ -81,6 +83,7 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
   }
+
 
   onRejectVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     updatedVehicle.status = 'Respins';
