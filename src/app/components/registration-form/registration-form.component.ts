@@ -15,6 +15,8 @@ import { v4 as uuidv4 } from 'uuid';
 import * as LR from '@uploadcare/blocks';
 import { OutputFileEntry } from '@uploadcare/blocks';
 
+LR.registerBlocks(LR)
+
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
