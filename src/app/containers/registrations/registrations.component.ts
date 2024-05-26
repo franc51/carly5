@@ -57,7 +57,7 @@ export class RegistrationsComponent implements OnInit {
       (createdVehicle: VehicleRegistration) => {
         console.log(" parent component : ",files);
         console.log('Vehicle created successfully:', createdVehicle);
-        // Handle the created vehicle as needed
+        // Handle the created vehicle
       },
       (error) => {
         console.error('Error creating vehicle:', error);

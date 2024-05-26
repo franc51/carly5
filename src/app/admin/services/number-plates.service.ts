@@ -5,7 +5,7 @@ import { Database } from 'firebase/database';
 import { Observable, catchError, from, map, of, tap } from 'rxjs';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { HttpClient } from '@angular/common/http';
-import { NumberPlates } from '../../model/number-plates';
+import { NumberPlates } from '../../models/number-plates';
 import { throwError } from 'rxjs';
 
 @Injectable({
@@ -52,8 +52,7 @@ export class NumberPlatesService {
   }
 
   checkNumberPlateExists(userInput: string): Observable<boolean> {
-    console.log('Type of userInput:', typeof userInput); // Log the type of userInput
-
+    console.log('Type of userInput:', typeof userInput);
     const url = `${this.databaseUrl}/number-plates.json`;
     return this.http.get<any>(url).pipe(
       map((data: { [key: string]: any }) => {

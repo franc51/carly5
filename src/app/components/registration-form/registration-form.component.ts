@@ -1,12 +1,5 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  Output,
-  Input,
-  OnInit,
-  OnDestroy,
-  EventEmitter,
+import {Component,ViewChild,ElementRef,Output,Input,
+  OnInit,OnDestroy,EventEmitter,
 } from '@angular/core';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
@@ -14,9 +7,7 @@ import { DatePipe } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
 import * as LR from '@uploadcare/blocks';
 import { OutputFileEntry } from '@uploadcare/blocks';
-
 LR.registerBlocks(LR)
-
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -43,10 +34,9 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe) {}
 
   onCreateVehicle(form: NgForm): void {
-    if (form.valid) {
+    if (form.valid && this.isInputMatchingPattern(this.userInput)) {
       const formValue = form.value;
 
-      // Ensure all required properties are present
       const newVehicle: VehicleRegistration = {
         ...formValue,
         _id: uuidv4(),
@@ -69,10 +59,10 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   }
 
   isInputMatchingPattern(input: string): boolean {
-    // Define your pattern matching logic here
-    const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
+    const pattern = /^([A-Z]{2}\d{2}[A-Z]{3}|[A-Z]\d{3}[A-Z]{3})$/;
     return pattern.test(input);
   }
+
 
   formatDate(date: Date): string {
     return this.datePipe.transform(date, 'dd/MM/yyyy') || ''; // Adjust format as per your requirement

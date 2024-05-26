@@ -3,7 +3,7 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { FirebaseService } from '../../admin/services/firebase.service';
-import { NumberPlates } from '../../model/number-plates';
+import { NumberPlates } from '../../models/number-plates';
 import { NumberPlatesService } from '../../admin/services/number-plates.service';
 import { ReserveContainerComponent } from '../reserve-container/reserve-container.component';
 import { HttpClient } from '@angular/common/http';
@@ -61,6 +61,8 @@ export class ReserveNumberplateComponent implements OnInit {
     private numberPlateService: NumberPlatesService,
     private datePipe: DatePipe
   ) {}
+
+
   displayedColumns: string[] = [
     'Nr. înmatriculare',
     'Rezervat în data',
@@ -83,8 +85,6 @@ export class ReserveNumberplateComponent implements OnInit {
     this.userInput = form.value.reservedVehicleNumberPlate;
     if (form.valid && this.isMatchingPattern(this.userInput)) {
       const formValue = form.value;
-
-      // Ensure all required properties are present
       const reservedNumberPlate: NumberPlates = {
         ...formValue,
         _id: uuidv4(),
@@ -162,13 +162,11 @@ export class ReserveNumberplateComponent implements OnInit {
   loadPlatesForUser(userEmail: string): void {
     this.auth.user$.subscribe((user) => {
       if (user) {
-        this.userEmail = user.email as string; // Assign to this.userEmail
-
+        this.userEmail = user.email as string;
         if (!this.userEmail) {
           console.error('User email is undefined');
           return;
         }
-
         this.numberPlateService.getPlates(this.userEmail).subscribe(
           (plates: NumberPlates[]) => {
             if (plates.length === 0) {
@@ -177,13 +175,11 @@ export class ReserveNumberplateComponent implements OnInit {
             // Filter out plates with availability date same as present
             const currentDate = new Date()
             const filteredPlates = plates.filter((plate) => new Date(plate.availability) < currentDate);
-
             // Delete filtered plates
             filteredPlates.forEach((plate) => {
               console.log(plates);
               this.deletePlateIfExpired(plate);
             });
-
             // Update dataSource with remaining plates
             this.reservedNumberPlates = plates.filter((plate) => !filteredPlates.includes(plate));
             this.dataSource = this.reservedNumberPlates;

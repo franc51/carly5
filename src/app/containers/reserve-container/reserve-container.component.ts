@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { FirebaseService } from '../../admin/services/firebase.service';
-import { NumberPlates } from '../../model/number-plates';
+import { NumberPlates } from '../../models/number-plates';
 import { NumberPlatesService } from '../../admin/services/number-plates.service';
 
 @Component({
