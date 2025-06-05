@@ -1,49 +1,86 @@
-
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@uploadcare/blocks/web/lr-file-uploader-regular.min.css"
->
 <div class="history-below">
   <mat-tab-group fitInkBarToContent>
     <mat-tab label="Înmatriculare / Radiere">
       <div class="register-form">
         <form action="" #form="ngForm" class="formabro">
           <div class="form-field">
-            <p>Completați formularul apoi alegeți dacă înmatriculați sau radiați vehiculul.</p>
+            <p>
+              Completați formularul apoi alegeți dacă înmatriculați sau radiați
+              vehiculul.
+            </p>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Nume Proprietar</mat-label>
-              <input matInput maxlength="15" placeholder="Popescu" required name="ownerName" #ownerName="ngModel" [ngModel]="vehicle.ownerName" [ngModelOptions]="{ updateOn: 'submit' }" />
+              <input
+                matInput
+                maxlength="15"
+                required
+                name="ownerName"
+                #ownerName="ngModel"
+                [ngModel]="vehicle.ownerName"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Prenume Proprietar</mat-label>
-              <input matInput maxlength="15" placeholder="Daniel" required name="ownerSurname" #ownerSurname="ngModel" [ngModel]="vehicle.ownerSurname" [ngModelOptions]="{ updateOn: 'submit' }" />
+              <input
+                matInput
+                maxlength="15"
+                required
+                name="ownerSurname"
+                #ownerSurname="ngModel"
+                [ngModel]="vehicle.ownerSurname"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Numar telefon</mat-label>
-              <input matInput type="tel" minlength="10" maxlength="10" placeholder="0712345678" required name="ownerPhone" #ownerPhone="ngModel" [ngModel]="vehicle.ownerPhone" [ngModelOptions]="{ updateOn: 'submit' }" />
+              <input
+                matInput
+                type="tel"
+                minlength="10"
+                maxlength="10"
+                required
+                name="ownerPhone"
+                #ownerPhone="ngModel"
+                [ngModel]="vehicle.ownerPhone"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>E-mail</mat-label>
-              <input matInput type="email" placeholder="david@yahoo.com" required name="ownerEmail" #ownerEmail="ngModel" [ngModel]="vehicle.ownerEmail" [ngModelOptions]="{ updateOn: 'submit' }" />
+              <input
+                matInput
+                type="email"
+                required
+                name="ownerEmail"
+                #ownerEmail="ngModel"
+                [ngModel]="vehicle.ownerEmail"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Marca</mat-label>
-              <mat-select name="vehicleManufacturer" #vehicleManufacturer="ngModel" [ngModel]="vehicle.vehicleManufacturer" [ngModelOptions]="{ updateOn: 'submit' }">
+              <mat-select
+                name="vehicleManufacturer"
+                #vehicleManufacturer="ngModel"
+                [ngModel]="vehicle.vehicleManufacturer"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              >
                 <mat-option value="VOLKSWAGEN">VOLKSWAGEN</mat-option>
               </mat-select>
             </mat-form-field>
@@ -52,7 +89,12 @@
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Model</mat-label>
-              <mat-select name="vehicleModel" [ngModel]="vehicle.vehicleModel" #vehicleModel="ngModel" [ngModelOptions]="{ updateOn: 'submit' }">
+              <mat-select
+                name="vehicleModel"
+                [ngModel]="vehicle.vehicleModel"
+                #vehicleModel="ngModel"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              >
                 <mat-option value="GOLF">GOLF</mat-option>
                 <mat-option value="PASSAT">PASSAT</mat-option>
                 <mat-option value="ARTEON">ARTEON</mat-option>
@@ -65,21 +107,46 @@
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>VIN</mat-label>
-              <input matInput type="number" maxlength="10" required name="vehicleVinNumber" #vehicleVinNumber="ngModel" [ngModel]="vehicle.vehicleVinNumber" [ngModelOptions]="{ updateOn: 'submit' }" />
+              <input
+                matInput
+                type="number"
+                maxlength="10"
+                required
+                name="vehicleVinNumber"
+                #vehicleVinNumber="ngModel"
+                [ngModel]="vehicle.vehicleVinNumber"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Numar inmatriculare</mat-label>
-              <input matInput type="text" class="input" name="numberPlate" oninput="this.value = this.value.toUpperCase()" required minlength="7" maxlength="7" [(ngModel)]="userInput" [ngModelOptions]="{ updateOn: 'submit' }" />
+              <input
+                matInput
+                type="text"
+                class="input"
+                name="numberPlate"
+                oninput="this.value = this.value.toUpperCase()"
+                required
+                minlength="7"
+                maxlength="7"
+                [(ngModel)]="userInput"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              />
             </mat-form-field>
           </div>
 
           <div class="form-field">
             <mat-form-field color="accent" class="wide-input">
               <mat-label>Activitate</mat-label>
-              <mat-select name="registerStatus" [ngModel]="registerStatus" #registerStatus="ngModel" [ngModelOptions]="{ updateOn: 'submit' }">
+              <mat-select
+                name="registerStatus"
+                [ngModel]="registerStatus"
+                #registerStatus="ngModel"
+                [ngModelOptions]="{ updateOn: 'submit' }"
+              >
                 <mat-option value="INMATRICULARE">INMATRICULARE</mat-option>
                 <mat-option value="RADIERE">RADIERE</mat-option>
               </mat-select>
@@ -89,39 +156,51 @@
           <!-- Form validations -->
           <ng-container *ngIf="form.invalid">
             <div class="error-message">
-              <p class="error">Formularul conține erori. Verificați datele introduse.</p>
+              <p class="error">
+                Formularul conține erori. Verificați datele introduse.
+              </p>
             </div>
           </ng-container>
-             <div class="upload">
-              <lr-config
-              ctx-name="my-uploader"
-              pubkey="3ba1eff324c6fa9111c3"
-            />
-            <lr-file-uploader-regular
-            ctx-name="my-uploader"
-            css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks/web/lr-file-uploader-regular.min.css"
-        ></lr-file-uploader-regular>
 
-            <lr-upload-ctx-provider
+          <div class="upload">
+            <uc-config
+              ctx-name="my-uploader"
+              source-list="local, camera, facebook, gdrive"
+              pubkey="3ba1eff324c6fa9111c3"
+            ></uc-config>
+
+            <uc-file-uploader-regular
+              ctx-name="my-uploader"
+              class="uc-light"
+            ></uc-file-uploader-regular>
+            <uc-upload-ctx-provider
               ctx-name="my-uploader"
               #ctxProvider
-            />
+            ></uc-upload-ctx-provider>
           </div>
-              <ng-container *ngIf="form.valid">
-                <div class="success-message">
-                  <p class="success">Cerere trimisă cu succes!</p>
-                </div>
-              </ng-container>
 
+          <ng-container *ngIf="form.valid">
+            <div class="success-message">
+              <p class="success">Cerere trimisă cu succes!</p>
+            </div>
+          </ng-container>
 
-          <button mat-raised-button color="primary" (click)="onCreateVehicle(form)">Trimite cerere</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCreateVehicle(form)"
+          >
+            Trimite cerere
+          </button>
         </form>
       </div>
     </mat-tab>
 
     <mat-tab label="Istoric înmatriculări">
       <div class="history-list">
-        <app-registration-history style="margin: 1rem;"></app-registration-history>
+        <app-registration-history
+          style="margin: 1rem"
+        ></app-registration-history>
       </div>
 
       <ng-template #noRegistrations>

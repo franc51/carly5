@@ -14,11 +14,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 
-import * as LR from '@uploadcare/blocks';
-
 import { getAnalytics } from 'firebase/analytics';
-
-LR.registerBlocks(LR);
 
 import {
   MatDialogTitle,
@@ -74,6 +70,7 @@ import { RadiationsComponent } from './containers/radiations/radiations.componen
 import { RadiationHistoryComponent } from './containers/radiation-history/radiation-history.component';
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 import { DatePipe } from '@angular/common';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +96,7 @@ import { DatePipe } from '@angular/common';
     RadiationsComponent,
     RadiationHistoryComponent,
     ImageGalleryComponent,
+    UserProfileComponent,
   ],
   imports: [
     UcWidgetModule,
@@ -152,7 +150,7 @@ import { DatePipe } from '@angular/common';
     provideFunctions(() => getFunctions()),
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'en-US' }, // You can set the locale according to your preference
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' },
     {
       provide: MAT_DATE_FORMATS,
       useValue: {

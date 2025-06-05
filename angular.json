@@ -36,7 +36,6 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "node_modules/@uploadcare/blocks/web/lr-file-uploader-regular.min.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -5,6 +5,9 @@
   justify-content: center;
   gap: 1rem;
 }
+.image-container img {
+  max-width: 60vw;
+}
 @media screen and (max-width: 600px) {
   img{
     width: 90vw;

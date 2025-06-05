@@ -1,0 +1,36 @@
+<!-- user-profile.component.html -->
+<div class="user-profile-container">
+  <form class="user-profile-form">
+    <h2>Profil Utilizator</h2>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Nume</mat-label>
+      <input matInput placeholder="Popescu" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="popescu@email.com" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Parolă</mat-label>
+      <input matInput type="password" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Salvează</button>
+  </form>
+
+  <div class="cars-section">
+    <h2>Mașinile mele</h2>
+
+    <div class="car-card" *ngFor="let car of cars">
+      <div class="car-card-title">
+        <h4 class="car-model">{{ car.brand }} {{ car.model }}</h4>
+        <p>{{ car.plate }}</p>
+      </div>
+      <p>{{ car.status }}</p>
+      <img class="car-image" src="/assets/car.svg" alt="" />
+    </div>
+  </div>
+</div>

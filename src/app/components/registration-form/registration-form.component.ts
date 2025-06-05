@@ -5,9 +5,12 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
-import * as LR from '@uploadcare/blocks';
+
+import * as UC from '@uploadcare/file-uploader'
 import { OutputFileEntry } from '@uploadcare/blocks';
-LR.registerBlocks(LR)
+
+UC.defineComponents(UC);
+
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -25,7 +28,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   @Output() files: OutputFileEntry<'success'>[] = []; // temporary store urls
 
   @ViewChild('ctxProvider', { static: true }) ctxProviderRef!: ElementRef<
-    InstanceType<LR.UploadCtxProvider>
+    InstanceType<UC.UploadCtxProvider>
   >;
 
   userInput: any;

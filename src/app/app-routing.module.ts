@@ -12,10 +12,11 @@ import { RegistrationsComponent } from './containers/registrations/registrations
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: 'register-vehicle', component: RegistrationsComponent },
   { path: 'radiate-vehicle', component: RadiationsComponent },
   { path: 'technical-appointment', component: TechnicalAppointmentComponent },
