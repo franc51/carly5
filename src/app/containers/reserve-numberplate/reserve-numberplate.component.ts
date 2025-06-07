@@ -24,6 +24,8 @@ export class ReserveNumberplateComponent implements OnInit {
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
 
+  recommendedPlate: string | null = null;
+
   // variable for getting the user data
   ownerEmail!: string;
 
@@ -54,15 +56,6 @@ export class ReserveNumberplateComponent implements OnInit {
   // showing in UI if it's NOT matching pattern
   isNotMatchingPattern!: boolean;
 
-  constructor(
-    public http: HttpClient,
-    public auth: AuthService,
-    private firebaseService: FirebaseService,
-    private numberPlateService: NumberPlatesService,
-    private datePipe: DatePipe
-  ) {}
-
-
   displayedColumns: string[] = [
     'Nr. înmatriculare',
     'Rezervat în data',
@@ -73,6 +66,19 @@ export class ReserveNumberplateComponent implements OnInit {
 
   userInput!: string;
   matchingNumberPlate: string | undefined;
+
+    constructor(
+    public http: HttpClient,
+    public auth: AuthService,
+    private firebaseService: FirebaseService,
+    private numberPlateService: NumberPlatesService,
+    private datePipe: DatePipe
+  ) {}
+
+   ngOnInit(): void {
+    this.loadPlatesForUser(this.userEmail);
+    this.isLoadingResults = false;
+  }
 
   isMatchingPattern(userInput: string): boolean {
     const pattern = /^[A-Z]{2}\d{2}[A-Z]{3}$/;
@@ -93,6 +99,7 @@ export class ReserveNumberplateComponent implements OnInit {
         ownerEmail: this.userEmail,
       };
       this.reserve.emit(reservedNumberPlate);
+      localStorage.setItem("ReservedPlates", JSON.stringify(reservedNumberPlate));
       console.log("OncreateReservation method: " , reservedNumberPlate);
       this.plateReservedSuccesfully = true;
     }
@@ -129,68 +136,99 @@ export class ReserveNumberplateComponent implements OnInit {
    }
 }
 
-  searchReservedNumberPlate(form: NgForm): void {
-    const userInput = form.value.reservedVehicleNumberPlate;
-    console.log(userInput);
-    if(this.isMatchingPattern(userInput)){
-    this.isLoadingResults = true;
-    this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
-      (reservedPlateExists: boolean) => {
-        console.log('reservedPlateExists:', reservedPlateExists);
-        this.isLoadingResults = false;
-        this.isReserved = reservedPlateExists;
-        console.log("matching: ",this.isNotMatchingPattern);
-        console.log("reserved: ",this.isReserved);
-
-      },
-      (error: any) => {
-        console.error('Error checking number plate:', error);
-        this.isLoadingResults = false;
-      }
-    );
-    }
-    else {
-      this.isNotMatchingPattern = true;
-    }
+searchReservedNumberPlate(form: NgForm): void {
+  const userInput = form.value.reservedVehicleNumberPlate?.toUpperCase();
+  if (!this.isMatchingPattern(userInput)) {
+    this.isNotMatchingPattern = true;
+    return;
   }
-
-  ngOnInit(): void {
-    this.loadPlatesForUser(this.userEmail);
-    this.isLoadingResults = false;
-  }
-
-  loadPlatesForUser(userEmail: string): void {
-    this.auth.user$.subscribe((user) => {
-      if (user) {
-        this.userEmail = user.email as string;
-        if (!this.userEmail) {
-          console.error('User email is undefined');
-          return;
-        }
-        this.numberPlateService.getPlates(this.userEmail).subscribe(
-          (plates: NumberPlates[]) => {
-            if (plates.length === 0) {
-              console.error('No number plates found for user:', this.userEmail);
+  this.isLoadingResults = true;
+  this.recommendedPlate = null;
+  // Check if plate is reserved
+  this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
+    (reservedPlateExists: boolean) => {
+      this.isReserved = reservedPlateExists;
+      // Then get registered plates
+      this.firebaseService.getAdminDashboard().subscribe(
+        (vehicles: VehicleRegistration[]) => {
+          this.isRegistered = vehicles.some(
+            (vehicle) => vehicle.vehicleNumberPlate.toUpperCase() === userInput
+          );
+          const registeredList = vehicles.map(v => v.vehicleNumberPlate.toUpperCase());
+          // Now get all reserved plates
+          this.numberPlateService.getAllReservedNumberPlates().subscribe(
+            (reservedList: string[]) => {
+              if (this.isRegistered || this.isReserved) {
+                this.recommendedPlate = this.recommendNextAvailablePlate(userInput, reservedList, registeredList);
+              }
+              this.isLoadingResults = false;
+            },
+            (error) => {
+              console.error('Error getting reserved list:', error);
+              this.isLoadingResults = false;
             }
-            // Filter out plates with availability date same as present
-            const currentDate = new Date()
-            const filteredPlates = plates.filter((plate) => new Date(plate.availability) < currentDate);
-            // Delete filtered plates
-            filteredPlates.forEach((plate) => {
-              console.log(plates);
-              this.deletePlateIfExpired(plate);
-            });
-            // Update dataSource with remaining plates
-            this.reservedNumberPlates = plates.filter((plate) => !filteredPlates.includes(plate));
-            this.dataSource = this.reservedNumberPlates;
-          },
-          (error) => {
-            console.error('Error fetching number plates:', error);
-          }
-        );
+          );
+        },
+        (error: any) => {
+          console.error('Error fetching vehicles:', error);
+          this.isLoadingResults = false;
+        }
+      );
+    },
+    (error: any) => {
+      console.error('Error checking number plate:', error);
+      this.isLoadingResults = false;
+    }
+  );
+}
+
+ loadPlatesForUser(userEmail: string): void {
+  this.auth.user$.subscribe((user) => {
+    if (user) {
+      this.isLoadingResults = true;
+      this.userEmail = user.email as string;
+      if (!this.userEmail) {
+        console.error('User email is undefined');
+        return;
       }
-    });
-  }
+
+      this.numberPlateService.getPlates(this.userEmail).subscribe(
+        (plates: NumberPlates[]) => {
+          if (plates.length === 0) {
+            console.error('No number plates found for user:', this.userEmail);
+          }
+
+          const currentDate = new Date();
+
+          // Filter expired plates
+          const filteredPlates = plates.filter(
+            (plate) => new Date(plate.availability) < currentDate
+          );
+
+          // Delete expired plates
+          filteredPlates.forEach((plate) => {
+            this.deletePlateIfExpired(plate);
+          });
+
+          // Keep only valid plates and sort by `date` DESCENDING
+          this.reservedNumberPlates = plates
+            .filter((plate) => !filteredPlates.includes(plate))
+            .sort(
+              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            );
+
+          this.dataSource = this.reservedNumberPlates;
+          this.isLoadingResults = false;
+        },
+        (error) => {
+          console.error('Error fetching number plates:', error);
+          this.isLoadingResults = false;
+        }
+      );
+    }
+  });
+}
+
   deletePlateIfExpired(plate: NumberPlates): void {
     const currentDate = new Date();
     if (new Date(plate.availability) < currentDate) {
@@ -206,7 +244,31 @@ export class ReserveNumberplateComponent implements OnInit {
     }
   }
 
-  openLink() {
-    window.open('https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY');
+  recommendNextAvailablePlate(basePlate: string, reservedList: string[], registeredList: string[]): string | null {
+  const pattern = /^([A-Z]{2})(\d{2})([A-Z]{3})$/;
+  const match = basePlate.match(pattern);
+  if (!match) return null;
+
+  const [_, prefix, numberStr, suffix] = match;
+  let number = parseInt(numberStr);
+
+  for (let i = 1; i <= 98; i++) {
+    const nextNum = (number + i).toString().padStart(2, '0');
+    const nextPlate = `${prefix}${nextNum}${suffix}`;
+    if (!reservedList.includes(nextPlate) && !registeredList.includes(nextPlate)) {
+      return nextPlate;
+    }
   }
+
+  return null;
+}
+
+  handleReserveAndCheckout(form: NgForm): void{
+  this.onCreateReservation(form);
+  this.goToCheckout();
+  }
+  goToCheckout() {
+    window.location.href = 'https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY';
+  }
+  
 }

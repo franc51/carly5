@@ -20,6 +20,25 @@ export class NumberPlatesService {
 
   private databaseUrl = 'https://reserved-plates.firebaseio.com';
 
+  getAllReservedNumberPlates(): Observable<string[]> {
+  const url = `${this.databaseUrl}/number-plates.json`;
+  return this.http.get<{ [key: string]: NumberPlates }>(url).pipe(
+    map((response) => {
+      const allPlates: string[] = [];
+      for (const key in response) {
+        if (response.hasOwnProperty(key)) {
+          allPlates.push(response[key].reservedVehicleNumberPlate.toUpperCase());
+        }
+      }
+      return allPlates;
+    }),
+    catchError((error) => {
+      console.error('Error fetching all reserved plates:', error);
+      return of([]); // return empty array on error to avoid crashing
+    })
+  );
+}
+
   getPlates(userEmail: string): Observable<NumberPlates[]> {
     const url = `${this.databaseUrl}/number-plates.json`;
     return this.http.get<{ [key: string]: NumberPlates }>(url).pipe(

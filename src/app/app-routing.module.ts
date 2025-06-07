@@ -13,6 +13,7 @@ import { ReserveContainerComponent } from './containers/reserve-container/reserv
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PaymentFailComponent } from './payments/payment-fail/payment-fail.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },
   { path: 'admin/image-gallery', component: ImageGalleryComponent, pathMatch: 'full' },
+  { path: 'payment-fail', component: PaymentFailComponent },
 ];
 
 @NgModule({

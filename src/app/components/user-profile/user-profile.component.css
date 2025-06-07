@@ -23,17 +23,21 @@
   gap: 1rem;
   margin: 0 2rem;
   width: 20rem;
+  max-height: 30rem;
   border-radius: 4px;
   border: 1px solid rgba(128, 128, 128, 0.356);
   padding: 1rem;
+  overflow-y: scroll;
 }
 
-.car-card {
+.car-card-list {
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem;
   border-radius: 4px;
   background: #fafafa;
   position: relative;
-  background-color: #00ffff30;
+  background-color: #00ff3334;
 }
 .car-card-title{
     display: flex;
@@ -45,12 +49,11 @@
 .car-image {
     height: 2rem;
     position: absolute;
-    top: 55%;
-    right: 5%;
+    top: 10%;
+    right: 3%;
 }
 .statusuri {
-  display: flex;
-  gap: 0.5rem;
+  text-align: right;
 }
 .radiate_car_profile {
   color: red;
@@ -68,8 +71,8 @@
   font-weight: bolder;
   padding-left: 1rem;
   position: absolute;
-  top: 10%;
-  right: 2%;
+  top: 50%;
+  left: 3%;
 }
 @media screen and (max-width: 600px){
   .user-profile-container {

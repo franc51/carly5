@@ -34,16 +34,17 @@
   <div class="cars-section">
     <h2>Mașinile mele</h2>
 
-    <div class="car-card" *ngFor="let car of cars">
+    <div class="car-card-list" *ngFor="let vehicle of vehicles">
+      <img class="car-image" src="/assets/car.svg" alt="" />
       <div class="car-card-title">
-        <h4 class="car-model">{{ car.brand }} {{ car.model }}</h4>
-        <input value="{{ car.plate }}" readonly />
+        <h4 class="car-model">
+          {{ vehicle.vehicleManufacturer }} {{ vehicle.vehicleModel }}
+        </h4>
+        <input value="{{ vehicle.vehicleNumberPlate }}" readonly />
       </div>
       <div class="statusuri">
-        <p>{{ car.status }}</p>
         <p class="radiate_car_profile">Radiază</p>
       </div>
-      <img class="car-image" src="/assets/car.svg" alt="" />
     </div>
   </div>
 </div>

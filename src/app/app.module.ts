@@ -71,6 +71,7 @@ import { RadiationHistoryComponent } from './containers/radiation-history/radiat
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 import { DatePipe } from '@angular/common';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PaymentFailComponent } from './payments/payment-fail/payment-fail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,6 +98,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     RadiationHistoryComponent,
     ImageGalleryComponent,
     UserProfileComponent,
+    PaymentFailComponent,
   ],
   imports: [
     UcWidgetModule,
