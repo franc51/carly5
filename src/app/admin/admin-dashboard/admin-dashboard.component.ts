@@ -105,7 +105,7 @@ export class AdminDashboardComponent implements OnInit {
 
   onApproveVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     updatedVehicle.status = 'Aprobat';
-    updatedVehicle.details = 'Certif. de înm, și nr. de înm. au fost trimise la adr. din CI';
+    updatedVehicle.details = 'Înmatriculare aprobată';
 
     this.firebaseService.updateVehicle(updatedVehicle._id, updatedVehicle).subscribe(
       (response: VehicleRegistration) => {

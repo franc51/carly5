@@ -11,7 +11,7 @@ cars = [
   {
     brand: 'Volkswagen',
     model: 'GOLF',
-    plate: 'B-123-ABC',
+    plate: 'BV 12 AJK',
     vin: '1234567890',
     year: 2015,
     status: 'Înmatriculat'
@@ -19,7 +19,7 @@ cars = [
   {
     brand: 'Dacia',
     model: 'DUSTER',
-    plate: 'CJ-99-XYZ',
+    plate: 'BV 99 XYZ',
     vin: '9876543210',
     year: 2020,
     status: 'Înmatriculat'

@@ -5,12 +5,22 @@
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Nume</mat-label>
-      <input matInput placeholder="Popescu" />
+      <input matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Prenume</mat-label>
+      <input matInput />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="popescu@email.com" />
+      <input matInput type="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Telefon</mat-label>
+      <input matInput type="number" maxlength="10" minlength="10" required="" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
@@ -18,7 +28,7 @@
       <input matInput type="password" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Salvează</button>
+    <button mat-raised-button color="primary" size>Salvează</button>
   </form>
 
   <div class="cars-section">
@@ -27,9 +37,12 @@
     <div class="car-card" *ngFor="let car of cars">
       <div class="car-card-title">
         <h4 class="car-model">{{ car.brand }} {{ car.model }}</h4>
-        <p>{{ car.plate }}</p>
+        <input value="{{ car.plate }}" readonly />
       </div>
-      <p>{{ car.status }}</p>
+      <div class="statusuri">
+        <p>{{ car.status }}</p>
+        <p class="radiate_car_profile">Radiază</p>
+      </div>
       <img class="car-image" src="/assets/car.svg" alt="" />
     </div>
   </div>
