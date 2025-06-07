@@ -9,6 +9,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  padding: 1rem;
 }
 .spinner{
   background-color: rgba(0, 174, 255, 0.075);
@@ -31,7 +33,12 @@
   background-color: rgba(0, 140, 255, 0.048);
   border: 1px solid rgb(230, 224, 224);
   padding: 1rem;
-  width: 30rem;
+  max-width: 30rem;
+  box-shadow: 2px 3px 10px 3px rgba(128, 128, 128, 0.427);
+}
+.carly_operatiuni {
+  display: flex;
+  gap: 1rem;
 }
 .nav-opener {
   color: rgb(85, 125, 212) !important;

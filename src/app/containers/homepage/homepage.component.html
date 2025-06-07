@@ -5,7 +5,9 @@
   </nav>
   <div class="container">
     <div class="homepage-content">
-      <div class="spinner" *ngIf="auth.isLoading$ | async"><mat-spinner></mat-spinner></div>
+      <div class="spinner" *ngIf="auth.isLoading$ | async">
+        <mat-spinner></mat-spinner>
+      </div>
 
       <mat-sidenav-container
         class="example-container"
@@ -13,7 +15,10 @@
       >
         <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav1">
           <app-dashboard></app-dashboard>
-          <mat-spinner class="spinner" *ngIf="auth.isLoading$ | async"></mat-spinner>
+          <mat-spinner
+            class="spinner"
+            *ngIf="auth.isLoading$ | async"
+          ></mat-spinner>
         </mat-sidenav>
 
         <mat-sidenav-content class="sidenav">
@@ -27,37 +32,60 @@
     </div>
   </div>
   <div *ngIf="(auth.isAuthenticated$ | async) === false" class="home">
-    <div class="notauth">
-      <h2>Înmatriculare vehicule</h2>
-    <p>Pentru a înmatricula un vehicul trebuie să fii logat în contul tău.</p>
-     <form #form="ngForm">
-     <button mat-raised-button class="programeaza">
-       <mat-icon >border_color</mat-icon>
-       înmatriculare
-     </button>
-     </form>
+    <div>
+      <h2>Bun venit pe carly!</h2>
+      <h3>
+        Pentru operațiunile de mai jos, vă rugăm autentificați-vă în contul de
+        utilizator. Dacă nu aveți un cont, puteți creea unul pe pagina de
+        logare/autentificare.
+      </h3>
     </div>
 
-    <div class="notauth">
-      <h2>Radiere vehicule</h2>
-    <p>Pentru a radia un vehicul trebuie să fii logat în contul tău.</p>
-     <form #form="ngForm">
-     <button mat-raised-button color="warn" class="programeaza">
-       <mat-icon >border_color</mat-icon>
-       Radiază
-     </button>
-     </form>
-    </div>
+    <div class="carly_operatiuni">
+      <div class="notauth">
+        <h2>Înmatriculare vehicule</h2>
+        <form #form="ngForm">
+          <button
+            (click)="auth.loginWithRedirect()"
+            mat-raised-button
+            color="primary"
+            class="programeaza"
+          >
+            <mat-icon>border_color</mat-icon>
+            înmatriculare
+          </button>
+        </form>
+      </div>
 
-    <div class="notauth">
-      <h2>Programare inspecție tehnică periodică sau RAR</h2>
-     <form #form="ngForm">
+      <div class="notauth">
+        <h2>Radiere vehicule</h2>
+        <form #form="ngForm">
+          <button
+            (click)="auth.loginWithRedirect()"
+            mat-raised-button
+            color="warn"
+            class="programeaza"
+          >
+            <mat-icon>border_color</mat-icon>
+            Radiază
+          </button>
+        </form>
+      </div>
 
-     <button mat-raised-button class="programeaza">
-       <mat-icon >border_color</mat-icon>
-       Programează
-     </button>
-     </form>
+      <div class="notauth">
+        <h2>Rezervare număr</h2>
+        <form #form="ngForm">
+          <button
+            (click)="auth.loginWithRedirect()"
+            mat-raised-button
+            color="primary"
+            class="programeaza"
+          >
+            <mat-icon>border_color</mat-icon>
+            Rezervă
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
