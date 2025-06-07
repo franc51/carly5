@@ -6,14 +6,13 @@ import { TechnicalAppointmentComponent } from './containers/technical-appointmen
 import { TaxesComponent } from './containers/taxes/taxes.component';
 import { ContactComponent } from './containers/contact/contact.component';
 import { HelpComponent } from './containers/help/help.component';
-import { ProfileComponent } from './containers/profile/profile.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { RegistrationsComponent } from './containers/registrations/registrations.component';
 import { ReserveContainerComponent } from './containers/reserve-container/reserve-container.component';
 import { RadiationsComponent } from './containers/radiations/radiations.component';
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { PaymentFailComponent } from './payments/payment-fail/payment-fail.component';
+import { PaymentConfirmationComponent } from './payments/payment-confirmation/payment-confirmation.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
@@ -26,7 +25,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },
   { path: 'admin/image-gallery', component: ImageGalleryComponent, pathMatch: 'full' },
-  { path: 'payment-fail', component: PaymentFailComponent },
+  { path: 'payment-confirmation', component: PaymentConfirmationComponent}
 ];
 
 @NgModule({

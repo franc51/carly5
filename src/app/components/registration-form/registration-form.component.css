@@ -6,15 +6,21 @@
   border-radius: 0.5rem;
   text-align: center;
   border-radius: 2px;
-  margin: 1rem;
+  margin: 3rem 0;
   background-color: white !important;
-  box-shadow: 1px 10px 20px 10px rgba(128, 128, 128, 0.248);
-  border: 1px solid rgba(128, 128, 128, 0.252);
+  border: 1px solid rgba(128, 128, 128, 0.356);
   border-radius: 4px;
-  max-width: 30rem;
+  max-width: 45rem;
 }
 .formabro {
   padding: 1rem 0.5rem !important;
+  gap: 1rem;
+}
+.form-field {
+  margin-right: 0.5rem;
+}
+.titlu_descriere {
+  padding-bottom: 1rem;
 }
 
 .history-below {

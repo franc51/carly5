@@ -71,7 +71,7 @@ import { RadiationHistoryComponent } from './containers/radiation-history/radiat
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 import { DatePipe } from '@angular/common';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { PaymentFailComponent } from './payments/payment-fail/payment-fail.component';
+import { PaymentConfirmationComponent } from './payments/payment-confirmation/payment-confirmation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +98,7 @@ import { PaymentFailComponent } from './payments/payment-fail/payment-fail.compo
     RadiationHistoryComponent,
     ImageGalleryComponent,
     UserProfileComponent,
-    PaymentFailComponent,
+    PaymentConfirmationComponent,
   ],
   imports: [
     UcWidgetModule,

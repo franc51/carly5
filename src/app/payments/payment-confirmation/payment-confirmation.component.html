@@ -1,0 +1,11 @@
+<div class="payment-succes-container">
+  <h2>Plata a fost efectuată cu succes!</h2>
+  <p>Ai rezervat cu succes numărul:</p>
+  <input value="{{ plate.reservedVehicleNumberPlate }}" readonly />
+  <br />
+  <p>
+    Numarul este valabil pana la data de:
+    {{ plate.availability | date : "mediumDate" }}
+  </p>
+  <img src="/assets/bought.gif" alt="" />
+</div>

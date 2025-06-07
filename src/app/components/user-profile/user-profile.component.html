@@ -33,7 +33,6 @@
 
   <div class="cars-section">
     <h2>Mașinile mele</h2>
-
     <div class="car-card-list" *ngFor="let vehicle of vehicles">
       <img class="car-image" src="/assets/car.svg" alt="" />
       <div class="car-card-title">
@@ -43,7 +42,21 @@
         <input value="{{ vehicle.vehicleNumberPlate }}" readonly />
       </div>
       <div class="statusuri">
-        <p class="radiate_car_profile">Radiază</p>
+        <p routerLink="/register-vehicle" class="radiate_car_profile">
+          Radiază
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cars-section">
+    <h2>Rezervările mele</h2>
+    <div class="car-card-list" *ngFor="let plate of reservedNumberPlates">
+      <div class="reserved_plates_list">
+        <input value="{{ plate.reservedVehicleNumberPlate }}" readonly />
+      </div>
+      <div class="data_valabila_rezervare">
+        <p>Valabil până la: {{ plate.availability | date : "shortDate" }}</p>
       </div>
     </div>
   </div>

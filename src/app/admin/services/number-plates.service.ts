@@ -7,6 +7,7 @@ import { VehicleRegistration } from '../../model/vehicle-registration';
 import { HttpClient } from '@angular/common/http';
 import { NumberPlates } from '../../models/number-plates';
 import { throwError } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class NumberPlatesService {
   private analytics!: Analytics;
   private database!: Database;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   private databaseUrl = 'https://reserved-plates.firebaseio.com';
 
@@ -39,24 +40,25 @@ export class NumberPlatesService {
   );
 }
 
-  getPlates(userEmail: string): Observable<NumberPlates[]> {
-    const url = `${this.databaseUrl}/number-plates.json`;
-    return this.http.get<{ [key: string]: NumberPlates }>(url).pipe(
-      map((response) => {
-        const plates: NumberPlates[] = [];
-        for (const key in response) {
-          if (response.hasOwnProperty(key) && response[key].ownerEmail === userEmail) {
-            plates.push({ ...response[key], _id: key });
-          }
+ getPlates(userEmail: string): Observable<NumberPlates[]> {
+  const url = `${this.databaseUrl}/number-plates.json`;
+  return this.http.get<{ [key: string]: NumberPlates }>(url).pipe(
+    map((response) => {
+      const plates: NumberPlates[] = [];
+      for (const key in response) {
+        if (response.hasOwnProperty(key) && response[key].ownerEmail === userEmail) {
+          plates.push({ ...response[key], _id: key });
         }
-        return plates;
-      }),
-      catchError((error) => {
-        console.error('Error fetching number plates:', error);
-        return throwError(error);
-      })
-    );
-  }
+      }
+      return plates;
+    }),
+    catchError((error) => {
+      console.error('Error fetching number plates:', error);
+      return throwError(error);
+    })
+  );
+}
+
 
   createReservedNumberPlate(
     reservedNumberPlate: NumberPlates

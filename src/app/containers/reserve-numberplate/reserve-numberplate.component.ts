@@ -9,13 +9,11 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reserve-numberplate',
   templateUrl: './reserve-numberplate.component.html',
   styleUrl: './reserve-numberplate.component.css',
-  providers: [DatePipe]
 })
 export class ReserveNumberplateComponent implements OnInit {
   @Output() reserve = new EventEmitter<NumberPlates>();
@@ -72,7 +70,6 @@ export class ReserveNumberplateComponent implements OnInit {
     public auth: AuthService,
     private firebaseService: FirebaseService,
     private numberPlateService: NumberPlatesService,
-    private datePipe: DatePipe
   ) {}
 
    ngOnInit(): void {
@@ -99,6 +96,7 @@ export class ReserveNumberplateComponent implements OnInit {
         ownerEmail: this.userEmail,
       };
       this.reserve.emit(reservedNumberPlate);
+      localStorage.removeItem("ReservedPlates");
       localStorage.setItem("ReservedPlates", JSON.stringify(reservedNumberPlate));
       console.log("OncreateReservation method: " , reservedNumberPlate);
       this.plateReservedSuccesfully = true;

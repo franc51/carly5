@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-payment-succes',
-  templateUrl: './payment-succes.component.html',
-  styleUrl: './payment-succes.component.css'
+  selector: 'app-payment-confirmation',
+  templateUrl: './payment-confirmation.component.html',
+  styleUrl: './payment-confirmation.component.css'
 })
-export class PaymentSuccesComponent {
-  plate: any;
+export class PaymentConfirmationComponent {
+ plate: any;
 
   ngOnInit(): void {
     this.plate = JSON.parse(localStorage.getItem("ReservedPlates") || '{}');

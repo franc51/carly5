@@ -34,11 +34,7 @@
         #reservedVehicleNumberPlate="ngModel"
         [(ngModel)]="userInput"
       />
-      <stripe-buy-button
-        buy-button-id="buy_btn_1RXMLQGp7vH5JHkmJxGtZHk5"
-        publishable-key="pk_test_51OyFNWGp7vH5JHkmYmIuUgLwE8bpfV5yiC5FLjegyZRCVeBUiNDSKCjXBaogH1jphLiglzc6rYMeOQCvnKCa9TPe0040lzxPVO"
-      >
-      </stripe-buy-button>
+      <p class="pret">RON 14,99</p>
       <ng-container *ngIf="isReserved">
         <p>
           <strong class="error">Numărul este deja rezervat!</strong>
