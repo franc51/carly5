@@ -4,7 +4,7 @@
   <input value="{{ plate.reservedVehicleNumberPlate }}" readonly />
   <br />
   <p>
-    Numarul este valabil pana la data de:
+    Rezervarea este valabilă până la data de:
     {{ plate.availability | date : "mediumDate" }}
   </p>
   <img src="/assets/bought.gif" alt="" />
