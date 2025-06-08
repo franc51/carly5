@@ -32,6 +32,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   @Output() create = new EventEmitter<{
     vehicle: VehicleRegistration;
     files: OutputFileEntry<'success'>[];
+    reservedPlateId: string | null;
   }>();
 
   @Input() vehicle!: VehicleRegistration;
@@ -116,10 +117,7 @@ onCreateVehicle(form: NgForm): void {
           this.snackBar.open('Numărul este deja rezervat de altcineva!', 'Închide', { duration: 5000 });
           return;
         } else {
-          // Reserved by current user — allow submission and then delete reservation
-          this.submitVehicle(form, () => {
-            this.deleteReservedPlateByUserInput(this.userInput);
-          });
+          this.submitVehicle(form);
         }
       });
     } else {
@@ -127,27 +125,6 @@ onCreateVehicle(form: NgForm): void {
       this.submitVehicle(form);
     }
   });
-}
-
-// Helper method to delete reserved plate after submission
-deleteReservedPlateByUserInput(plate: string): void {
-  const reservedPlateId = this.findReservedPlateId(plate);
-  if (reservedPlateId) {
-    this.numberPlateService.deleteReservedNumberPlate(reservedPlateId).subscribe({
-      next: () => {
-        this.snackBar.open('Numărul rezervat a fost eliminat din lista rezervărilor.', 'Închide', { duration: 3000 });
-        // Update local reserved plates lists
-        this.reservedPlates = this.reservedPlates.filter(p => p._id !== reservedPlateId);
-        this.filteredPlates = this.reservedPlates
-       .map(p => p.reservedVehicleNumberPlate.toUpperCase())
-       .filter(plate => plate.includes(this.userInput));
-      },
-      error: (err) => {
-        console.error('Eroare la ștergerea numărului rezervat:', err);
-        this.snackBar.open('Ștergerea numărului rezervat a eșuat.', 'Închide', { duration: 3000 });
-      }
-    });
-  }
 }
 
 
@@ -170,7 +147,12 @@ submitVehicle(form: NgForm, callback?: () => void): void {
     vehicleNumberPlate: this.userInput,
   };
 
-  this.create.emit({ vehicle: newVehicle, files: this.files });
+  this.create.emit({
+  vehicle: newVehicle,
+  files: this.files,
+  reservedPlateId: this.findReservedPlateId(this.userInput),
+});
+
   form.resetForm();
   this.isReserved = false;
   this.isRegistered = false;
@@ -187,22 +169,15 @@ submitVehicle(form: NgForm, callback?: () => void): void {
   }
 }
 
-
-findReservedPlateId(plate: string): string | null {
-  const found = this.reservedPlates.find(
-    (p) => p.reservedVehicleNumberPlate.toUpperCase() === plate.toUpperCase()
-  );
-  return found?._id || null;
-}
-
- onUserInputChange(value: string): void {
-  // Force uppercase
+onUserInputChange(value: string): void {
+  // Force uppercase only for user input
   this.userInput = value.toUpperCase();
-  // Filter autocomplete list
+  // Filter autocomplete list, reservedVehicleNumberPlate is already uppercase
   this.filteredPlates = this.reservedPlates
-    .map(p => p.reservedVehicleNumberPlate.toUpperCase())
+    .map(p => p.reservedVehicleNumberPlate)
     .filter(plate => plate.includes(this.userInput));
 }
+
 
 
   isInputMatchingPattern(input: string): boolean {
@@ -272,6 +247,12 @@ checkPlateStatus(userInput: string, callback: () => void): void {
   );
 }
 
+findReservedPlateId(plate: string): string | null {
+  const found = this.reservedPlates.find(
+    (p) => p.reservedVehicleNumberPlate.toUpperCase() === plate.toUpperCase()
+  );
+  return found?._id || null;
+}
 
   recommendNextAvailablePlate(
     basePlate: string,

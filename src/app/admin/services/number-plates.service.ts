@@ -21,21 +21,24 @@ export class NumberPlatesService {
 
   private databaseUrl = 'https://reserved-plates.firebaseio.com';
 
-  getAllReservedNumberPlates(): Observable<string[]> {
+getAllReservedNumberPlates(): Observable<{ _id: string; reservedVehicleNumberPlate: string }[]> {
   const url = `${this.databaseUrl}/number-plates.json`;
-  return this.http.get<{ [key: string]: NumberPlates }>(url).pipe(
-    map((response) => {
-      const allPlates: string[] = [];
-      for (const key in response) {
-        if (response.hasOwnProperty(key)) {
-          allPlates.push(response[key].reservedVehicleNumberPlate.toUpperCase());
+  return this.http.get<{ [key: string]: any }>(url).pipe(
+    map(data => {
+      const plates: { _id: string; reservedVehicleNumberPlate: string }[] = [];
+      for (const key in data) {
+        if (data.hasOwnProperty(key) && data[key].reservedVehicleNumberPlate) {
+          plates.push({
+            _id: key,
+            reservedVehicleNumberPlate: data[key].reservedVehicleNumberPlate,
+          });
         }
       }
-      return allPlates;
+      return plates;
     }),
-    catchError((error) => {
-      console.error('Error fetching all reserved plates:', error);
-      return of([]); // return empty array on error to avoid crashing
+    catchError(error => {
+      console.error('Error fetching reserved plates:', error);
+      return throwError(() => new Error('Error fetching reserved plates: ' + error.message));
     })
   );
 }

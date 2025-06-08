@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { HttpClient } from '@angular/common/http';
 import { VehicleRegistration } from '../../model/vehicle-registration';
 import { NumberPlates } from '../../models/number-plates';
 import { NumberPlatesService } from '../../admin/services/number-plates.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogRadiationComponent } from '../dialog-radiation/dialog-radiation.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,7 +17,9 @@ export class UserProfileComponent implements OnInit {
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
   userEmail!: string;
-  isLoadingResults = true;
+  isLoadingVehicles = true;
+  isLoadingPlates = true;
+
   dataSource: VehicleRegistration[] = [];
 
   constructor(
@@ -25,12 +29,17 @@ export class UserProfileComponent implements OnInit {
     private router: Router
   ) {}
 
+  get isLoadingResults(): boolean {
+  return this.isLoadingVehicles || this.isLoadingPlates;
+}
+
   ngOnInit() {
     this.loadRegisteredVehiclesForUser();
     this.loadPlatesForUser();
   }
 
   loadRegisteredVehiclesForUser() {
+    this.isLoadingVehicles = true;
     this.auth.user$.subscribe(user => {
       if (user && user.email) {
         this.userEmail = user.email;
@@ -42,18 +51,21 @@ export class UserProfileComponent implements OnInit {
             );
             this.vehicles.reverse();
             this.dataSource = this.vehicles;
-            this.isLoadingResults = false;
+            this.isLoadingVehicles = false;
           },
           (error) => {
             console.error('Error fetching vehicles:', error);
-            this.isLoadingResults = false;
+            this.isLoadingVehicles = false;
           }
+          
         );
+        this.isLoadingVehicles = false;
       }
     });
   }
 
   loadPlatesForUser() {
+    this.isLoadingPlates = true;
     this.auth.user$.subscribe(user => {
       if (user && user.email) {
         this.userEmail = user.email;
@@ -74,11 +86,44 @@ export class UserProfileComponent implements OnInit {
           this.reservedNumberPlates = plates.filter(
             plate => new Date(plate.availability) >= currentDate
           ).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+          this.isLoadingPlates = false;
 
         }, error => {
           console.error('Error fetching number plates:', error);
+          this.isLoadingPlates = false;
         });
       }
     });
   }
+
+   readonly dialog = inject(MatDialog);
+
+openRadiationDialog(vehicle: VehicleRegistration): void {
+  const dialogRef = this.dialog.open(DialogRadiationComponent, {
+    width: '350px',
+    data: { vehicle: vehicle.vehicleNumberPlate },
+    enterAnimationDuration: '300ms',
+    exitAnimationDuration: '200ms',
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === true) {
+      this.deleteVehicleRegistration(vehicle); // logică efectivă de ștergere
+    }
+  });
+}
+
+deleteVehicleRegistration(vehicle: VehicleRegistration): void {
+  // exemplu pentru Firebase Realtime DB
+  const url = `https://vehicles-9f2ad.firebaseio.com/vehicles/${vehicle._id}.json`;
+  this.http.delete(url).subscribe({
+    next: () => {
+      console.log('Vehicul radiat:', vehicle.vehicleNumberPlate);
+      this.vehicles = this.vehicles.filter(v => v._id !== vehicle._id);
+      this.dataSource = [...this.vehicles];
+    },
+    error: err => console.error('Eroare la radiere:', err),
+  });
+}
+
 }

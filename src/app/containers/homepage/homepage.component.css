@@ -7,10 +7,14 @@
 .home {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   padding: 1rem;
+  background-image: url('/assets/22.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 30%;
+  height: 100vh;
 }
 .spinner{
   background-color: rgba(0, 174, 255, 0.075);
@@ -28,13 +32,11 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin-top: 1rem;
   border-radius: 4px;
-  background-color: rgba(0, 140, 255, 0.048);
   border: 1px solid rgb(230, 224, 224);
   padding: 1rem;
   max-width: 30rem;
-  box-shadow: 2px 3px 10px 3px rgba(128, 128, 128, 0.427);
+  background-color: white;
 }
 .carly_operatiuni {
   display: flex;
@@ -83,7 +85,6 @@
 
 .homepage-content{
   box-shadow: 2px 2px 20px 2px gray;
-
 }
 .loading {
   height: 100vh;
@@ -128,6 +129,15 @@
     -6px 24px 4px 1px, -14px 35px 6px 2px, -5px 36px 8px 2px, -5px 45px 8px 2px,
     -14px 49px 8px 2px, 6px 60px 11px 1px, -11px 66px 11px 1px, 11px 75px 13px,
     -1px 82px 15px;
+}
+
+.sidenav {
+  background-image: url('/assets/22.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 30%;
+  height: 100vh;
+  margin: 0;
 }
 
 @keyframes rotate {

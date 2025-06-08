@@ -42,9 +42,13 @@
         <input value="{{ vehicle.vehicleNumberPlate }}" readonly />
       </div>
       <div class="statusuri">
-        <p routerLink="/register-vehicle" class="radiate_car_profile">
+        <button
+          class="radiate_car_profile"
+          matButton="elevated"
+          (click)="openRadiationDialog(vehicle)"
+        >
           Radiază
-        </p>
+        </button>
       </div>
     </div>
     <ng-container *ngIf="vehicles.length === 0">

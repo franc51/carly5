@@ -42,6 +42,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // form
 import { MatAccordion } from '@angular/material/expansion';
@@ -74,6 +75,7 @@ import { ImageGalleryComponent } from './components/image-gallery/image-gallery.
 import { DatePipe } from '@angular/common';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PaymentConfirmationComponent } from './payments/payment-confirmation/payment-confirmation.component';
+import { DialogRadiationComponent } from './components/dialog-radiation/dialog-radiation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,8 +103,10 @@ import { PaymentConfirmationComponent } from './payments/payment-confirmation/pa
     ImageGalleryComponent,
     UserProfileComponent,
     PaymentConfirmationComponent,
+    DialogRadiationComponent,
   ],
   imports: [
+    MatDialogModule,
     MatAutocompleteModule,
     MatSnackBarModule,
     UcWidgetModule,
