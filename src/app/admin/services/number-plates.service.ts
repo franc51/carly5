@@ -97,5 +97,21 @@ export class NumberPlatesService {
     );
   }
 
+checkReservedPlateOwner(userInput: string): Observable<string | null> {
+  const url = `${this.databaseUrl}/number-plates.json`;
+  return this.http.get<any>(url).pipe(
+    map((data: { [key: string]: any }) => {
+      const entries = Object.values(data || {});
+      const found = entries.find((plate: any) =>
+        plate.reservedVehicleNumberPlate.toUpperCase() === userInput.toUpperCase()
+      );
+      return found ? found.ownerEmail : null;
+    }),
+    catchError(error => {
+      console.error('Error checking reserved plate owner:', error);
+      return throwError('Error fetching reserved plates: ' + error.message);
+    })
+  );
+}
 
 }

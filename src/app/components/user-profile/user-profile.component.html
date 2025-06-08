@@ -47,6 +47,18 @@
         </p>
       </div>
     </div>
+    <ng-container *ngIf="vehicles.length === 0">
+      <p>
+        Nu aveți nici-un autovehicul înmatriculat. Pentru a înmatricula un
+        autovehicul mergeți pe pagina de
+        <span routerLink="/register-vehicle" class="gotoreserve"
+          >Înmatriculări.</span
+        >
+      </p>
+    </ng-container>
+    <ng-container *ngIf="isLoadingResults">
+      <mat-spinner></mat-spinner>
+    </ng-container>
   </div>
 
   <div class="cars-section">
@@ -59,5 +71,17 @@
         <p>Valabil până la: {{ plate.availability | date : "shortDate" }}</p>
       </div>
     </div>
+    <ng-container *ngIf="reservedNumberPlates.length === 0">
+      <p>
+        Nu aveți nici-un număr rezervat. Dacă doriți să rezervați un număr
+        mergeți la
+        <span routerLink="/reserve-container" class="gotoreserve"
+          >Rezervări</span
+        >.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="isLoadingResults">
+      <mat-spinner></mat-spinner>
+    </ng-container>
   </div>
 </div>

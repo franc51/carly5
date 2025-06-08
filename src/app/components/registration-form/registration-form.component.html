@@ -2,7 +2,12 @@
   <mat-tab-group fitInkBarToContent>
     <mat-tab label="Înmatriculare / Radiere">
       <div class="register-form">
-        <form action="" #form="ngForm" class="formabro">
+        <form
+          action=""
+          #form="ngForm"
+          (ngSubmit)="onCreateVehicle(form)"
+          class="formabro"
+        >
           <div class="titlu_descriere">
             <p>
               Completați formularul apoi alegeți dacă înmatriculați sau radiați
@@ -111,15 +116,21 @@
             <input
               matInput
               type="text"
-              class="input"
               name="numberPlate"
-              oninput="this.value = this.value.toUpperCase()"
-              required
-              minlength="7"
-              maxlength="7"
               [(ngModel)]="userInput"
-              [ngModelOptions]="{ updateOn: 'submit' }"
+              (ngModelChange)="onUserInputChange($event)"
+              [matAutocomplete]="auto"
+              class="input"
+              required
+              minlength="6"
+              maxlength="7"
+              autocomplete="off"
             />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let plate of filteredPlates" [value]="plate">
+                {{ plate }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
@@ -136,13 +147,31 @@
           </mat-form-field>
 
           <!-- Form validations -->
-          <ng-container *ngIf="form.invalid">
-            <div class="error-message">
-              <p class="error">
-                Formularul conține erori. Verificați datele introduse.
-              </p>
-            </div>
-          </ng-container>
+          <div class="feedback-messages">
+            <p *ngIf="isNotMatchingPattern" class="error">
+              <strong>Numărul trebuie să fie de forma BV12ABC</strong>
+            </p>
+
+            <p *ngIf="isRegistered" class="error">
+              <strong>Numărul este deja înmatriculat!</strong>
+            </p>
+
+            <p *ngIf="isReserved" class="error">
+              <strong>Numărul este deja rezervat!</strong>
+            </p>
+
+            <p
+              *ngIf="
+                !isRegistered &&
+                !isReserved &&
+                !isNotMatchingPattern &&
+                userInput
+              "
+              class="success"
+            >
+              <strong>Numărul este disponibil pentru înmatriculare.</strong>
+            </p>
+          </div>
 
           <div class="upload">
             <uc-config
@@ -161,17 +190,13 @@
             ></uc-upload-ctx-provider>
           </div>
 
-          <ng-container *ngIf="form.valid">
+          <ng-container *ngIf="form.valid && form.submitted">
             <div class="success-message">
               <p class="success">Cerere trimisă cu succes!</p>
             </div>
           </ng-container>
 
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="onCreateVehicle(form)"
-          >
+          <button mat-raised-button color="primary" type="submit">
             Trimite cerere
           </button>
         </form>

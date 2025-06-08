@@ -64,6 +64,7 @@ h2 {
   margin: 1rem 5rem;
   border-radius: 8px;
   border: 1px solid rgba(0, 128, 0, 0.753);
+  font-weight: 900;
 }
 .wide-input{
   width: 400px;

@@ -106,79 +106,45 @@ export class ReserveNumberplateComponent implements OnInit {
     }
   }
 
-  searchNumberPlates(form: NgForm): void {
-    const userInput = form.value.reservedVehicleNumberPlate;
-    // Extract the number plate from the form
-   if(this.isMatchingPattern(userInput)){
-    this.isLoadingResults = true;
-    this.firebaseService.getAdminDashboard().subscribe(
-      (vehicles: VehicleRegistration[]) => {
-        console.log('Vehicles:', vehicles);
-        if (vehicles && Array.isArray(vehicles)) {
-          const plateExists = vehicles.some(
-            (vehicle) => vehicle.vehicleNumberPlate === userInput
-          );
-          this.isRegistered = plateExists;
-          console.log("registered: ",this.isRegistered);
-          console.log("plateExists: ", plateExists);
-        } else {
-          console.error('Error fetching vehicles: Invalid data format');
-        }
-        this.isLoadingResults = false;
-      },
-      (error: any) => {
-        console.error('Error fetching vehicles:', error);
-        this.isLoadingResults = false;
-      }
-    );
-   }
-}
-
-searchReservedNumberPlate(form: NgForm): void {
+ checkNumberPlate(form: NgForm): void {
+  this.isNotMatchingPattern = false;
+  this.isRegistered = false;
+  this.isReserved = false;
+  this.recommendedPlate = null;
   const userInput = form.value.reservedVehicleNumberPlate?.toUpperCase();
   if (!this.isMatchingPattern(userInput)) {
     this.isNotMatchingPattern = true;
     return;
   }
   this.isLoadingResults = true;
-  this.recommendedPlate = null;
-  // Check if plate is reserved
   this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
     (reservedPlateExists: boolean) => {
       this.isReserved = reservedPlateExists;
-      // Then get registered plates
       this.firebaseService.getAdminDashboard().subscribe(
         (vehicles: VehicleRegistration[]) => {
           this.isRegistered = vehicles.some(
-            (vehicle) => vehicle.vehicleNumberPlate.toUpperCase() === userInput
+            (v) => v.vehicleNumberPlate.toUpperCase() === userInput
           );
+          const reservedList = [userInput];
           const registeredList = vehicles.map(v => v.vehicleNumberPlate.toUpperCase());
-          // Now get all reserved plates
-          this.numberPlateService.getAllReservedNumberPlates().subscribe(
-            (reservedList: string[]) => {
-              if (this.isRegistered || this.isReserved) {
-                this.recommendedPlate = this.recommendNextAvailablePlate(userInput, reservedList, registeredList);
-              }
-              this.isLoadingResults = false;
-            },
-            (error) => {
-              console.error('Error getting reserved list:', error);
-              this.isLoadingResults = false;
-            }
-          );
+          if (this.isReserved || this.isRegistered) {
+            this.recommendedPlate = this.recommendNextAvailablePlate(userInput, reservedList, registeredList);
+          }
+          this.isLoadingResults = false;
         },
-        (error: any) => {
+        (error) => {
           console.error('Error fetching vehicles:', error);
           this.isLoadingResults = false;
         }
       );
     },
-    (error: any) => {
-      console.error('Error checking number plate:', error);
+    (error) => {
+      console.error('Error checking reservation:', error);
       this.isLoadingResults = false;
     }
   );
 }
+
 
  loadPlatesForUser(userEmail: string): void {
   this.auth.user$.subscribe((user) => {

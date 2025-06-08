@@ -2,6 +2,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FirebaseService } from './admin/services/firebase.service';
 
+import {MatSnackBarModule} from '@angular/material/snack-bar'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatNativeDateModule, MatDateFormats, NativeDateAdapter } from '@angular/material/core';
 
@@ -101,6 +103,8 @@ import { PaymentConfirmationComponent } from './payments/payment-confirmation/pa
     PaymentConfirmationComponent,
   ],
   imports: [
+    MatAutocompleteModule,
+    MatSnackBarModule,
     UcWidgetModule,
     MatAccordion,
     MatDialogClose,
