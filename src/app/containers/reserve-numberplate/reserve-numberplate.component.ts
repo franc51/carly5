@@ -75,6 +75,7 @@ export class ReserveNumberplateComponent implements OnInit {
    ngOnInit(): void {
     this.loadPlatesForUser(this.userEmail);
     this.isLoadingResults = false;
+    localStorage.removeItem("ReservedPlates");
   }
 
   isMatchingPattern(userInput: string): boolean {
@@ -96,7 +97,6 @@ export class ReserveNumberplateComponent implements OnInit {
         ownerEmail: this.userEmail,
       };
       this.reserve.emit(reservedNumberPlate);
-      localStorage.removeItem("ReservedPlates");
       localStorage.setItem("ReservedPlates", JSON.stringify(reservedNumberPlate));
       console.log("OncreateReservation method: " , reservedNumberPlate);
       this.plateReservedSuccesfully = true;

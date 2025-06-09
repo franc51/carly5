@@ -1,3 +1,6 @@
+.spinner {
+  margin-left: 12rem;
+}
 .red {
   height: 40rem;
   width: 50vw;
@@ -17,7 +20,7 @@ p{
 }
 .pret{
   background-color: rgba(9, 255, 0, 0.411);
-  border-radius: 0.5rem;
+  border-radius: 4px;
   padding: 0.3rem 0.7rem;
   font-weight: 900;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,14 +28,11 @@ p{
 }
 
 .register-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  margin-left: 1rem;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll !important;
+  position: relative;
 }
 .register-container::-webkit-scrollbar {
   display: none !important; /* for Chrome, Safari, and Opera */
@@ -41,9 +41,11 @@ p{
 .app-numberplate-check {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   text-align: center;
-  background-color: #d0e7ff;
-  border-radius: 0.5rem;
-  max-width: 400px;
+  background-color: white;
+  border: 1px solid rgba(128, 128, 128, 0.448);
+  border-radius: 4px;
+  max-width: 25rem;
+  margin: 0.5rem;
 }
 label {
   display: flex;
@@ -104,8 +106,13 @@ h3 {
 }
 
 .reserved-numberplates-history {
-  margin: 1rem;
+  margin: 0.5rem;
   width: 25rem;
+}
+.reserved-numberplates-history table {
+  box-shadow: none;
+  border: 1px solid rgba(128, 128, 128, 0.455);
+  border-radius: 4px;
 }
 
 @media only screen and (max-width: 600px) {

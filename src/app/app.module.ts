@@ -76,6 +76,7 @@ import { DatePipe } from '@angular/common';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PaymentConfirmationComponent } from './payments/payment-confirmation/payment-confirmation.component';
 import { DialogRadiationComponent } from './components/dialog-radiation/dialog-radiation.component';
+import  emailjs  from "@emailjs/browser"; 
 @NgModule({
   declarations: [
     AppComponent,

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { NumberPlatesService } from '../services/number-plates.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import emailjs from "@emailjs/browser";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -117,11 +118,34 @@ export class AdminDashboardComponent implements OnInit {
         if (index !== -1) {
           this.vehicles[index] = response;
           this.dataSource = [...this.vehicles];
-          location.reload();
         }
       },
       (error) => {
         console.error('Error updating vehicle:', error);
+      }
+    );
+     const templateParams = {
+      email: updatedVehicle.ownerEmail,
+      owner_name: updatedVehicle.ownerName,
+      owner_surname: updatedVehicle.ownerSurname,
+      vehicle_manufacturer: updatedVehicle.vehicleManufacturer,
+      vehicle_model: updatedVehicle.vehicleModel,
+      vin: updatedVehicle.vehicleVinNumber,
+      number_plate: updatedVehicle.vehicleNumberPlate,
+    };
+    emailjs
+    .send(
+      'service_1xewkt5',      
+      'template_vfzk977',     
+      templateParams,
+      'KSKcnRkzisR40rcif'
+    )
+    .then(
+      (response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+      },
+      (error) => {
+        console.error('Email sending failed!', error);
       }
     );
   }
@@ -136,14 +160,42 @@ onApproveVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
 
       const index = this.vehicles.findIndex((vehicle) => vehicle._id === response._id);
       if (index !== -1) {
-        this.vehicles[index] = response;
+        this.vehicles.splice(index, 1);
         this.dataSource = [...this.vehicles];
 
-        // Debug: afiseaza numarul de inmatriculare care se sterge
-        console.log('Ștergem rezervarea aferentă numărului aprobat:', response.vehicleNumberPlate);
+        
 
         // Ștergem rezervarea aferentă numărului aprobat
+        if(this.reservedPlates.some(p => p.reservedVehicleNumberPlate === response.vehicleNumberPlate)){
         this.deleteReservedPlateByUserInput(response.vehicleNumberPlate);
+        }
+    this.snackBar.open('Înmatriculare aprobată', 'Închide', { duration: 9000 });
+    
+
+    const templateParams = {
+      email: updatedVehicle.ownerEmail,
+      owner_name: updatedVehicle.ownerName,
+      owner_surname: updatedVehicle.ownerSurname,
+      vehicle_manufacturer: updatedVehicle.vehicleManufacturer,
+      vehicle_model: updatedVehicle.vehicleModel,
+      vin: updatedVehicle.vehicleVinNumber,
+      number_plate: updatedVehicle.vehicleNumberPlate,
+    };
+    emailjs
+    .send(
+      'service_1xewkt5',      
+      'template_vfzk977',     
+      templateParams,
+      'KSKcnRkzisR40rcif'
+    )
+    .then(
+      (response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+      },
+      (error) => {
+        console.error('Email sending failed!', error);
+      }
+    );
       }
     },
     (error) => {
@@ -151,8 +203,6 @@ onApproveVehicle(form: NgForm, updatedVehicle: VehicleRegistration): void {
     }
   );
 }
-
-
 
 // Helper method to delete reserved plate after submission
 deleteReservedPlateByUserInput(plate: string): void {
@@ -163,7 +213,7 @@ deleteReservedPlateByUserInput(plate: string): void {
     this.numberPlateService.deleteReservedNumberPlate(reservedPlateId).subscribe({
       next: () => {
         console.log('Reserved plate deleted successfully:', reservedPlateId);
-        this.snackBar.open('Numărul rezervat a fost folosit pentru înmatriculare', 'Închide', { duration: 9000 });
+        this.snackBar.open('Înmatriculare aprobată', 'Închide', { duration: 9000 });
 
         this.reservedPlates = this.reservedPlates.filter(p => p._id !== reservedPlateId);
 

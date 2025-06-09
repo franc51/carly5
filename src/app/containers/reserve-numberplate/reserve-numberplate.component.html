@@ -114,7 +114,9 @@
       </button>
     </div>
   </div>
-  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  <div class="spinner">
+    <mat-spinner diameter="30" *ngIf="isLoadingResults"></mat-spinner>
+  </div>
   <div *ngIf="dataSource.length === 0">
     <p>Nu aveti inca numere rezervate.</p>
   </div>

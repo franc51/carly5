@@ -19,6 +19,7 @@ import { OutputFileEntry } from '@uploadcare/blocks';
 import { FirebaseService } from '../../admin/services/firebase.service';
 import { NumberPlatesService } from '../../admin/services/number-plates.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import emailjs from '@emailjs/browser';
 
 UC.defineComponents(UC);
 
@@ -167,6 +168,31 @@ submitVehicle(form: NgForm, callback?: () => void): void {
   if (callback) {
     callback();
   }
+
+   const templateParams = {
+      email: this.userEmail,
+      owner_name: newVehicle.ownerName,
+      owner_surname: newVehicle.ownerSurname,
+      vehicle_manufacturer: newVehicle.vehicleManufacturer,
+      vehicle_model: newVehicle.vehicleModel,
+      vin: newVehicle.vehicleVinNumber,
+      number_plate: newVehicle.vehicleNumberPlate,
+    };
+    emailjs
+    .send(
+      'service_1xewkt5',      
+      'template_5daawgj',     
+      templateParams,
+      'KSKcnRkzisR40rcif'
+    )
+    .then(
+      (response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+      },
+      (error) => {
+        console.error('Email sending failed!', error);
+      }
+    );
 }
 
 onUserInputChange(value: string): void {
