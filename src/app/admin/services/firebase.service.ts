@@ -4,7 +4,9 @@ import { Analytics } from 'firebase/analytics';
 import { Database } from 'firebase/database';
 import { Observable, catchError, from, map } from 'rxjs';
 import { VehicleRegistration } from '../../model/vehicle-registration';
+import { User } from '../../model/users.model';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +16,10 @@ export class FirebaseService {
   private analytics!: Analytics;
   private database!: Database;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   private databaseUrl = 'https://vehicles-9f2ad.firebaseio.com';
+  private usersUrl = 'https://users-acb6a.firebaseio.com';
 
   createVehicle(vehicle: VehicleRegistration): Observable<any> {
     const url = `${this.databaseUrl}/vehicles.json`;
@@ -54,6 +57,29 @@ export class FirebaseService {
     const url = `${this.databaseUrl}/vehicles/${vehicleId}.json`;
     return this.http.put(url, updatedVehicle);
   }
+
+   updateUser(
+    userId: string,
+    updatedUser: User
+  ): Observable<any> {
+    const url = `${this.usersUrl}/users/${userId}.json`;
+    return this.http.put(url, updatedUser);
+  }
+
+ saveUserProfile(userId: string, userData: User): Observable<any> {
+  const url = `${this.usersUrl}/users/${userId}.json`;
+  this.snackBar.open("Profil salvat cu succes.","Închide");
+  return this.http.put(url, userData);
+
+}
+
+getUserProfile(userId: string): Observable<User> {
+  const url = `${this.usersUrl}/users/${userId}.json`;
+  return this.http.get<User>(url);
+}
+
+
+
   getAllNumberPlates(): Observable<VehicleRegistration[]> {
     const url = `${this.databaseUrl}/vehicles.json`;
     return this.http.get<VehicleRegistration[]>(url);

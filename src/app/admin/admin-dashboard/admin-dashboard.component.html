@@ -1,6 +1,6 @@
 <div class="content">
-  <mat-tab-group>
-    <mat-tab label="Cereri înmatriculare / radiere">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Cereri înmatriculare">
       <div class="register-history">
         <div>
           <div>
@@ -165,7 +165,10 @@
               </table>
             </ng-container>
             <ng-container *ngIf="!vehicles.length">
-              <p>Nu sunt cereri de inmatriculare</p>
+              <p>Încă nu există cereri de inmatriculare</p>
+            </ng-container>
+            <ng-container *ngIf="isLoadingResults">
+              <mat-spinner></mat-spinner>
             </ng-container>
           </div>
         </div>

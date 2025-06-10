@@ -1,0 +1,47 @@
+.app_container {
+    display: flex;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(128, 128, 128, 0.241);
+    text-align: center;
+    background-color: white;
+}
+.appointment_list {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 1rem;
+}
+.appointment_item {
+    background-color: rgba(0, 255, 0, 0.189);
+    padding: 1rem;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.736);
+    width: 14rem;
+    position: relative;
+}
+.appointment_item mat-icon {
+    position: absolute;
+    top: 7%;
+    right: 7%;
+}
+.appointment_item .delete {
+    position: absolute;
+    top: 82%;
+    right: 2%;
+}
+.margin_bro {
+    margin-left: 1rem;
+}
+.app_history_container {
+    background-color: white;
+    padding: 1rem;
+    margin: 1rem;
+    margin-left: 0;
+    border-radius: 4px;
+    border: 1px solid rgba(128, 128, 128, 0.251);
+}

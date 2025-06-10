@@ -9,6 +9,7 @@ import { ReserveContainerComponent } from '../reserve-container/reserve-containe
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reserve-numberplate',
@@ -70,6 +71,7 @@ export class ReserveNumberplateComponent implements OnInit {
     public auth: AuthService,
     private firebaseService: FirebaseService,
     private numberPlateService: NumberPlatesService,
+    private snackBar: MatSnackBar,
   ) {}
 
    ngOnInit(): void {
@@ -100,6 +102,7 @@ export class ReserveNumberplateComponent implements OnInit {
       localStorage.setItem("ReservedPlates", JSON.stringify(reservedNumberPlate));
       console.log("OncreateReservation method: " , reservedNumberPlate);
       this.plateReservedSuccesfully = true;
+      this.snackBar.open('Numărul este deja înregistrat!', 'Închide', { duration: 5000 });
     }
     else {
       this.isNotMatchingPattern = true;

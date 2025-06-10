@@ -7,6 +7,10 @@ import { NumberPlatesService } from '../../admin/services/number-plates.service'
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogRadiationComponent } from '../dialog-radiation/dialog-radiation.component';
+import { FirebaseService } from '../../admin/services/firebase.service';
+import { User } from '../../model/users.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,9 +20,10 @@ import { DialogRadiationComponent } from '../dialog-radiation/dialog-radiation.c
 export class UserProfileComponent implements OnInit {
   vehicles: VehicleRegistration[] = [];
   reservedNumberPlates: NumberPlates[] = [];
-  userEmail!: string;
   isLoadingVehicles = true;
   isLoadingPlates = true;
+  userId!: string;
+  userEmail!: string;
 
   dataSource: VehicleRegistration[] = [];
 
@@ -26,16 +31,51 @@ export class UserProfileComponent implements OnInit {
     public http: HttpClient,
     public auth: AuthService,
     private numberPlateService: NumberPlatesService,
-    private router: Router
+    private router: Router,
+    private firebaseService: FirebaseService,
+    private snackBar: MatSnackBar,
   ) {}
 
   get isLoadingResults(): boolean {
   return this.isLoadingVehicles || this.isLoadingPlates;
 }
 
-  ngOnInit() {
-    this.loadRegisteredVehiclesForUser();
-    this.loadPlatesForUser();
+userProfile: User = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: 0,
+  password: '',
+};
+
+  ngOnInit(): void {
+    this.auth.user$.subscribe((user) => {
+      if (user?.email && user?.sub) {
+        this.userId = user.sub;
+        this.userEmail = user.email;
+        this.userProfile.email = user.email;
+        console.log(this.userEmail);
+        // Preia profilul dacă există
+        this.firebaseService.getUserProfile(this.userId).subscribe({
+          next: (profile) => {
+            if (profile) this.userProfile = profile;
+          },
+          error: (err) => console.error('Eroare la profil:', err),
+        });
+
+        // Încarcă mașinile și plăcuțele rezervate
+        this.loadRegisteredVehiclesForUser();
+        this.loadPlatesForUser();
+      }
+    });
+  }
+
+  saveUserProfile(): void {
+    if (!this.userId) return;
+    this.firebaseService.saveUserProfile(this.userId, this.userProfile).subscribe({
+      next: () => console.log('Profil salvat cu succes!'),
+      error: (err) => console.error('Eroare la salvare:', err),
+    });
   }
 
   loadRegisteredVehiclesForUser() {

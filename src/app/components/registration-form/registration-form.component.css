@@ -6,7 +6,7 @@
   border-radius: 0.5rem;
   text-align: center;
   border-radius: 2px;
-  margin: 3rem 0;
+  margin: 1rem 0;
   background-color: white !important;
   border: 1px solid rgba(128, 128, 128, 0.356);
   border-radius: 4px;
@@ -19,18 +19,16 @@
 .form-field {
   margin-right: 0.5rem;
 }
-.titlu_descriere {
-  padding-bottom: 1rem;
+.titlu_descriere h2 {
+  padding: 0;
 }
 
 .history-below {
-  margin: 0.5rem;
+  margin: 5rem 1rem;
 }
 .history-list {
-  display: flex;
   flex-direction: column;
 }
-
 .upload {
   display: flex;
   align-items: center;
@@ -49,8 +47,6 @@ app-uploadcare{
 
 h2 {
   color: gray;
-  margin-left: 1rem;
-  margin-top: 2rem;
 }
 .example-container {
   background-color: white !important;

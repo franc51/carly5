@@ -91,6 +91,7 @@ export class AdminDashboardComponent implements OnInit {
       (vehicles: VehicleRegistration[] | null) => {
         if (vehicles && Array.isArray(vehicles)) {
           this.vehicles = vehicles.reverse();
+          this.isLoadingResults = true;
           // Filter vehicles where details property is "Cerere trimisa"
           const filteredVehicles = vehicles.filter(
             (vehicle) => vehicle.details === 'Cerere trimisă'
@@ -100,12 +101,15 @@ export class AdminDashboardComponent implements OnInit {
           this.isLoadingResults = false;
         } else {
           console.error('Error fetching vehicles: Invalid data format');
+          this.isLoadingResults = false;
         }
       },
       (error: any) => {
         console.error('Error fetching vehicles:', error);
+        this.isLoadingResults = false;
       }
     );
+    this.isLoadingResults = false;
   }
 
 
@@ -122,30 +126,6 @@ export class AdminDashboardComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating vehicle:', error);
-      }
-    );
-     const templateParams = {
-      email: updatedVehicle.ownerEmail,
-      owner_name: updatedVehicle.ownerName,
-      owner_surname: updatedVehicle.ownerSurname,
-      vehicle_manufacturer: updatedVehicle.vehicleManufacturer,
-      vehicle_model: updatedVehicle.vehicleModel,
-      vin: updatedVehicle.vehicleVinNumber,
-      number_plate: updatedVehicle.vehicleNumberPlate,
-    };
-    emailjs
-    .send(
-      'service_1xewkt5',      
-      'template_vfzk977',     
-      templateParams,
-      'KSKcnRkzisR40rcif'
-    )
-    .then(
-      (response) => {
-        console.log('Email sent successfully!', response.status, response.text);
-      },
-      (error) => {
-        console.error('Email sending failed!', error);
       }
     );
   }

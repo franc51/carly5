@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegistrationHistoryComponent implements OnInit {
   vehicles: VehicleRegistration[] = [];
-  isLoadingResults = true;
+  isLoadingResults = false;
   userEmail!: string;
 
   constructor(
@@ -40,12 +40,12 @@ export class RegistrationHistoryComponent implements OnInit {
     this.auth.user$.subscribe((user) => {
       if (user) {
         this.userEmail = user.email as string;
+        this.isLoadingResults = true;
 
         if (!this.userEmail) {
           console.error('User email is undefined');
           return;
         }
-
         // Make HTTP GET request to fetch vehicles from Firebase
         this.http.get<{ [key: string]: VehicleRegistration }>('https://vehicles-9f2ad.firebaseio.com/vehicles.json').subscribe(
           (vehiclesData) => {
@@ -61,9 +61,11 @@ export class RegistrationHistoryComponent implements OnInit {
           },
           (error) => {
             console.error('Error fetching vehicles:', error);
+            this.isLoadingResults = false;
           }
         );
       }
+      this.isLoadingResults = false;
     });
   }
 }

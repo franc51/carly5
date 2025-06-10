@@ -82,6 +82,16 @@
   background-color: #5cadfe;
   height: 4rem;
 }
+.nav-toggle {
+  color: white;
+  margin-right: 1rem;
+  font-size: 28px;
+}
+
+.right_content {
+  display: flex;
+  align-items: center;
+}
 
 .homepage-content{
   box-shadow: 2px 2px 20px 2px gray;
@@ -151,9 +161,10 @@
     flex-direction: column;
   }
   .nav-opener {
-    color: black !important;
-    padding: 0;
+    padding: 1rem;
+    display: flex;
   }
+
   .example-container {
     position: absolute;
     top: 4rem;

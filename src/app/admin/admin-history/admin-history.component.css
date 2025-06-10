@@ -31,6 +31,8 @@ h2 {
 }
 table {
   width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.245);
+  box-shadow: none;
 }
 
 .example-loading-shade {

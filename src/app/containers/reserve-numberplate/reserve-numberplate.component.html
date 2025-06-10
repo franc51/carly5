@@ -1,28 +1,6 @@
 <div class="register-container">
   <div class="app-numberplate-check">
-    <mat-expansion-panel class="expansion-panel">
-      <mat-expansion-panel-header>
-        <h3 style="color: rgb(36, 33, 33)">Rezervare număr înmatriculare</h3>
-      </mat-expansion-panel-header>
-      <p>
-        Pentru a rezerva un număr de înmatriculare, după ce vă asigurați că
-        numărul este disponibil, apăsați pe butonul
-        <span style="font-weight: bolder">Rezervă</span>
-      </p>
-      <p>
-        După ce ați apăsat pe butonul
-        <span style="font-weight: bolder">Rezervă</span> veți fi redirecționat
-        spre pagina de plată.
-      </p>
-      <p>
-        Rezervarea numărului de înmatriculare se face pentru perioada de
-        <span style="font-weight: bolder">14 zile.</span>
-      </p>
-      <p *ngIf="(auth.isAuthenticated$ | async) === false">
-        Pentru a rezerva un număr trebuie să fii logat în cont.
-      </p>
-    </mat-expansion-panel>
-
+    <h3>Rezervare număr înmatriculare</h3>
     <form class="nr-inmatriculare" #form="ngForm">
       <input
         type="text"
@@ -116,9 +94,6 @@
   </div>
   <div class="spinner">
     <mat-spinner diameter="30" *ngIf="isLoadingResults"></mat-spinner>
-  </div>
-  <div *ngIf="dataSource.length === 0">
-    <p>Nu aveti inca numere rezervate.</p>
   </div>
   <div class="reserved-numberplates-history" *ngIf="dataSource.length">
     <table

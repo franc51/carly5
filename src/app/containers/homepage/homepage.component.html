@@ -1,8 +1,21 @@
 <div class="main-container">
   <nav class="nav">
     <h2 class="logo">Carly</h2>
-    <app-login></app-login>
+    <div class="right_content">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        class="nav-toggle"
+        matTooltip="Deschide/Închide meniul"
+        aria-label="Toggle sidenav"
+      >
+        <mat-icon>first_page</mat-icon>
+      </button>
+
+      <app-login></app-login>
+    </div>
   </nav>
+
   <div class="container">
     <div class="homepage-content">
       <div class="spinner" *ngIf="auth.isLoading$ | async">
@@ -13,7 +26,11 @@
         class="example-container"
         *ngIf="auth.isAuthenticated$ | async"
       >
-        <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav1">
+        <mat-sidenav
+          #sidenav
+          [mode]="isMobile ? 'over' : 'side'"
+          [(opened)]="opened"
+        >
           <app-dashboard></app-dashboard>
           <mat-spinner
             class="spinner"
@@ -22,12 +39,8 @@
         </mat-sidenav>
 
         <mat-sidenav-content class="sidenav">
-          <button mat-button (click)="sidenav.toggle()" class="nav-opener">
-            <mat-icon>arrow_forward_ios</mat-icon>
-          </button>
           <router-outlet></router-outlet>
         </mat-sidenav-content>
-        <app-dashboard></app-dashboard>
       </mat-sidenav-container>
     </div>
   </div>

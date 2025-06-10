@@ -1,23 +1,26 @@
-<ng-container  *ngIf="auth.isAuthenticated$ | async; else loggedOut">
- <div class="notifications">
-  <button mat-raised-button class="notif-btn" matTooltip="Notificări" ><mat-icon [ngStyle]="{'color':'white'}"
-    style="padding-left: 10px;">notifications_none</mat-icon>
-  <ng-template ><mat-icon matTooltip="Notificări" >home</mat-icon></ng-template></button>
-  <button
-    (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })"
-    mat-raised-button
-    class="logout"
-    style="background-color: red; color: white;">
-    <mat-icon>logout</mat-icon>
-    Deconectare
-  </button>
- </div>
+<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+  <div class="notifications">
+    <button
+      (click)="
+        auth.logout({ logoutParams: { returnTo: document.location.origin } })
+      "
+      mat-raised-button
+      class="logout"
+      style="background-color: red; color: white"
+    >
+      <mat-icon>logout</mat-icon>
+      Deconectare
+    </button>
+  </div>
 </ng-container>
 
 <ng-template #loggedOut>
-  <button (click)="auth.loginWithRedirect()" mat-raised-button
+  <button
+    (click)="auth.loginWithRedirect()"
+    mat-raised-button
     class="login"
-    style="background-color: blue; color: white">
+    style="background-color: blue; color: white"
+  >
     <mat-icon>login</mat-icon>
     Autentificare
   </button>

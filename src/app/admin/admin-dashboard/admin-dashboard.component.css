@@ -1,9 +1,9 @@
 .register-history {
-  padding: 2rem 0;
+  padding: 1rem 0;
   border-radius: 0.5rem;
 }
 .content{
-  padding: 0 2rem;
+  padding: 5rem 1rem;
 }
 
 .status-acceptat {
@@ -29,6 +29,8 @@ h2 {
 }
 table {
   width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.255);
+  box-shadow: none;
 }
 
 .admin-power {
@@ -58,9 +60,7 @@ button:hover {
 img {
   border-radius: 50%;
 }
-mat-form-field {
-  margin-left: 8px;
-}
+
 .highlight{
   background-color: rgba(255, 0, 0, 0.219);
 }

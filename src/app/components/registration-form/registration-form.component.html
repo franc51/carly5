@@ -1,6 +1,6 @@
 <div class="history-below">
-  <mat-tab-group fitInkBarToContent>
-    <mat-tab label="Înmatriculare / Radiere">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Înmatriculare">
       <div class="register-form">
         <form
           action=""
@@ -9,16 +9,14 @@
           class="formabro"
         >
           <div class="titlu_descriere">
-            <p>
-              Completați formularul apoi alegeți dacă înmatriculați sau radiați
-              vehiculul.
-            </p>
+            <h2>Formular înmatriculare</h2>
           </div>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Nume Proprietar</mat-label>
             <input
               matInput
+              [matAutocomplete]="auto"
               maxlength="15"
               required
               name="ownerName"

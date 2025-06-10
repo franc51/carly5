@@ -1,34 +1,60 @@
 <!-- user-profile.component.html -->
 <div class="user-profile-container">
-  <form class="user-profile-form">
+  <form
+    class="user-profile-form"
+    #userForm="ngForm"
+    (ngSubmit)="saveUserProfile()"
+  >
     <h2>Profil Utilizator</h2>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Nume</mat-label>
-      <input matInput />
+      <input
+        matInput
+        name="lastName"
+        [(ngModel)]="userProfile.lastName"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Prenume</mat-label>
-      <input matInput />
+      <input
+        matInput
+        name="firstName"
+        [(ngModel)]="userProfile.firstName"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Email</mat-label>
-      <input matInput type="email" />
+      <input
+        matInput
+        type="email"
+        name="email"
+        [(ngModel)]="userProfile.email"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Telefon</mat-label>
-      <input matInput type="number" maxlength="10" minlength="10" required="" />
+      <input
+        matInput
+        type="tel"
+        name="phone"
+        [(ngModel)]="userProfile.phone"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Parolă</mat-label>
-      <input matInput type="password" />
+      <input matInput type="password" name="password" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" size>Salvează</button>
+    <button mat-raised-button color="primary" type="submit">Salvează</button>
   </form>
 
   <div class="cars-section">

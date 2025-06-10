@@ -1,0 +1,74 @@
+<div class="app_container">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <h2>Programare ITP/RAR</h2>
+    <mat-form-field>
+      <mat-label>Serviciu</mat-label>
+      <mat-select
+        name="service"
+        [(ngModel)]="selectedService"
+        required
+        (selectionChange)="onDateOrServiceChange()"
+      >
+        <mat-option value="ITP">ITP</mat-option>
+        <mat-option value="RAR">RAR</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Companie</mat-label>
+      <mat-select name="company" [(ngModel)]="selectedCompany" required>
+        <mat-option *ngFor="let company of companies" [value]="company">
+          {{ company }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Data</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        name="date"
+        [(ngModel)]="selectedDate"
+        required
+        (dateChange)="onDateOrServiceChange()"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Ora</mat-label>
+      <mat-select name="time" [(ngModel)]="selectedTime" required>
+        <mat-option *ngFor="let time of availableTimes" [value]="time">
+          {{ time }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Programează</button>
+  </form>
+
+  <div class="app_history_container">
+    <h2 class="margin_bro">Programări active</h2>
+    <div class="margin_bro" *ngIf="userAppointments.length === 0">
+      Nu aveți programări făcute.
+    </div>
+    <div *ngIf="isLoading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="appointment_list">
+      <div
+        class="appointment_item"
+        *ngFor="let appt of userAppointments | orderByDate"
+      >
+        <p><strong>Serviciu:</strong> {{ appt.service }}</p>
+        <p><strong>Data:</strong> {{ appt.date | date : "mediumDate" }}</p>
+        <p><strong>Ora:</strong> {{ appt.time }}</p>
+        <p><strong>Companie:</strong> {{ appt.company }}</p>
+        <mat-icon>build</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

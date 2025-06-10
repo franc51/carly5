@@ -5,7 +5,7 @@ import { FirebaseService } from './admin/services/firebase.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatNativeDateModule, MatDateFormats, NativeDateAdapter } from '@angular/material/core';
+import { MatDateFormats, NativeDateAdapter } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,7 +41,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
-import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 
 // form
@@ -77,8 +76,14 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { PaymentConfirmationComponent } from './payments/payment-confirmation/payment-confirmation.component';
 import { DialogRadiationComponent } from './components/dialog-radiation/dialog-radiation.component';
 import  emailjs  from "@emailjs/browser"; 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { provideNativeDateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { Pipe, PipeTransform } from '@angular/core';
+import { OrderByDatePipe } from './pipes/order-by-date.pipe';
+
 @NgModule({
   declarations: [
+    OrderByDatePipe,
     AppComponent,
     LoginComponent,
     HomepageComponent,
@@ -107,6 +112,8 @@ import  emailjs  from "@emailjs/browser";
     DialogRadiationComponent,
   ],
   imports: [
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatAutocompleteModule,
     MatSnackBarModule,

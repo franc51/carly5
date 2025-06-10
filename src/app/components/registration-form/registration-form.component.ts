@@ -20,6 +20,7 @@ import { FirebaseService } from '../../admin/services/firebase.service';
 import { NumberPlatesService } from '../../admin/services/number-plates.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import emailjs from '@emailjs/browser';
+import { User } from '../../model/users.model';
 
 UC.defineComponents(UC);
 
@@ -54,6 +55,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   reservedPlates: { _id: string; reservedVehicleNumberPlate: string }[] = [];
 
   filteredPlates: string[] = [];
+  userProfile!: User;
 
   constructor(
     private datePipe: DatePipe,
@@ -69,20 +71,32 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
       this.handleChangeEvent
     );
 
-    this.auth.user$.subscribe((user) => {
-      this.userEmail = user?.email || '';
+this.auth.user$.subscribe(user => {
+  const userId = user?.sub;  // Auth0 user ID
+  const userEmail = user?.email || '';
 
-      if (this.userEmail) {
-       this.numberPlateService.getPlates(this.userEmail).subscribe((plates) => {
-        this.reservedPlates = plates; // keep full objects with IDs
-this.filteredPlates = this.reservedPlates
-  .map(p => p.reservedVehicleNumberPlate.toUpperCase())
-  .filter(plate => plate.includes(this.userInput));
-});
+  if (userId) {
+    this.firebaseService.getUserProfile(userId).subscribe((profile: User) => {
+      this.userProfile = profile;
 
-      }
+      // Autofill form fields
+      this.vehicle.ownerName = this.userProfile.firstName;
+      this.vehicle.ownerSurname = this.userProfile.lastName;
+      this.vehicle.ownerEmail = this.userProfile.email;
+      this.vehicle.ownerPhone = this.userProfile.phone;
     });
   }
+
+  if (userEmail) {
+    this.numberPlateService.getPlates(userEmail).subscribe(plates => {
+      this.reservedPlates = plates;
+      this.filteredPlates = this.reservedPlates
+        .map(p => p.reservedVehicleNumberPlate.toUpperCase())
+        .filter(plate => plate.includes(this.userInput));
+    });
+  }
+});
+}
 
   ngOnDestroy(): void {
     this.ctxProviderRef.nativeElement.removeEventListener(

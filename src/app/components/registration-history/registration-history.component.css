@@ -23,15 +23,6 @@
   padding: 0.3rem;
   border-radius: 0.3rem;
 }
-h2 {
-  margin-top: 2rem;
-  color: gray;
-  text-align: left;
-}
-table {
-  width: 100%;
-}
-
 .example-loading-shade {
   position: absolute;
   height:max-content;
@@ -46,4 +37,8 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+table {
+  box-shadow: none;
+  border: 1px solid rgba(128, 128, 128, 0.303);
 }
