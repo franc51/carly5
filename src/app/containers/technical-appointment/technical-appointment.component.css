@@ -10,6 +10,7 @@ form {
     border: 1px solid rgba(128, 128, 128, 0.241);
     text-align: center;
     background-color: white;
+    text-align: left;
 }
 .appointment_list {
     display: grid;
@@ -17,17 +18,19 @@ form {
     gap: 1rem;
 }
 .appointment_item {
-    background-color: rgba(0, 255, 0, 0.189);
+    background-color: rgba(0, 255, 8, 0.189);
     padding: 1rem;
     border-radius: 6px;
     color: rgba(0, 0, 0, 0.736);
     width: 14rem;
     position: relative;
+    max-height: 10rem;
 }
 .appointment_item mat-icon {
     position: absolute;
-    top: 7%;
-    right: 7%;
+    top: 4%;
+    right: 3%;
+    cursor: pointer;
 }
 .appointment_item .delete {
     position: absolute;

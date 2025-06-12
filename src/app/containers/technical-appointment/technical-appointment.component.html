@@ -46,6 +46,30 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-checkbox name="pickupReturn" [(ngModel)]="pickupAndReturn">
+      Ridicare & Returnare vehicul
+    </mat-checkbox>
+
+    <div *ngIf="pickupAndReturn">
+      <mat-form-field>
+        <mat-label>Localitate</mat-label>
+        <mat-select name="pickupCity" [(ngModel)]="pickupCity" required>
+          <mat-option value="Brașov">Brașov</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Adresă Ridicare</mat-label>
+        <input
+          matInput
+          name="pickupAddress"
+          [(ngModel)]="pickupAddress"
+          required
+        />
+      </mat-form-field>
+      <p>Taxă pickup&return: <strong>100 Lei</strong></p>
+    </div>
+    <p>Taxe servicii: <strong>160 Lei</strong></p>
     <button mat-raised-button color="primary" type="submit">Programează</button>
   </form>
 
@@ -67,7 +91,11 @@
         <p><strong>Data:</strong> {{ appt.date | date : "mediumDate" }}</p>
         <p><strong>Ora:</strong> {{ appt.time }}</p>
         <p><strong>Companie:</strong> {{ appt.company }}</p>
-        <mat-icon>build</mat-icon>
+        <p *ngIf="appt.pickupAndReturn">
+          <strong>Ridicare din:</strong> {{ appt.pickupDetails?.city }},
+          {{ appt.pickupDetails?.address }}
+        </p>
+        <mat-icon>cancel</mat-icon>
       </div>
     </div>
   </div>

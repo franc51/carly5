@@ -3,5 +3,10 @@ export interface Appointment {
   service: 'ITP' | 'RAR'; 
   date: string;            
   time: string;  
-  company: string;   
+  company: string;  
+  pickupAndReturn: boolean; 
+  pickupDetails?: {
+    city: string;
+    address: string;
+  };
 }

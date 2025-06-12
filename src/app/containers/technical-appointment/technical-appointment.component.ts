@@ -19,6 +19,9 @@ export class TechnicalAppointmentComponent implements OnInit {
   selectedTime = '';
   availableTimes: string[] = [];
   userAppointments: Appointment[] = [];
+  pickupAndReturn: boolean = false;
+  pickupCity: string = 'Brașov'; // default
+  pickupAddress: string = '';
 
   isLoading: boolean = false;
 
@@ -80,6 +83,13 @@ formatDate(date: Date): string {
       date: this.formatDate(this.selectedDate!),     
       time: this.selectedTime,
       company: this.selectedCompany,
+      pickupAndReturn: this.pickupAndReturn,
+      pickupDetails: this.pickupAndReturn
+        ? {
+            city: this.pickupCity,
+            address: this.pickupAddress,
+          }
+        : undefined,
     };
 
     this.appointmentService

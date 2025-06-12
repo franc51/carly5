@@ -80,6 +80,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { provideNativeDateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { OrderByDatePipe } from './pipes/order-by-date.pipe';
     DialogRadiationComponent,
   ],
   imports: [
+    MatCheckboxModule,
     MatNativeDateModule,
     MatDatepickerModule,
     MatDialogModule,
