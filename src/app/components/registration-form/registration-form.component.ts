@@ -73,7 +73,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
 
 this.auth.user$.subscribe(user => {
   const userId = user?.sub;  // Auth0 user ID
-  const userEmail = user?.email || '';
+  this.userEmail = user?.email || '';
 
   if (userId) {
     this.firebaseService.getUserProfile(userId).subscribe((profile: User) => {
@@ -87,8 +87,8 @@ this.auth.user$.subscribe(user => {
     });
   }
 
-  if (userEmail) {
-    this.numberPlateService.getPlates(userEmail).subscribe(plates => {
+  if (this.userEmail) {
+    this.numberPlateService.getPlates(this.userEmail).subscribe(plates => {
       this.reservedPlates = plates;
       this.filteredPlates = this.reservedPlates
         .map(p => p.reservedVehicleNumberPlate.toUpperCase())
@@ -119,24 +119,26 @@ onCreateVehicle(form: NgForm): void {
 
   this.checkPlateStatus(this.userInput, () => {
     if (this.isRegistered) {
-      // Plate already registered, block submission
       this.snackBar.open('Numărul este deja înregistrat!', 'Închide', { duration: 5000 });
       return;
     }
 
     if (this.isReserved) {
-      // Plate is reserved, check owner
+
+
       this.numberPlateService.checkReservedPlateOwner(this.userInput).subscribe(ownerEmail => {
-        if (ownerEmail !== this.userEmail) {
-          // Reserved by someone else — block
-          this.snackBar.open('Numărul este deja rezervat de altcineva!', 'Închide', { duration: 5000 });
-          return;
-        } else {
+        if (ownerEmail === this.userEmail) {
           this.submitVehicle(form);
+          
+        } else {
+          this.snackBar.open('Numărul este deja rezervat de altcineva!', 'Închide', { duration: 5000 });
+          console.log('Owner Email:', ownerEmail);
+          console.log('Current User Email:', this.userEmail);
         }
+      }, error => {
+        this.snackBar.open('Eroare la verificarea rezervării plăcuței.', 'Închide', { duration: 5000 });
       });
     } else {
-      // Not registered or reserved, just submit
       this.submitVehicle(form);
     }
   });
