@@ -66,6 +66,33 @@ export class ReserveNumberplateComponent implements OnInit {
   userInput!: string;
   matchingNumberPlate: string | undefined;
 
+  isForbiddenPlate: boolean = false;
+
+   forbiddenPlates: string[] = [
+    "MAI",
+    "ALA",
+    "GUV",
+    "DEP",
+    "SNT",
+    "SRI",
+    "POL",
+    "BOU",
+    "BOY",
+    "GAY",
+    "JAF",
+    "JEG",
+    "DAI",
+    "PIX",
+    "TOV",
+    "ROM",
+    "COW",
+    "POC",
+    "SEX",
+    "MUI",
+    "I",
+    "O",
+   ];
+
     constructor(
     public http: HttpClient,
     public auth: AuthService,
@@ -87,52 +114,99 @@ export class ReserveNumberplateComponent implements OnInit {
     return pattern.test(userInput);
   };
 
-  onCreateReservation(form: NgForm): void {
-    this.userInput = form.value.reservedVehicleNumberPlate;
-    if (form.valid && this.isMatchingPattern(this.userInput)) {
-      const formValue = form.value;
-      const reservedNumberPlate: NumberPlates = {
-        ...formValue,
-        _id: uuidv4(),
-        date: new Date(),
-        availability: new Date(new Date().setDate(new Date().getDate()+14)),
-        ownerEmail: this.userEmail,
-      };
-      this.reserve.emit(reservedNumberPlate);
-      localStorage.setItem("ReservedPlates", JSON.stringify(reservedNumberPlate));
-      console.log("OncreateReservation method: " , reservedNumberPlate);
-      this.plateReservedSuccesfully = true;
-      this.snackBar.open('Numărul este deja înregistrat!', 'Închide', { duration: 5000 });
+  checkIfForbidden(userInput: string): boolean {
+  const plate = userInput.toUpperCase();
+  return this.forbiddenPlates.some(forbidden => {
+    if (forbidden === "I" || forbidden === "O") {
+      // Forbidden if plate starts with I or O
+      return plate.startsWith(forbidden);
+    } else {
+      // Forbidden if the plate contains any 3-letter term
+      return plate.includes(forbidden);
     }
-    else {
-      this.isNotMatchingPattern = true;
-    }
+  });
+}
+
+onCreateReservation(form: NgForm): void {
+  this.userInput = form.value.reservedVehicleNumberPlate?.toUpperCase();
+  this.plateReservedSuccesfully = false;
+
+  // Reset errors
+  this.isNotMatchingPattern = false;
+  this.isForbiddenPlate = false;
+
+  // Check if pattern is invalid
+  if (!this.isMatchingPattern(this.userInput)) {
+    this.isNotMatchingPattern = true;
+    return;
   }
+
+  // Check if plate is forbidden
+  if (this.checkIfForbidden(this.userInput)) {
+    this.isForbiddenPlate = true;
+    return;
+  }
+
+  // Only proceed if form is valid and plate passed all checks
+  if (form.valid) {
+    const formValue = form.value;
+    const reservedNumberPlate: NumberPlates = {
+      ...formValue,
+      _id: uuidv4(),
+      date: new Date(),
+      availability: new Date(new Date().setDate(new Date().getDate() + 14)),
+      ownerEmail: this.userEmail,
+    };
+
+    this.reserve.emit(reservedNumberPlate);
+    localStorage.setItem("ReservedPlates", JSON.stringify(reservedNumberPlate));
+    console.log("OnCreateReservation method: ", reservedNumberPlate);
+    this.plateReservedSuccesfully = true;
+    this.snackBar.open('Numărul a fost rezervat cu succes!', 'Închide', { duration: 5000 });
+  }
+}
 
  checkNumberPlate(form: NgForm): void {
   this.isNotMatchingPattern = false;
   this.isRegistered = false;
   this.isReserved = false;
   this.recommendedPlate = null;
+  this.isForbiddenPlate = false;
+
   const userInput = form.value.reservedVehicleNumberPlate?.toUpperCase();
+
+  // 1. Pattern check
   if (!this.isMatchingPattern(userInput)) {
     this.isNotMatchingPattern = true;
     return;
   }
+
+  // 2. Forbidden check (stop here if forbidden)
+  if (this.checkIfForbidden(userInput)) {
+    this.isForbiddenPlate = true;
+    return;
+  }
+
+  // 3. Check reservation + registration
   this.isLoadingResults = true;
+
   this.numberPlateService.checkNumberPlateExists(userInput).subscribe(
     (reservedPlateExists: boolean) => {
       this.isReserved = reservedPlateExists;
+
       this.firebaseService.getAdminDashboard().subscribe(
         (vehicles: VehicleRegistration[]) => {
           this.isRegistered = vehicles.some(
             (v) => v.vehicleNumberPlate.toUpperCase() === userInput
           );
+
           const reservedList = [userInput];
           const registeredList = vehicles.map(v => v.vehicleNumberPlate.toUpperCase());
+
           if (this.isReserved || this.isRegistered) {
             this.recommendedPlate = this.recommendNextAvailablePlate(userInput, reservedList, registeredList);
           }
+
           this.isLoadingResults = false;
         },
         (error) => {
@@ -232,10 +306,11 @@ export class ReserveNumberplateComponent implements OnInit {
 
   handleReserveAndCheckout(form: NgForm): void{
   this.onCreateReservation(form);
-  this.goToCheckout();
+  if(this.isForbiddenPlate === false){
+    this.goToCheckout();
+  }
   }
   goToCheckout() {
     window.location.href = 'https://buy.stripe.com/test_eVa7vKcbwbdW1jifYY';
   }
-  
 }

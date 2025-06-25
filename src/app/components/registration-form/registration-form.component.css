@@ -68,13 +68,12 @@ h2 {
 
 
 @media screen and (max-width:600px) {
-  .register-form {
-    width: 90vw;
-  }
   .formabro {
   padding: 0;
-  width: 90vw;
   overflow: none !important;
 }
-
+.form-field {
+  width: 80vw;
+  padding: 0rem 0.5rem;
+}
 }

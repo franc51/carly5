@@ -34,6 +34,7 @@ p{
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll !important;
   position: relative;
+  max-width: 30rem;
 }
 .register-container::-webkit-scrollbar {
   display: none !important; /* for Chrome, Safari, and Opera */
@@ -44,7 +45,6 @@ p{
   text-align: center;
   background-color: white;
   border: 1px solid rgba(128, 128, 128, 0.448);
-  width: 21rem;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -100,8 +100,8 @@ h3 {
 }
 
 .reserved-numberplates-history {
-  width: 22.1rem;
   border-radius: 1rem;
+  max-width: 30rem;
 }
 .reserved-numberplates-history table {
   box-shadow: none;
@@ -109,6 +109,9 @@ h3 {
 }
 
 @media only screen and (max-width: 600px) {
+  .register-container {
+    margin: 0.5rem;
+  }
   .notauth {
     background-color: white;
   }
@@ -117,14 +120,12 @@ h3 {
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     text-align: center;
     margin: 2rem;
+    max-width: 40rem;
   }
   label {
     display: flex;
     flex-direction: column;
     margin: 1rem 5rem;
-  }
-  .nr-inmatriculare {
-    background-color: #d0e7ff;
   }
   .input {
     border: none;
@@ -142,16 +143,9 @@ h3 {
     font-weight: bolder;
     font-size: 1rem;
   }
-  .expansion-panel {
-    padding: 0.5rem 0.3rem;
-    background-color: #0080ff4d;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    transition: none !important;
-    box-shadow: none !important;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
 
+  .app-numberplate-check {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
 }

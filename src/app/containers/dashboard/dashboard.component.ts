@@ -15,8 +15,4 @@ export class DashboardComponent {
       this.isAdmin = user.email_verified === true;
     });
   }
-  openBookingPage() {
-    // Open the booking link in a new tab
-    window.open('https://carly.appointer.io/', '_self');
-  }
 }

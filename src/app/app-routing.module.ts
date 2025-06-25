@@ -13,6 +13,8 @@ import { RadiationsComponent } from './containers/radiations/radiations.componen
 import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PaymentConfirmationComponent } from './payments/payment-confirmation/payment-confirmation.component';
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { AboutMeComponent } from './components/about-me/about-me.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
@@ -25,7 +27,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },
   { path: 'admin/image-gallery', component: ImageGalleryComponent, pathMatch: 'full' },
-  { path: 'payment-confirmation', component: PaymentConfirmationComponent}
+  { path: 'payment-confirmation', component: PaymentConfirmationComponent},
+  { path: 'about-me', component: AboutMeComponent}
 ];
 
 @NgModule({

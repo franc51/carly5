@@ -81,6 +81,7 @@ import { provideNativeDateAdapter, MatNativeDateModule } from '@angular/material
 import { Pipe, PipeTransform } from '@angular/core';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AboutMeComponent } from './components/about-me/about-me.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     UserProfileComponent,
     PaymentConfirmationComponent,
     DialogRadiationComponent,
+    AboutMeComponent,
   ],
   imports: [
     MatCheckboxModule,

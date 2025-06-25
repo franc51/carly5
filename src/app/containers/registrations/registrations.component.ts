@@ -45,7 +45,6 @@ export class RegistrationsComponent implements OnInit {
     vehicle: VehicleRegistration,
     files: OutputFileEntry<'success'>[]
   ): void {
-    // Convert the file URLs to strings before assigning them to the vehicle object
     const vehicleWithUrls: VehicleRegistration = {
       ...vehicle,
       ownerIdentityCard: files[0]?.cdnUrl || '',

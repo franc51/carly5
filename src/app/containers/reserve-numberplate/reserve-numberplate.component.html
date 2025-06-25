@@ -47,7 +47,8 @@
         *ngIf="
           isRegistered === false &&
           isReserved === false &&
-          isNotMatchingPattern === false
+          isNotMatchingPattern === false &&
+          isForbiddenPlate === false
         "
       >
         <p>
@@ -69,6 +70,13 @@
           <strong class="available">Numărul a fost rezervat cu succes!</strong>
         </p>
       </ng-container>
+
+         <ng-container *ngIf="isForbiddenPlate">
+        <p>
+          <strong class="error">Numărul este interzis de lege, vă rugăm alegeți altul.</strong>
+        </p>
+      </ng-container>
+
     </form>
     <div class="reserve-numberplate">
       <button
